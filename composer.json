@@ -1,0 +1,23 @@
+{
+  "name": "caibao/grpc_client",
+  "description": "grpc_client",
+  "license": "MIT",
+  "authors": [
+	{
+	  "name": "vivi",
+	  "email": "751608899@qq.com"
+	}
+  ],
+  "minimum-stability": "stable",
+  "require": {
+	"grpc/grpc": "^1.4",
+	"google/protobuf": "^3.3"
+  },
+  "autoload": {
+	"psr-4": {
+	  "GrpcServer\\": "src/GrpcServer/",
+	  "GPBMetadata\\": "src/GPBMetadata/",
+	  "Cfwf\\": "src/Cfwf/"
+	}
+  }
+}

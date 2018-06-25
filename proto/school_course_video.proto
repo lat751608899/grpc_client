@@ -1,0 +1,248 @@
+﻿syntax = "proto3";
+
+//school_coursevideo:  课堂实录
+
+package cfwf.micro_service.school_coursevideo;
+option java_package = "com.cfwf.micro_service.school_coursevideo";
+
+service SchoolCourseVideo { 
+  //获取课堂实录列表
+  rpc SearchCourseVideo (SearchCourseVideoRequest) returns (SearchCourseVideoResponse) {}  
+  
+  //删除课堂实录
+  rpc DeleteCourseVideo (DeleteCourseVideoRequest) returns (DeleteCourseVideoResponse) {}
+  
+  //获取课堂实录审核列表(学校查询调用)
+  rpc SearchApplyCourseVideo (SearchApplyCourseVideoRequest) returns (SearchApplyCourseVideoResponse) {}
+    	
+  //处理课堂实录审核
+  rpc ApproveCourseVideo (ApproveCourseVideoRequest) returns (ApproveCourseVideoResponse) {}
+  
+  //获取课程信息
+  rpc GetCourseVideoInfo(GetCourseVideoInfoRequest) returns (GetCourseVideoInfoResponse) {}   
+  
+  //新增课堂实录
+  rpc InsertCourseVideo(InsertCourseVideoRequest) returns (InsertCourseVideoResponse) {}
+  
+  //观看课堂实录，增加观看数
+  rpc ViewCourseVideo (ViewCourseVideoRequest) returns (ViewCourseVideoResponse) {}
+} 
+
+//通用rpc调用返回结果
+enum RPC_CALL_RESULT {
+   RPC_CALL_RESULT_NONE        = 0;   //不应出现
+   RPC_CALL_RESULT_SUCCESS     = 1;   //成功
+   RPC_CALL_RESULT_DB_ERROR    = 2;   //数据库出错
+   RPC_CALL_RESULT_INPUT_ERROR = 3;   //传入数据有错，格式错误或者找不到对应条目
+   RPC_CALL_RESULT_ERROR       = 4;   //其他错误
+}
+
+//一般rpc调用返回值
+message CommonResponse{
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+} 
+
+message Grade_and_Subject{
+	int32 grade = 1;            //学科
+	string subject = 2;         //科目（如果有多个，就用‘,’作为分隔符）
+}
+
+//查询者类型
+enum SEARCH_TYPE {
+	SEARCH_TYPE_INIT = 0;      
+	SEARCH_TYPE_SELE = 1;      //发布者自己查询
+	SEARCH_TYPE_SCHOOL = 2;    //学校查询
+	SEARCH_TYPE_COUNTYR = 3;   //区县查询
+	SEARCH_TYPE_CITY = 4;      //市查询
+}
+
+message SearchCourseVideoRequest{
+	int32 page_size = 1;	        //一页显示多少条
+	int32 page = 2;	            //第几页
+	int64 userid = 3;           //发布者ID
+	int32 cityid = 4;           
+	int32 schoolid = 5;         
+	int32 classid = 6;           //属于哪个班
+	int32 public_type = 7;       //视频公开方式 0=所有（公开+本校） 1=本校 2=公开
+	repeated Grade_and_Subject grade_subject = 8; //年级学科分类
+	string start_time = 9;       //开始时间 '2017-08-08 12:03:00'
+	string end_time = 10;        //结束时间 '2017-08-08 12:03:00'	 
+	string keyword = 11;         //搜索关键字
+	int32 chapterid = 12;        //章节ID	 
+	int32 order = 13;            //排序方式 1-最新发布 2-点击最多
+	string cityid_list = 14;     //可以传入多个id，id之间用‘,’分隔	
+	SEARCH_TYPE search_type = 15; //查询者类型
+	bool is_search_wait_approve = 16; //是否查询还在审核中的视频 true：查询 false：不查询 默认不查询
+}
+
+message Course_delete_status {
+	bool is_delete_by_self = 1;      //是否被发布者自己删除
+	bool is_delete_by_school = 2;    //是否被学校管理员删除
+	bool is_delete_by_country = 3;   //是否被区县管理员删除
+	bool is_delete_by_city = 4;      //是否被市管理员删除
+	bool is_delete_by_sysadmin = 5;  //是否被系统管理员删除
+}
+
+//视频审核状态
+enum COURSEVIDEO_APPROVE_STATUS {
+	COURSEVIDEO_APPROVE_STATUS_INIT = 0;
+	COURSEVIDEO_APPROVE_STATUS_WAIT = 1;     //等待审核中
+	COURSEVIDEO_APPROVE_STATUS_ACCEPT = 2;   //审核通过
+	COURSEVIDEO_APPROVE_STATUS_REFUSE = 3;   //审核未通过
+}
+
+message CourseVideoItem{
+	int64 id = 1;             //课堂实录ID
+	string title = 2;         //课堂实录标题	
+	int64 userid = 3;         //发布者ID	 
+	int32 view_count = 4;     //课堂实录观看次数
+	string cover_resid = 5;   //封面资源id	
+	string file_resid = 6;    //视频资源id
+	string time = 7;          //发布时间  
+	int32 public_type = 8;    //视频公开方式 0=所有 1=本校 2=公开
+	int64 schoolid = 9;       //学校ID
+	string description = 10;  //课程描述
+	int32 duiation = 11;      //视频时长
+	int32 grade = 12;         //年级
+	int32 subject = 13;       //学科
+	int32 size = 14;          //视频文件大小 
+	string attachments = 15;  //附件：教学设计 注意：老数据中没有filesize项，解析时需要注意[{"filename:":"文件名.doc","resid":"xxxxx","filesize":123234},{"filename:":"文件名.doc","resid":"xxxxx","filesize":123234}]
+	string attachments_courseware = 16;  //附件：课件 注意：老数据中没有filesize项，解析时需要注意[{"filename:":"文件名.doc","resid":"xxxxx","filesize":123234},{"filename:":"文件名.doc","resid":"xxxxx","filesize":123234}]
+	Course_delete_status delete_status = 17; //删除状态	
+	COURSEVIDEO_APPROVE_STATUS approve_status = 18;  //视频审核状态
+}
+
+message SearchCourseVideoResponse{
+	RPC_CALL_RESULT result = 1;
+	int32 page_size = 2;          //每页条数
+    int32 page = 3;              //当前页
+    int32 page_count = 4;         //总页数
+    int32 record_count = 5;       //总条数
+	repeated CourseVideoItem list = 6; //当前页结果列表
+} 
+
+message SearchApplyCourseVideoRequest{
+	int32 page = 1;            //第几页
+	int32 page_size = 2;        //一页显示多少条
+	int32 schoolid = 3;        //学校ID
+	repeated Grade_and_Subject grade_subject = 4; //年级学科分类
+	string keyword = 5;        //搜索关键字	 
+} 
+
+message SearchApplyCourseVideoResponse{
+	RPC_CALL_RESULT result = 1;
+	int32 page_size = 2;               //每页条数
+    int32 page = 3;                   //当前页
+    int32 page_count = 4;              //总页数
+    int32 record_count = 5;            //总条数
+	repeated CourseVideoItem list = 6; //当前页结果列表
+}
+
+enum DELETE_COURSEVIDEO_USER_TYPE{
+	DELETE_COURSEVIDEO_USER_TYPE_UNDELETE = 0;         //未被删除
+	DELETE_COURSEVIDEO_USER_TYPE_SELF = 1;             //用户自己删除
+	DELETE_COURSEVIDEO_USER_TYPE_SCHOOL_ADMIN = 2;     //学校管理员删除 
+	DELETE_COURSEVIDEO_USER_TYPE_SYSTEM_ADMIN = 3;     //系统管理员删除
+	DELETE_COURSEVIDEO_USER_TYPE_CONUNTRY_ADMIN = 4;   //被区管理员删除
+	DELETE_COURSEVIDEO_USER_TYPE_CITY_ADMIN = 5;       //被市管理员删除   
+}
+
+message DeleteCourseVideoRequest{
+	repeated string id = 1;	                   //课程ID
+	DELETE_COURSEVIDEO_USER_TYPE user_type = 2; //用户类型
+	int64 userid = 3;                          //操作者ID
+}
+
+message DeleteCourseVideoResponse{
+	RPC_CALL_RESULT result = 1; 
+	string msg = 2;                       //失败信息	  
+	repeated CourseVideoItem list = 3;
+}
+
+message ApproveCourseVideoRequest{
+	repeated string id = 1;    //课程id
+	int32 operation = 2;       //1-通过 2-拒绝
+	int64 userid = 3;          //操作者id
+}
+
+message ApproveCourseVideoResponse{
+	RPC_CALL_RESULT result = 1;	
+	string msg = 2;      //失败信息
+	repeated CourseVideoItem list = 3;
+}
+
+message GetCourseVideoInfoRequest{
+	int32 id = 1;              //课程id	 
+}
+
+message GetCourseVideoInfoResponse{
+	RPC_CALL_RESULT result = 1;
+	CourseVideoItem item = 2;
+}
+
+//新增课堂实录
+message InsertCourseVideoRequest {
+	int64 userid = 1;                      //发布者ID
+	int32 cityid = 2;                      //城市id
+	int64 schoolid = 3;                    //学校id
+	int64 classid = 4;                     //班级id
+	bool is_public = 5;                    //是否公开 true=公开 false=不公开 默认不公开
+	string title = 6;                      //标题
+	string description = 7;                //描述，简介
+	int32 length = 8;                      //视频时长
+	string cover_resid = 9;                //封面资源id
+	string resid = 10;                     //视频资源id
+	int32 filesize = 11;                   //文件大小
+	int32 grade = 12;                      //年级
+	int32 subject = 13;                    //学科
+	int32 chapterid = 14;                  //章节ID
+	string knowledge_point = 15;           //知识点id列表，可多个，使用逗号分隔
+	bool is_need_approve = 16;             //是否需要审核 true=要审核 false=不用审核 默认需要审核
+	string attachments = 17;               //附件：教学设计
+	string attachments_courseware = 18;    //附件：课件
+}
+
+message InsertCourseVideoResponse {
+	RPC_CALL_RESULT result = 1;	
+	string msg = 2;       //返回信息   
+	int64 courseid = 3;   //课程ID
+}
+
+//观看课堂实录，增加观看数
+message ViewCourseVideoRequest {
+	int64 id = 1; //课程id
+}
+
+message ViewCourseVideoResponse {
+	RPC_CALL_RESULT result = 1;
+}
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

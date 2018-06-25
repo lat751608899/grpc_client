@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+//school_subject:  教材的目录章节分类
+
+package cfwf.micro_service.school_subject;
+option java_package = "com.cfwf.micro_service.school_subject";
+
+service SchoolSubject { 
+  //获取教材版本
+  rpc GetTextbookVersion (GetTextbookVersionRequest) returns (GetTextbookVersionResponse) {}  
+
+  //获取教材对应的目录信息
+  rpc GetTextbookCatalogue (GetTextbookCatalogueRequest) returns (GetTextbookCatalogueResponse) {}
+}
+
+//通用rpc调用返回结果
+enum RPC_CALL_RESULT {
+   RPC_CALL_RESULT_NONE        = 0;   //不应出现
+   RPC_CALL_RESULT_SUCCESS     = 1;   //成功
+   RPC_CALL_RESULT_DB_ERROR    = 2;   //数据库出错
+   RPC_CALL_RESULT_INPUT_ERROR = 3;   //传入数据有错，格式错误或者找不到对应条目
+   RPC_CALL_RESULT_ERROR       = 4;   //其他错误
+}
+
+//一般rpc调用返回值
+message CommonResponse{
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+}
+
+message GetTextbookVersionRequest{
+	int32 cityid = 1;     //所在地区
+	int32 grade = 2;      //年级
+	int32 subject = 3;    //科目
+	int32 year = 4;       //年份： 2018
+	int32 term = 5;       //学期：1=上 2=下 3=全年  和 教材 volume 统一
+}
+
+message TextBookVersionItem{
+	int32 version = 1;     //教材版本的id
+	string name = 2;       //教材版本的名称
+}
+
+message GetTextbookVersionResponse{
+	RPC_CALL_RESULT result = 1;
+	repeated TextBookVersionItem list = 2;
+}
+
+message GetTextbookCatalogueRequest{
+	int32 grade = 1;       //年级
+	int32 subject = 2;     //科目
+	int32 version = 3;     //教材版本的id 
+	int32 volume = 4;      //1=上册 2=下册 3=全一册
+}
+
+message TextbookCatalogueItem{
+	int32 id = 1;                //章节的id
+	string chaptername = 2;      //章节的名称
+	int32 level = 3;             //本条章节目录的层次 1-6，最大6层
+	int32 chapterid = 4;         //章节id2
+	int32 chapterno = 5;         //章节序号
+}
+
+message GetTextbookCatalogueResponse{
+	RPC_CALL_RESULT result = 1;
+	repeated TextbookCatalogueItem list = 2;
+}
