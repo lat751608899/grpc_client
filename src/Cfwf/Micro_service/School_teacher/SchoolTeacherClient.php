@@ -46,11 +46,11 @@ class SchoolTeacherClient extends \Grpc\BaseStub {
 
     /**
      * 批准老师申请
-     * @param \Cfwf\Micro_service\School_teacher\SchoolTeacherApplyItem $argument input argument
+     * @param \Cfwf\Micro_service\School_teacher\ApproveTeacherApplyRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function ApproveTeacherApply(\Cfwf\Micro_service\School_teacher\SchoolTeacherApplyItem $argument,
+    public function ApproveTeacherApply(\Cfwf\Micro_service\School_teacher\ApproveTeacherApplyRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.school_teacher.SchoolTeacher/ApproveTeacherApply',
         $argument,
@@ -60,11 +60,11 @@ class SchoolTeacherClient extends \Grpc\BaseStub {
 
     /**
      * 拒绝老师申请
-     * @param \Cfwf\Micro_service\School_teacher\SchoolTeacherApplyItem $argument input argument
+     * @param \Cfwf\Micro_service\School_teacher\RejectTeacherApplyRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function RejectTeacherApply(\Cfwf\Micro_service\School_teacher\SchoolTeacherApplyItem $argument,
+    public function RejectTeacherApply(\Cfwf\Micro_service\School_teacher\RejectTeacherApplyRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.school_teacher.SchoolTeacher/RejectTeacherApply',
         $argument,

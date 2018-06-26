@@ -14,41 +14,41 @@ service SchoolTeacher {
   
   
   //批准老师申请
-  rpc ApproveTeacherApply (SchoolTeacherApplyItem) returns (CommonResponse) {}  
-  
+  rpc ApproveTeacherApply (ApproveTeacherApplyRequest) returns (CommonResponse) {}
+
   //拒绝老师申请
-  rpc RejectTeacherApply (SchoolTeacherApplyItem) returns (CommonResponse) {}  
+  rpc RejectTeacherApply (RejectTeacherApplyRequest) returns (CommonResponse) {}
 
   //批量批准老师申请
-  rpc BatchApproveTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}  
-  
+  rpc BatchApproveTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}
+
   //批量拒绝老师申请
-  rpc BatchRejectTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}  
-  
+  rpc BatchRejectTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}
+
   //老师提交入校申请：如果之前老师已经提交过对该学校的申请，则新申请信息会覆盖原申请信息
-  rpc TeacherSubmitApply (TeacherApplyInfo) returns (CommonResponse) {} 
-  
+  rpc TeacherSubmitApply (TeacherApplyInfo) returns (CommonResponse) {}
+
   //获取老师列表(分页返回)
-  rpc SearchTeacher (SearchTeacherRequest) returns (SearchTeacherResponse) {} 
-  
+  rpc SearchTeacher (SearchTeacherRequest) returns (SearchTeacherResponse) {}
+
   //获取某老师信息
-  rpc GetTeacherInfo (GetTeacherInfoRequest) returns (GetTeacherInfoResponse) {} 
- 
+  rpc GetTeacherInfo (GetTeacherInfoRequest) returns (GetTeacherInfoResponse) {}
+
   //设置学校审批老师申请的方式：自动同意还是人工审核。未设置的学校默认人工审核
   rpc SetApprovePatternsForTeacherApply (SetApprovePatternsForTeacherApplyRequest) returns (CommonResponse) {}
 
   //获取学校审批老师申请的方式
   rpc GetApprovePatternsForTeacherApply (GetApprovePatternsForTeacherApplyRequest) returns (GetApprovePatternsForTeacherApplyResponse) {}
-  
+
   //设置老师任课信息
   rpc SetTeacherClassInfo (SetTeacherClassInfoRequest) returns (CommonResponse) {}
-  
+
   //设置老师任课信息
   rpc SetTeacherClassInfoByJson (SetTeacherClassInfoByJsonRequest) returns (CommonResponse) {}
-  
+
   //设置老师所属学校信息。如果老师已属于其他学校，且全局设置中老师只能属于一个学校时，退出原学校
   rpc AddTeacherToSchool (AddTeacherToSchoolRequest) returns (CommonResponse) {}
-  
+
 
   //从学校内移除老师
   rpc RemoveTeacherFromSchool(RemoveTeacherFromSchoolRequest) returns (CommonResponse) {}
@@ -132,6 +132,20 @@ message GetTeacherApplyResponse{
     RPC_CALL_RESULT result = 1;
 
     repeated TeacherApplyInfo list = 2; //当前页结果列表
+}
+
+message ApproveTeacherApplyRequest
+{
+    fixed64 operatorid = 1;
+    fixed64 schoolid = 2;    //学校id
+    fixed64 teacherid = 3;      //教师id
+}
+
+message RejectTeacherApplyRequest
+{
+    fixed64 operatorid = 1;
+    fixed64 schoolid = 2;    //学校id
+    fixed64 teacherid = 3;    //教师id
 }
 
 //教师申请条目：用于 ApproveTeacherApply 和 RejectTeacherApply
