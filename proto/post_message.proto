@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+//帮助web端向客户端发送消息
+
+import "message.proto";
+
+package cfwf.micro_service.post_message;
+
+service PostMessage {  
+  // 发送一般消息
+  rpc PostCommonMessageToUsers (PostCommonMessageToUsersRequest) returns (CommonResponse) {}    //发送给个人
+  rpc PostCommonMessageToSchoolClass (PostCommonMessageToSchoolClassRequest) returns (CommonResponse) {} //发送给班级
+  rpc PostCommonMessageToCooperativeGroup (PostCommonMessageToCooperativeGroupRequest) returns (CommonResponse) {} //发送给校内协作组
+  
+  // 发送计数消息
+  rpc PostCounterMessageToUsers (PostCounterMessageToUsersRequest) returns (CommonResponse) {}
+  rpc PostCounterMessageToSchoolClass (PostCounterMessageToSchoolClassRequest) returns (CommonResponse) {}
+  rpc PostCounterMessageToCooperativeGroup (PostCounterMessageToCooperativeGroupRequest) returns (CommonResponse) {}
+}
+
+// 通用返回结果
+enum RPC_CALL_RESULT {
+   RPC_CALL_RESULT_NONE        = 0;   //不应出现
+   RPC_CALL_RESULT_SUCCESS     = 1;   //成功
+   RPC_CALL_RESULT_SERVICE_ERROR = 2; //微服务操作失败
+   RPC_CALL_RESULT_INPUT_ERROR = 3;   //传入数据格式错误或不合法
+}
+
+message CommonResponse{
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+}
+
+message PostCommonMessageToUsersRequest {
+	fixed64 operatorid = 1;
+	cfwf.message.CommonMessage msg = 2;
+    repeated fixed64 send_to_users = 3;
+}
+
+
+message PostCommonMessageToSchoolClassRequest {
+	fixed64 operatorid = 1;
+	cfwf.message.CommonMessage msg = 2;
+    repeated fixed64 send_to_classids = 3;
+}
+
+message PostCommonMessageToCooperativeGroupRequest {
+	fixed64 operatorid = 1;
+	cfwf.message.CommonMessage msg = 2;
+    repeated fixed64 send_to_groupids = 3; //校内协作组id
+}
+
+message PostCounterMessageToUsersRequest {
+	fixed64 operatorid = 1;
+	cfwf.message.CounterMessage msg = 2;
+    repeated fixed64 send_to_users = 3;
+}
+
+
+message PostCounterMessageToSchoolClassRequest {
+	fixed64 operatorid = 1;
+	cfwf.message.CounterMessage msg = 2;
+    repeated fixed64 send_to_classids = 3;
+}
+
+message PostCounterMessageToCooperativeGroupRequest {
+	fixed64 operatorid = 1;
+	cfwf.message.CommonMessage msg = 2;
+    repeated fixed64 send_to_groupids = 3; //校内协作组id
+}
+
+
+
+

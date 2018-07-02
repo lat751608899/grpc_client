@@ -1,0 +1,191 @@
+﻿syntax = "proto3";
+
+//消息格式定义
+
+package cfwf.message;
+option java_package = "com.cfwf.cb.business_proto";
+option java_outer_classname = "ClientConnMessage";
+option objc_class_prefix = "ConnMessage";
+
+/*
+服务器持久化保存的消息，客户端上线后可获取的离线消息
+注意： 
+    /protobuf/rabbitmq_message
+    /protobuf/micro_service/user_message_quene
+    都存在本文件的svn外部链接
+*/
+
+//一般消息，客户端可在上线后调用 im::kCmdGetUnreceivedMessage指令获取未收到的离线消息
+message CommonMessage
+{
+    enum MESSAGE_TYPE{
+        kMsgTypeNone                  = 0;   //不被使用
+        
+        //1-10: 广播类
+        kMsgTypeSystemBroadcast       = 1;   //系统广播
+        kMsgTypeOrgBroadcast          = 2;   //单位广播： 如学校广播等
+        
+        //11-30: 好友群组类
+        kMsgTypeFriendChat            = 11;   //好友对聊       由 im_friends 微服务发出
+        kMsgTypeGroupChat             = 12;   //群组聊天       由 im_group 微服务发出
+        kMsgTypeGroupInform           = 13;   //群组通知       由 im_group 微服务发出  
+        kMsgTypeAddFriendApply        = 14;   //申请加好友     由 im_friends 微服务发出 from_userid:自己的userID send_to:对方id  content:申请时填写的验证信息
+        kMsgTypeAddFriendReply        = 15;   //回复好友申请   由 im_friends 微服务发出 from_userid:自己的userID send_to:对方id  content内容：json格式{"result":"accept/refuse","msg":"XXX同意/拒绝了你的好友申请"}
+        kMsgTypeJoinGroupApply        = 16;   //申请入群       由 im_group 微服务发出 from_userid:申请者id send_to：群组的id content：申请时填写的验证信息
+        kMsgTypeJoinGroupReply        = 17;   //回复申请入群   由 im_group 微服务发出 from_userid:处理请求的管理员的id send_to:群组的id content内容：json格式{"result":"accept/refuse","msg":"管理员XXX同意/拒绝了你的进群申请"}
+
+        
+        //31-40: 系统通知
+        kMsgTypeCommonInform          = 31;   //一般通知    
+        kMsgTypeTradeInform           = 32;   //交易类通知
+
+        //41-50: 协作组通知
+        kMsgTypCooperativeInvite      = 41;   //协作组-邀请
+        kMsgTypCooperativeApply       = 42;   //协作组-申请
+        kMsgTypCooperativeReply       = 43;   //协作组-答复申请
+        kMsgTypCooperativeNews        = 44;   //协作组-动态
+        
+        //51-100: 学校内各应用通知
+        //群通知
+        kMsgTypeSchoolInform          = 51;  //全校通知      由 im_group 微服务发出 
+        kMsgTypeSchoolTeacherInform   = 52;  //全校教师通知  由 im_group 微服务发出    
+        kMsgTypeGradeTeacherInform    = 53;  //年级教师通知  由 im_group 微服务发出   
+        kMsgTypeTeacherGroupInform    = 54;  //教师分组通知  由 im_group 微服务发出 
+        kMsgTypeSchoolClassInform     = 55;  //班级通知      由 im_group 微服务发出 
+        
+        //业务通知
+        //kMsgTypeSchoolNewRecordCourse = 61;   //自己的老师发了新微课     （暂不用，已改为使用 统计数字型消息）  
+        //kMsgTypeSchoolTimingRecordCourseReceipt = 62;   //定时发布微课时，发送给发布老师自己的发送提醒信息 
+        //kMsgTypeSchoolNewHomeWork     = 63;   //自己的老师发了新作业     （暂不用，已改为使用 统计数字型消息）  
+        //kMsgTypeSchoolTimingHomeWorkReceipt     = 64;   //定时发布作业时，发送给发布老师自己的发送提醒信息 
+        //kMsgTypeSchoolNewSeatWork     = 65;   //自己的老师发了新随堂检测 （暂不用，已改为使用 统计数字型消息）  
+        //kMsgTypeSchoolTimingSeatWorkReceipt     = 66;   //定时随堂检测时，发送给发布老师自己的发送提醒信息     
+        kMsgTypeSchoolResearch        = 67;   //在线教研通知
+        kMsgTypeSchoolPingKe          = 68;    //评课通知
+		kMsgTypeStudentLeaveClass     = 69;    //学生离开了班级，本班老师会收到这个通知 from_userid:离开的学生id send_to:classid content:classid
+        
+        //申请和应答
+        kMsgTypeStudentJoinClassApply  = 71;   //收到学生发出的入班申请              由 school_student 微服务发出 from_userid:申请的学生id send_to:classid content:clsssid
+        kMsgTypeStudentJoinClassReply  = 72;   //老师对学生入班申请做出处理          由 school_student 微服务发出 msgid:对应的申请消息的msgid from_userid:操作的老师的id send_to:申请的学生id content："accept"/"reject"
+        kMsgTypeTeacherJoinSchoolApply = 73;   //学校管理员收到老师发来的入校申请    由 school_teacher 微服务发出    
+        kMsgTypeTeacherJoinSchoolReply = 74;   //学校管理员对老师入校申请做出了处理  由 school_teacher 微服务发出
+		
+        //其他学校业务通知
+        kMsgTypeSchoolClassActivity    = 80;   //新增班级活动，通知给班级成员。 由 web 调用 PostMessage微服务发出   content内容：json格式{"classid":} 
+               
+               
+               
+        //200-255 “钉”一下消息，催读消息 （由“人”(而非系统)发出的消息/通知，有“钉”消息）
+        kMsgTypeFriendChatDing       = 200;    // 由 im_friends 微服务发出
+        kMsgTypeGroupChatDing        = 201;    // 由 im_group 微服务发出 
+        kMsgTypeGroupInformDing      = 202;    // 由 im_group 微服务发出 
+        kMsgTypeSchoolInformDing     = 203;    // 由 im_group 微服务发出 
+        kMsgTypeSchoolTeacherInformDing = 204; // 由 im_group 微服务发出 
+        kMsgTypeGradeTeacherInformDing  = 205; // 由 im_group 微服务发出 
+        kMsgTypeTeacherGroupInformDing  = 206; // 由 im_group 微服务发出 
+        kMsgTypeSchoolClassInformDing   = 207; // 由 im_group 微服务发出 
+    };    
+    enum CONTENT_TYPE{
+        kContentTypeNone = 0;
+        kContentTypeCommon = 1; //content内是文字混合内容， 文字+[e:] ,[img: ],[at:],[link:] [file:] 等  [at:]新增， 群聊内 at某(些)用户
+        kContentTypeFile = 2;   //content内保存文件信息，json格式：{"resid":file_resid,"filesize":filesize,"filename":filename} 
+        kChatContentImage = 3;  //content=内保存图片信息，json格式：{"resid":file_resid,"filesize":filesize,"size":size,"url":url}           
+        kChatContentAudio = 4;  //content内保存音频信息，json格式：{"resid":file_resid,"filesize":filesize,"duration":duration}  
+        kChatContentLink = 5;  //content内保存超链接地址
+        kChatContentUndo = 6;  //撤销某条消息，content内要撤销的 msgid。 只可能出现在 msg_type=kMsgTypeFriendChat 或  msg_type=kMsgTypeGroupChat 消息中。
+    }
+
+    int64 msgid = 1;  
+    MESSAGE_TYPE msg_type = 2;  //MESSAGE_TYPE     
+    int64 from_userid = 3;
+    int64 send_to = 4;
+
+    CONTENT_TYPE content_type = 5;
+    string content = 6;
+    string attachment_file = 7; //文件和图片(根据filename后缀判断)，json格式：[{"resid":file_resid,"filesize":filesize,"filename":filename}]
+    string attachment_audio = 8;//音视频(根据filename后缀判断)，json格式：[{"resid":file_resid,"filesize":filesize,"duration":duration,"filename":filename}]
+
+    string link_url = 9;       //连接到特定页面    
+    string send_time = 10;   
+    bool need_read_confirm = 11; //需要接收方确认阅读状态。 此类消息显示时，需要显示“阅读确认”的按钮，用户点击按钮时   
+}
+
+//计数型消息。客户端可在上线后调用 im::kCmdGetCounterMessageStat 指令获取如新班级微课、随堂检测灯光计数统计信息 
+message CounterMessage
+{
+    enum MESSAGE_TYPE{
+        kMsgTypeNone                  = 0;   //不被使用
+        kMsgTypeSchoolWeike           = 1;   //微课
+        kMsgTypeSchoolSeatwork        = 2;   //随堂检测
+        kMsgTypeSchoolHomework        = 3;   //家庭作业
+        kMsgTypeSchoolInform          = 4;   //校内通知
+    }
+    MESSAGE_TYPE msg_type = 1;
+    enum TYPE{
+        kSetToZero = 0;        //将未读数清零
+        kIncreaseCount  = 1;   //未读数增加
+        kDeclineCount  = 2;    //未读数减少
+    }
+    TYPE type = 2;
+    int32  count = 3;     //当 set_type!=kSetCountZero时， 增加或减少的值
+}
+
+
+/*
+只在线时才接收，离线后无需接收的消息。服务器不保存
+*/
+
+//服务器转发的消息，某用户发给另一用户，接入服务器收到指令后，将之投递到RabbitMQ上。 服务器只做转发，不做其他处理
+message TranspondMessage
+{
+    int64 msgid = 1;
+    
+    enum MESSAGE_TYPE{
+        kMsgTypeNone                  = 0;   //不被使用
+        kMsgTypeEboard                = 1;   //电子白板相关消息： 邀请、进入房间
+        kMsgTypeShakeWindow           = 2;   //闪烁好友窗口。戳一下
+    }
+    MESSAGE_TYPE msg_type = 2;
+    int64 from_userid = 3;
+    string content = 4;           //根据msg_type 不同有特殊格式。 json字符串
+    string send_time = 5;
+}
+
+//一般在线推送
+message OnlineMessage
+{
+    enum MESSAGE_TYPE{
+        kMsgTypeNone                  = 0;   //不被使用
+        
+        //自己信息变化
+        kMsgTypeMyInfoChange          = 1;   //某项或某几项信息发生了变动。 由另一设备调用 im::kCmdSetMySomeInfo 或im::kCmdSetMyBaseInfo 后， account微服务发出
+        kMsgTypeMyMoneyChange         = 2;   //余额发生变动
+        kMsgTypeMyScoreChange         = 3;   //积分发生变动
+        
+        kMsgTypeHasAddFriend          = 11;   //其他设备上增加了好友。     由 im_friend 微服务发出
+        kMsgTypeHasRemoveFriend       = 12;   //其他设备上删除了好友。     由 im_friend 微服务发出
+        kMsgTypeHasDisposeFriendApply = 13;   //其他设备上处理了好友申请。 由 im_friend 微服务发出
+        kMsgTypeHasAddUserToBlackList = 14;   //其他设备上将好友拉黑       由 im_friend 微服务发出
+        
+        //（群）好友信息变化
+        kMsgTypeFriendInfoChange      = 21;   //好友某项或某几项信息变更。 本方调用 im::kCmdSetMySomeInfo 或im::kCmdSetMyBaseInfo时，若好友关心本方改变的信息(名字、心情、头像) ，则会给好友发送该消息
+        kMsgTypeFriendOnlineStatusChange = 22; //好友上下线   由 online_status 微服务发出。 注意：离线消息不能马上发出，应等待一个超时时间后，客户端未重新上线后再发出，防止因客户端切换网络时频繁触发
+        kMsgTypeGroupAddMember        = 23;   //群成员增加    由 im_group 微服务发出
+        kMsgTypeGroupMemberLeave      = 24;   //群成员减少    由 im_group 微服务发出	
+    }
+    MESSAGE_TYPE msg_type = 1;
+    string content = 2;   //json格式，根据 msg_type 不同而不同。
+      //kMsgTypeMyInfoChange、kMsgTypeFriendInfoChange: {"name":new_value, "face":new_value, "mood": new_value, "friendcheck": new_value, "birthday": new_value ..} //一个或多个信息字段
+      //kMsgTypeMyMoneyChange: {"caibi":new_value, "xuebi": new_value}
+      //kMsgTypeMyScoreChange: {"level":new_value, "score": new_value}
+      
+      //kMsgTypeHasAddFriend:  {"userid":value, "name": value, "face":value, "default_face":value, "mood":value,"os":value, "isonline":value} //userinfo
+      //kMsgTypeHasRemoveFriend:  {"userid":value}
+      //kMsgTypeHasDisposeFriendApply:  {"userid":value,"is_agree":value,"msgid":value}
+      //kMsgTypeHasAddUserToBlackList:  {"userid":value}
+      
+      //kMsgTypeFriendOnlineStatusChange:  {"userid":value, "os":value, "isonline":value}
+      //kMsgTypeGroupAddMember:  {"userid":value,"groupid":value, {"userid":value, "name": value, "face":value, "default_face":value, "mood":value,"os":value, "isonline":value}} //userinfo部分名字和kMsgTypeHasAddFriend一致
+      //kMsgTypeGroupMemberLeave: {"userid":value,"groupid":value}
+} 
+   

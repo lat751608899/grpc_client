@@ -2,6 +2,7 @@
 
 namespace GrpcServer;
 
+use Google\Protobuf\Internal\GPBLabel;
 use Google\Protobuf\Internal\Message;
 use GrpcServer\traits\EventTrait;
 use GrpcServer\traits\FieldTrait;
@@ -204,17 +205,25 @@ class ClientFactory
 	{
 		$value = $value? : $this->where;
 		foreach ($fieldData as $key => $field){
+			if(!is_array($value)){
+				return $request;
+			}
 			if(in_array($key, array_keys($value))){
 				$setter = $field->getSetter();
 				$messageType = $field->getMessageType();
 				if(!$messageType){ // 普通类型的
 					$request->$setter($value[$key]);
-				}else{  //数组类型的
+				}else{  //message类型的
 					$fieldDataSon = $this->dealField($messageType->getField());
 					$requestSonClass = $messageType->getClass();
-					foreach ($this->where[$key] as $val){
+					if($field->getLabel() == GPBLabel::REPEATED){  // repeated 数组格式
+						foreach ($this->where[$key] as $val){
+							$requestSon  = new $requestSonClass;
+							$data[] = $this->dealRequest($requestSon, $fieldDataSon,$val);
+						}
+					}else{  // 直接是message形式的
 						$requestSon  = new $requestSonClass;
-						$data[] = $this->dealRequest($requestSon, $fieldDataSon,$val);
+						$data = $this->dealRequest($requestSon, $fieldDataSon,$this->where[$key]);
 					}
 					$request->$setter($data);
 				}
