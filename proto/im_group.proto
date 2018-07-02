@@ -1,0 +1,408 @@
+﻿syntax = "proto3";
+
+//im_group: 即时通信-群
+option java_package = "com.cfwf.micro_service.im_group";
+package cfwf.micro_service.im_group;
+
+service IM_Group { 
+	//获取某用户群列表
+	rpc GetGroupList (GetGroupListRequest) returns (GetGroupListResponse) {}
+
+	//获取群成员列表
+	rpc GetGroupMembers (GetGroupMembersRequest) returns (GetGroupMembersResponse) {}
+	
+	//获取群申请列表（未处理的申请）
+	rpc GetGroupApplyList (GetGroupApplyListRequest) returns (GetGroupApplyListResponse) {}
+	
+	//申请加入群
+	rpc InsertAskEnterGroup (InsertAskEnterGroupRequest) returns (InsertAskEnterGroupResponse) {}
+		
+	//处理群申请
+	rpc DealGroupApply (DealGroupApplyRequest) returns (CommonResponse) {}
+	
+	//进入群
+	//不用申请，直接加入
+	rpc EnterGroup (EnterGroupRequest) returns (CommonResponse) {}
+	
+	//离开群
+	rpc LeaveGroup (LeaveGroupRequest) returns (CommonResponse) {}
+	
+	//删除群成员
+	rpc RemoveGruopMember (RemoveGruopMemberRequest) returns (CommonResponse) {}
+	
+	//获取群公告/通知列表
+	rpc GetGroupInformList (GetGroupInformListRequest) returns (GetGroupInformListResponse) {}
+	
+	//发布群公告/通知
+	rpc InsertGruopInform (InsertGruopInformRequest) returns (InsertGruopInformResponse) {} 
+	
+	//发送特定群组消息，只有消息数目
+	rpc BroadcastCounterMsg (BroadcastCounterMsgRequest) returns (CommonResponse) {}
+	
+	//删除群公告/通知
+	rpc DeleteGroupInform (DeleteGroupInformRequest) returns (CommonResponse) {}
+
+	//增加群聊天
+	rpc InsertGruopSpeak (InsertGroupSpeakRequest) returns (InsertGruopSpeakResponse) {}
+	
+	//获取群聊天列表
+	rpc GetGroupSpeakList (GetGroupSpeakListRequest) returns (GetGroupSpeakListResponse) {}
+	
+	//获取群信息
+	rpc GetGruopInfo (GetGruopInfoRequest) returns (GetGruopInfoResponse) {}
+	
+	//创建群
+	rpc InsertNewGroup (InsertNewGroupRequest) returns (InsertNewGroupResponse) {}	
+	
+	//解散群
+	rpc DeleteGroup (DeleteGroupRequest) returns (CommonResponse) {}	
+	
+	//搜索自己所在群群内成员
+	rpc  SearchGroupMember (SearchGroupMemberRequest) returns (SearchGroupMemberResponse) {}
+	
+	//搜索自己所在群
+	rpc SearchGroup (SearchGroupRequest) returns (SearchGroupResponse) {}
+	
+	//搜索群聊
+	rpc SearchGroupInfo (SearchGroupInfoRequest) returns (SearchGroupInfoResponse) {}
+} 
+
+// 通用返回结果
+enum RPC_CALL_RESULT {
+   RPC_CALL_RESULT_NONE        = 0;   //不应出现
+   RPC_CALL_RESULT_SUCCESS     = 1;   //成功
+   RPC_CALL_RESULT_DB_ERROR    = 2;   //数据库出错：数据库连接失败、操作失败等
+   RPC_CALL_RESULT_INPUT_ERROR = 3;   //传入数据格式错误或不合法
+   RPC_CALL_RESULT_ITEM_NOT_EXIST  = 4;   //对应条目不存在，"获取"["删除"/"修改"]单条数据时，若找不到对应数据，则返回该值
+   RPC_CALL_RESULT_ITEM_HAS_EXIST  = 5;   //对应条目已存在，"创建"单条数据或批量数据时，若发现已存在相同数据则返回该值； "修改"时，发现除了要修改的对象外，还有其他数据和修改后的数据出现重复时，则不做修改并返回该值
+}
+
+//一般rpc调用请求
+message CommonRequest{
+	string msg = 1;
+}
+
+//一般rpc调用返回值
+message CommonResponse{
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+} 
+
+enum GROUP_TYPE {
+	GROUP_TYPE_INIT = 0;                          
+	GROUP_TYPE_USER_CREATE = 1;                    //自建群
+	GROUP_TYPE_SCHOOL_ALL_TEACHER_STUDENT = 10;     //全校师生群
+	GROUP_TYPE_SCHOOL_ALL_TEACHER = 11;             //全校教师群
+	GROUP_TYPE_SCHOOL_GRADE_TEACHER = 12;           //年级教师群
+	GROUP_TYPE_SCHOOL_CLASS = 13;                   //班级群
+	GROUP_TYPE_SCHOOL_TEACHER = 14;                 //校内教师分组
+	GROUP_TYPE_SCHOOL_TEAMWORK = 20;                //校内协作组
+	GROUP_TYPE_JIAOYAN_TEAMWORK = 21;               //教研协作组
+	GROUP_TYPE_EDU_OFFICIAL = 30;                    //教育局群
+}
+
+enum GROUP_ENTER_TYPE {
+	GROUP_ENTER_TYPE_INIT = 0;
+	GROUP_ENTER_TYPE_FREEDOM = 1;     //自由进入 
+	GROUP_ENTER_TYPE_APPLY = 2;       //申请进入
+	GROUP_ENTER_TYPE_INVITE = 3;      //邀请进入
+}
+
+message GroupInfoItem {
+	int64 groupid = 1;                //群id
+	string name = 2;                  //群名称
+	GROUP_TYPE type = 3;              //群类型
+	int64 target_unit = 4;            //分组所属的单位，如:学校、教育局 
+	int64 target = 5;                 //分组ID, 如 年级编号, 班级id, 协作组id等
+	int64 super_admin = 6;            //超级管理员
+	string admins = 7;                //管理员列表:userid,userid...
+	string createtime = 8;            //创建时间
+	GROUP_ENTER_TYPE enterway = 9;    //自建群进入方式
+	int32 member_limit = 10;          //自建群的人数限制 0=不限
+	int32 member_count = 11;          //当前成员数
+	string target_describe = 12;      //json格式，信息描述，根据fld_type有特定含义。
+	                                  //如: {"schoolid":xxx,"grade":xxx,"class":xxx,"classid":xxx}
+}
+
+
+//获取群列表
+message GetGroupListRequest {
+	int64 userid = 1;     //调用者id
+}
+
+message GetGroupListResponse {
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;             //返回信息
+	repeated GroupInfoItem list = 3;    //群id列表
+}
+
+//获取群成员列表
+message GetGroupMembersRequest {
+	int64 groupid = 1;    //群ID
+}
+
+message GroupMemberItem {
+	int64 userid = 1;         //群成员id
+	string nick_name = 2;     //群内备注名称
+	string time = 3;          //加入时间
+	int64 groupid = 4;        //群id
+}
+
+message GetGroupMembersResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated GroupMemberItem list = 2;
+}
+
+//申请加入群
+message InsertAskEnterGroupRequest {
+	int64 userid = 1;      //申请者id
+	int64 groupid = 2;     //群ID
+	string content = 3;    //附带信息 
+}
+
+message InsertAskEnterGroupResponse {
+	enum CMD_RESULT{
+        kCmdResultNone    = 0;   //服务调用失败 
+        kCmdResultSuccess = 1;
+        kCmdResultRefuse  = 2;
+        kCmdResultWaitApprove = 3;
+        kCmdResultError   = 4;
+    }
+    CMD_RESULT result = 1;
+    int64 userid = 2;
+    GroupInfoItem group_info = 3;
+}
+
+//加入群
+message EnterGroupRequest {
+	int64 userid = 1;     //用户ID
+	int64 groupid = 2;    //群ID  当不知道groupid时，靠3，4,5来确定groupid
+	GROUP_TYPE type = 3;              //群类型
+	int64 target_unit = 4;            //分组所属的单位，如:学校、教育局 
+	int64 target = 5;                 //分组ID, 如 年级编号, 班级id, 协作组id等
+}
+
+//离开群
+message LeaveGroupRequest {
+	int64 userid = 1;     //用户ID
+	int64 groupid = 2;    //群ID   当不知道groupid时，靠3，4,5来确定groupid
+	GROUP_TYPE type = 3;              //群类型
+	int64 target_unit = 4;            //分组所属的单位，如:学校、教育局 
+	int64 target = 5;                 //分组ID, 如 年级编号, 班级id, 协作组id等
+}
+
+//处理群申请
+enum DEAL_GROUP_APPLY {
+	DEAL_GROUP_APPLY_INIT = 0;
+	DEAL_GROUP_APPLY_ACCEPT = 1;   //同意
+	DEAL_GROUP_APPLY_REFUSE = 2;   //拒绝
+	DEAL_GROUP_APPLY_IGNORE = 3;   //忽略
+}
+
+message DealGroupApplyRequest {
+	int64 operatorid = 1;        //处理者ID
+	int64 msgid = 2;             //群申请的消息id
+	int64 groupid = 3;           //群id
+	DEAL_GROUP_APPLY result = 4; //处理结果
+}
+
+//获取群申请列表
+message GetGroupApplyListRequest {
+	int64 groupid = 1;     //群ID
+}
+
+message GroupApplyItem {
+	int64 apply_userid = 1;       //申请者id
+	int64 msgid = 2;              //申请消息id
+	int64 groupid = 3;            //群id
+	string content = 4;           //申请携带的内容
+	string time = 5;              //申请时间
+}
+
+message GetGroupApplyListResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated GroupApplyItem list = 2;
+}
+
+//删除群成员
+message RemoveGruopMemberRequest {
+	int64 operatorid = 1;       //处理者id
+	int64 memberid = 2;        //被删除人id
+	int64 groupid = 3;         //群id
+}
+
+//获取群公告列表
+message GetGroupInformListRequest {
+	int64  groupid = 1;       //群组ID
+    int64  before_msgid = 2; //获取发送时间在这个id之前的条目
+    int64  after_msgid = 3;  //获取发送时间在这个id之后的条目
+    int32 limit_count = 4;   //获取条数
+}
+
+message GruopInformItem {
+	int64 msgid = 1;                 //消息的id
+	int64 userid = 2;                //发布者id
+	string content = 3;              //内容
+	string attachment_files = 4;     //附件。格式:["fileid":file]
+	string attachment_audios = 5;    //语音。格式：["resid":resid]
+	string time = 6;                 //发布时间
+	int64 groupid = 7;               //群id
+}
+
+message GetGroupInformListResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated GruopInformItem list = 2;
+}
+
+//发布群公告
+message InsertGruopInformRequest {
+	GruopInformItem item = 1;
+} 
+
+message InsertGruopInformResponse {
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+	int64 msgid = 3; //发布成功后的群公告的id
+}
+
+//发布特定群组消息，只有一个消息数目，没有文字内容
+message BroadcastCounterMsgRequest {
+	int64 from_userid = 1;                 //信息发布者id
+	int64 send_to_groupid = 2;             //接收信息的groupid
+	int64 send_to_targetid = 3;            //classid不知道时，使用targetid 和 send_to_target_type 确定groupid 如果有必要还需加上send_to_target_unit
+	int64 send_to_target_unit = 4;         //群组所属单位
+	GROUP_TYPE send_to_target_type = 5;    //群组类型
+	string content = 6;                    //消息内容
+	int32 msg_type = 7;                      //消息类型 cfwf.message.CounterMessage.MESSAGE_TYPE
+}
+
+//删除群公告
+message DeleteGroupInformRequest {
+	int64 msgid = 1;     //群通知的消息id
+	int64 userid = 2;    //操作者id
+}
+
+//发送群聊天
+enum IM_GROUP_SPEACK_TYPE {
+	IM_GROUP_SPEACK_TYPE_INIT = 0;
+	IM_GROUP_SPEACK_MIX = 1;          //图文混排
+	IM_GROUP_SPEACK_FILE = 2;         //文件  
+	IM_GROUP_SPEACK_IMAGE = 3;        //图片
+	IM_GROUP_SPEACK_AUDIO = 4;        //语音
+	IM_GROUP_SPEACK_LINK = 5;         //超链接
+	IM_GROUP_SPEACK_UNDO = 6;         //撤销某条消息
+}
+
+message InsertGroupSpeakRequest {
+	int64 userid = 1;                       //发送着userid
+	int64 group_id = 2;                     //群id
+	IM_GROUP_SPEACK_TYPE speak_type = 3;    //发送的消息类型。如果类型为IM_FRIEND_SPEACK_UNDO，则将要撤销的消息的id放入content字段内
+	string content = 4;                     //聊天内容
+	bool need_confirm = 5;                  //是否需要接收方做已读确认
+}
+
+message InsertGruopSpeakResponse {
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+	int64 msgid = 3; //发布成功后的聊天消息的id
+}
+
+//获取群聊天列表
+message GetGroupSpeakListRequest {	 
+    int64  group_id = 1; //群ID
+    int64  before_msgid = 2; //获取发送时间在这个id之前的条目
+    int64  after_msgid = 3;  //获取发送时间在这个id之后的条目
+    int32 limit_count = 4;   //获取条数
+}
+
+message GroupChatSpeakInfo {
+	int64 userid = 1;                      //发布者id
+	int64 groupid = 2;                     //群id
+	int64 msgid = 3;                       //消息id
+	IM_GROUP_SPEACK_TYPE speak_type = 4;   //聊天类型
+	string time = 5;                       //发布时间
+	string content = 6;	                   //聊天类容
+	bool need_confirm = 7;                 //是否需要已读确认
+	int32 confirm_count = 8;               //已确认条数
+}
+
+message GetGroupSpeakListResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated GroupChatSpeakInfo list = 2;
+}
+
+//获取群信息
+message GetGruopInfoRequest {
+	repeated int64 groupid = 1;
+}
+
+message GetGruopInfoResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated GroupInfoItem list = 2;
+}
+
+//创建群
+message InsertNewGroupRequest {
+	int64 userid = 1;          //操作者id
+	GroupInfoItem item = 2;
+}
+
+message InsertNewGroupResponse {
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;              //返回信息
+	int64 groupid = 3;           //群ID
+}
+
+//解散群
+message DeleteGroupRequest {
+	int64 userid = 1;      //操作者id
+	int64 groupid = 2;     //被解散的群ID  当不知道groupid时，靠3，4,5来确定groupid
+	GROUP_TYPE type = 3;              //群类型
+	int64 target_unit = 4;            //分组所属的单位，如:学校、教育局 
+	int64 target = 5;                 //分组ID, 如 年级编号, 班级id, 协作组id等
+}
+
+//搜索群内成员
+message SearchGroupMemberRequest {
+	int64 userid = 1;               //用户id
+	repeated string keyword = 2;    //搜索关键字 (群成员用户名、群内备注)
+}
+
+message SearchGroupMemberResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated GroupMemberItem list = 2;
+}
+
+//搜索自己所在群
+message SearchGroupRequest {
+	int64 userid = 1;               //用户id
+	repeated string keyword = 2;    //搜索关键字 (群名称)
+}
+
+message SearchGroupResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated GroupInfoItem list = 2;
+}
+
+//搜索群聊
+message SearchGroupInfoRequest {
+	int64 userid = 1;               //用户id
+	string keyword = 2;    //搜索关键字 (群名称,或用户昵称)
+}
+
+message SearchGroupInfoResult
+{
+	int64 groupid = 1;                //群id
+	string group_name = 2;                  //群名称
+	repeated string hitMembers = 3;    //命中的成员昵称
+}
+
+message SearchGroupInfoResponse {
+	RPC_CALL_RESULT result = 1;
+	repeated SearchGroupInfoResult list = 2;
+}
+
+
+
+
+
