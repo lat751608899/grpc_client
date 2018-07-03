@@ -6,7 +6,7 @@ import "message.proto";
 
 package cfwf.micro_service.post_message;
 
-service PostMessage {  
+service PostMessageProxy {  
   // 发送一般消息
   rpc PostCommonMessageToUsers (PostCommonMessageToUsersRequest) returns (CommonResponse) {}    //发送给个人
   rpc PostCommonMessageToSchoolClass (PostCommonMessageToSchoolClassRequest) returns (CommonResponse) {} //发送给班级
