@@ -2,6 +2,7 @@
 namespace GrpcServer\traits;
 
 use Google\Protobuf\Internal\RepeatedField;
+use \Google\Protobuf\Internal\Message;
 use GrpcServer\Event;
 
 /**
@@ -14,8 +15,14 @@ trait EventTrait
 	 * @var array
 	 */
 	protected $eventType = ['response', 'request', 'init'];
+	/**
+	 * @var
+	 */
 	protected $clientName;
 
+	/**
+	 * @param $clientName
+	 */
 	protected function setEvent($clientName)
 	{
 		$this->clientName = $clientName;
@@ -27,6 +34,9 @@ trait EventTrait
 		}
 	}
 
+	/**
+	 * @param $clientName
+	 */
 	protected function setResponseEvent($clientName)
 	{
 		Event::add($clientName.'_response', function ($response){
@@ -49,37 +59,21 @@ trait EventTrait
 		});
 	}
 
+	/**
+	 * @param $clientName
+	 */
 	protected function setRequestEvent($clientName)
 	{
 		Event::add($clientName.'_request', function ($request){
 			// 记录request
-			$field = $this->getField(get_class($request));
-			$data = [];
-			foreach ($field as $key => $value){
-				$getter = $value->getGetter();
-				$req = $res = $request->$getter();
-				if($message = $value->getMessageType()){  // repeat 的特殊处理
-					$sonField = $this->getField($message->getClass());
-					$res = [];
-					foreach ($req as $val){
-						$res[] = array_map(function ($item) use ($val){
-							$getter = $item->getGetter();
-							$req = $val->$getter();
-							return $req;
-						}, $sonField);
-					}
-				}else if($req instanceof RepeatedField){  // resid=>[11111,2222,4333] repeated 格式
-					$res = [];
-					foreach ($req as $val){
-						$res[] = $val;
-					}
-				}
-				$data[$key] = $res;
-			}
+			$data = $this->dealRequestToArray($request);
 			$this->saveLog("[ GRPC_REQUEST ]:".json_encode($data));
 		});
 	}
 
+	/**
+	 * @param $clientName
+	 */
 	protected function setInitEvent($clientName)
 	{
 		Event::add($clientName.'_init', function ($server){
@@ -99,6 +93,43 @@ trait EventTrait
 		if(class_exists(\think\Log::class)){
 			\think\Log::record($log,$type);
 		}
+	}
+
+	/**
+	 * @param $request
+	 * @return array
+	 */
+	protected function dealRequestToArray($request)
+	{
+		$field = $this->getField(get_class($request));
+		$data = [];
+		foreach ($field as $key => $value){
+			$getter = $value->getGetter();
+			$req = $res = $request->$getter();
+			if($message = $value->getMessageType()){  // repeat 的特殊处理
+				$sonField = $this->getField($message->getClass());
+				$res = [];
+				if($req instanceof  Message){
+					$res = $this->dealRequestToArray($req);
+				}else{
+					foreach ($req as $val){
+						$res[] = array_map(function ($item) use ($val){
+							$getter = $item->getGetter();
+							$req = $val->$getter();
+							return $req;
+						}, $sonField);
+					}
+				}
+			}else if($req instanceof RepeatedField){  // resid=>[11111,2222,4333] repeated 格式
+				$res = [];
+				foreach ($req as $val){
+					$res[] = $val;
+				}
+			}
+			$data[$key] = $res;
+		}
+
+		return $data;
 	}
 
 }
