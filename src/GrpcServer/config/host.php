@@ -70,7 +70,7 @@ return [
 		'test' => '10.183.105.170:30201',
 		'develop' => '192.168.1.10:30201',
 	],
-	'cfwf.micro_service.post_message.PostMessage' => [
+	'cfwf.micro_service.post_message.PostMessageProxy' => [
 		'product' => '10.183.105.132:30009',
 		'test' => '10.183.105.170:30009',
 		'develop' => '192.168.1.10:30009',
