@@ -158,14 +158,28 @@ class IM_GroupClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 发送特定群组消息，只有消息数目
-     * @param \Cfwf\Micro_service\Im_group\BroadcastCounterMsgRequest $argument input argument
+     * 发送通用计数型消息
+     * @param \Cfwf\Micro_service\Im_group\BroadcastCounterMsgToMembersRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function BroadcastCounterMsg(\Cfwf\Micro_service\Im_group\BroadcastCounterMsgRequest $argument,
+    public function BroadcastCounterMsgToMembers(\Cfwf\Micro_service\Im_group\BroadcastCounterMsgToMembersRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/BroadcastCounterMsg',
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/BroadcastCounterMsgToMembers',
+        $argument,
+        ['\Cfwf\Micro_service\Im_group\CommonResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 发送通用一般消息
+     * @param \Cfwf\Micro_service\Im_group\BroadcastCommonMsgToMembersRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function BroadcastCommonMsgToMembers(\Cfwf\Micro_service\Im_group\BroadcastCommonMsgToMembersRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/BroadcastCommonMsgToMembers',
         $argument,
         ['\Cfwf\Micro_service\Im_group\CommonResponse', 'decode'],
         $metadata, $options);
@@ -294,6 +308,48 @@ class IM_GroupClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SearchGroupInfo',
         $argument,
         ['\Cfwf\Micro_service\Im_group\SearchGroupInfoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 设置超级管理员
+     * @param \Cfwf\Micro_service\Im_group\SetSuperAdminRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetSuperAdmin(\Cfwf\Micro_service\Im_group\SetSuperAdminRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SetSuperAdmin',
+        $argument,
+        ['\Cfwf\Micro_service\Im_group\SetSuperAdminRespnse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 设置一般管理员
+     * @param \Cfwf\Micro_service\Im_group\SetAdminsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetAdmins(\Cfwf\Micro_service\Im_group\SetAdminsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SetAdmins',
+        $argument,
+        ['\Cfwf\Micro_service\Im_group\SetAdminsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 修改群名称
+     * @param \Cfwf\Micro_service\Im_group\SetGroupNameRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetGroupName(\Cfwf\Micro_service\Im_group\SetGroupNameRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SetGroupName',
+        $argument,
+        ['\Cfwf\Micro_service\Im_group\SetGroupNameResponse', 'decode'],
         $metadata, $options);
     }
 

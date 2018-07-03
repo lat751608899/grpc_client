@@ -21,6 +21,12 @@ class GetGroupMembersRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 groupid = 1;</code>
      */
     private $groupid = 0;
+    /**
+     *身份标签筛选
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.im_group.GROUP_MEMBER_IDENTITY_TAG identity_tag_filter = 2;</code>
+     */
+    private $identity_tag_filter = 0;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -49,6 +55,32 @@ class GetGroupMembersRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->groupid = $var;
+
+        return $this;
+    }
+
+    /**
+     *身份标签筛选
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.im_group.GROUP_MEMBER_IDENTITY_TAG identity_tag_filter = 2;</code>
+     * @return int
+     */
+    public function getIdentityTagFilter()
+    {
+        return $this->identity_tag_filter;
+    }
+
+    /**
+     *身份标签筛选
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.im_group.GROUP_MEMBER_IDENTITY_TAG identity_tag_filter = 2;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setIdentityTagFilter($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Im_group\GROUP_MEMBER_IDENTITY_TAG::class);
+        $this->identity_tag_filter = $var;
 
         return $this;
     }

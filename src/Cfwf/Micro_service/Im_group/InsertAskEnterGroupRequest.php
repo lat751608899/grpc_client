@@ -33,6 +33,12 @@ class InsertAskEnterGroupRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string content = 3;</code>
      */
     private $content = '';
+    /**
+     *身份标签, GROUP_MEMBER_IDENTITY_TAG的集合。  如: IDENTITY_TAG_STUDENT，  IDENTITY_TAG_RESEARCHER | IDENTITY_TAG_TEACHER
+     *
+     * Generated from protobuf field <code>uint32 idnetity_tag = 4;</code>
+     */
+    private $idnetity_tag = 0;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -113,6 +119,32 @@ class InsertAskEnterGroupRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->content = $var;
+
+        return $this;
+    }
+
+    /**
+     *身份标签, GROUP_MEMBER_IDENTITY_TAG的集合。  如: IDENTITY_TAG_STUDENT，  IDENTITY_TAG_RESEARCHER | IDENTITY_TAG_TEACHER
+     *
+     * Generated from protobuf field <code>uint32 idnetity_tag = 4;</code>
+     * @return int
+     */
+    public function getIdnetityTag()
+    {
+        return $this->idnetity_tag;
+    }
+
+    /**
+     *身份标签, GROUP_MEMBER_IDENTITY_TAG的集合。  如: IDENTITY_TAG_STUDENT，  IDENTITY_TAG_RESEARCHER | IDENTITY_TAG_TEACHER
+     *
+     * Generated from protobuf field <code>uint32 idnetity_tag = 4;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setIdnetityTag($var)
+    {
+        GPBUtil::checkUint32($var);
+        $this->idnetity_tag = $var;
 
         return $this;
     }
