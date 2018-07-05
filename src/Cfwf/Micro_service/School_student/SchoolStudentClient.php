@@ -87,6 +87,20 @@ class SchoolStudentClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 获取班级内学生列表
+     * @param \Cfwf\Micro_service\School_student\GetClassStudentsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetClassStudents(\Cfwf\Micro_service\School_student\GetClassStudentsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.school_student.SchoolStudent/GetClassStudents',
+        $argument,
+        ['\Cfwf\Micro_service\School_student\GetClassStudentsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * 获取某学生信息
      * @param \Cfwf\Micro_service\School_student\GetStudentInfoRequest $argument input argument
      * @param array $metadata metadata

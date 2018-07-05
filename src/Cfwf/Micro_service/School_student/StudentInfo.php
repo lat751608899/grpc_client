@@ -55,6 +55,10 @@ class StudentInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 class_no = 7;</code>
      */
     private $class_no = 0;
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo.STUDENT_STATUS status = 8;</code>
+     */
+    private $status = 0;
 
     public function __construct() {
         \GPBMetadata\SchoolStudent::initOnce();
@@ -235,6 +239,28 @@ class StudentInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->class_no = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo.STUDENT_STATUS status = 8;</code>
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo.STUDENT_STATUS status = 8;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\School_student\StudentInfo_STUDENT_STATUS::class);
+        $this->status = $var;
 
         return $this;
     }

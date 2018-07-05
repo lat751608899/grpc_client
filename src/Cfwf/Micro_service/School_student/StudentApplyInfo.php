@@ -71,6 +71,10 @@ class StudentApplyInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string submit_time = 10;</code>
      */
     private $submit_time = '';
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo.APPROVE_STATUS status = 11;</code>
+     */
+    private $status = 0;
 
     public function __construct() {
         \GPBMetadata\SchoolStudent::initOnce();
@@ -329,6 +333,28 @@ class StudentApplyInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->submit_time = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo.APPROVE_STATUS status = 11;</code>
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo.APPROVE_STATUS status = 11;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\School_student\StudentApplyInfo_APPROVE_STATUS::class);
+        $this->status = $var;
 
         return $this;
     }

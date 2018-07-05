@@ -22,15 +22,19 @@ class GetStudentStatusInfoResponse extends \Google\Protobuf\Internal\Message
      */
     private $studentid = 0;
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.GetStudentStatusInfoResponse.IDENTITY_STATUS status = 3;</code>
+     * Generated from protobuf field <code>bool exist_student_info = 3;</code>
      */
-    private $status = 0;
+    private $exist_student_info = false;
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo apply_info = 4;</code>
+     * Generated from protobuf field <code>bool exist_apply_info = 4;</code>
+     */
+    private $exist_apply_info = false;
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo apply_info = 5;</code>
      */
     private $apply_info = null;
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo student_info = 5;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo student_info = 6;</code>
      */
     private $student_info = null;
 
@@ -84,29 +88,51 @@ class GetStudentStatusInfoResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.GetStudentStatusInfoResponse.IDENTITY_STATUS status = 3;</code>
-     * @return int
+     * Generated from protobuf field <code>bool exist_student_info = 3;</code>
+     * @return bool
      */
-    public function getStatus()
+    public function getExistStudentInfo()
     {
-        return $this->status;
+        return $this->exist_student_info;
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.GetStudentStatusInfoResponse.IDENTITY_STATUS status = 3;</code>
-     * @param int $var
+     * Generated from protobuf field <code>bool exist_student_info = 3;</code>
+     * @param bool $var
      * @return $this
      */
-    public function setStatus($var)
+    public function setExistStudentInfo($var)
     {
-        GPBUtil::checkEnum($var, \Cfwf\Micro_service\School_student\GetStudentStatusInfoResponse_IDENTITY_STATUS::class);
-        $this->status = $var;
+        GPBUtil::checkBool($var);
+        $this->exist_student_info = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo apply_info = 4;</code>
+     * Generated from protobuf field <code>bool exist_apply_info = 4;</code>
+     * @return bool
+     */
+    public function getExistApplyInfo()
+    {
+        return $this->exist_apply_info;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool exist_apply_info = 4;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setExistApplyInfo($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->exist_apply_info = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo apply_info = 5;</code>
      * @return \Cfwf\Micro_service\School_student\StudentApplyInfo
      */
     public function getApplyInfo()
@@ -115,7 +141,7 @@ class GetStudentStatusInfoResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo apply_info = 4;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentApplyInfo apply_info = 5;</code>
      * @param \Cfwf\Micro_service\School_student\StudentApplyInfo $var
      * @return $this
      */
@@ -128,7 +154,7 @@ class GetStudentStatusInfoResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo student_info = 5;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo student_info = 6;</code>
      * @return \Cfwf\Micro_service\School_student\StudentInfo
      */
     public function getStudentInfo()
@@ -137,7 +163,7 @@ class GetStudentStatusInfoResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo student_info = 5;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.school_student.StudentInfo student_info = 6;</code>
      * @param \Cfwf\Micro_service\School_student\StudentInfo $var
      * @return $this
      */

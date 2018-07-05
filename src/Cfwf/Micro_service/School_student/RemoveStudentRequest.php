@@ -27,6 +27,16 @@ class RemoveStudentRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>repeated fixed64 students = 3;</code>
      */
     private $students;
+    /**
+     *true=只离开班级，不离开学校
+     *
+     * Generated from protobuf field <code>bool only_leave_class = 4;</code>
+     */
+    private $only_leave_class = false;
+    /**
+     * Generated from protobuf field <code>fixed64 classid = 5;</code>
+     */
+    private $classid = 0;
 
     public function __construct() {
         \GPBMetadata\SchoolStudent::initOnce();
@@ -95,6 +105,54 @@ class RemoveStudentRequest extends \Google\Protobuf\Internal\Message
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::FIXED64);
         $this->students = $arr;
+
+        return $this;
+    }
+
+    /**
+     *true=只离开班级，不离开学校
+     *
+     * Generated from protobuf field <code>bool only_leave_class = 4;</code>
+     * @return bool
+     */
+    public function getOnlyLeaveClass()
+    {
+        return $this->only_leave_class;
+    }
+
+    /**
+     *true=只离开班级，不离开学校
+     *
+     * Generated from protobuf field <code>bool only_leave_class = 4;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setOnlyLeaveClass($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->only_leave_class = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 classid = 5;</code>
+     * @return int|string
+     */
+    public function getClassid()
+    {
+        return $this->classid;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 classid = 5;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setClassid($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->classid = $var;
 
         return $this;
     }

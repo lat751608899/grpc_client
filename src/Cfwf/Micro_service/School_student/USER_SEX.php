@@ -10,12 +10,16 @@ namespace Cfwf\Micro_service\School_student;
 class USER_SEX
 {
     /**
-     * Generated from protobuf enum <code>USER_SEX_GIRL = 0;</code>
+     * Generated from protobuf enum <code>USER_SEX_INIT = 0;</code>
      */
-    const USER_SEX_GIRL = 0;
+    const USER_SEX_INIT = 0;
     /**
-     * Generated from protobuf enum <code>USER_SEX_BOY = 1;</code>
+     * Generated from protobuf enum <code>USER_SEX_GIRL = 1;</code>
      */
-    const USER_SEX_BOY = 1;
+    const USER_SEX_GIRL = 1;
+    /**
+     * Generated from protobuf enum <code>USER_SEX_BOY = 2;</code>
+     */
+    const USER_SEX_BOY = 2;
 }
 

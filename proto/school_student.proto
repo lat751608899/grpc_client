@@ -4,7 +4,7 @@ syntax = "proto3";
 package cfwf.micro_service.school_student;
 option java_package = "com.cfwf.micro_service.school_student";
 
-service SchoolStudent {
+service SchoolStudent { 
   //获取学生申请列表(分页返回)
   rpc SearchStudentApply (SearchStudentApplyRequest) returns (SearchStudentApplyResponse) {}  
 
@@ -20,6 +20,9 @@ service SchoolStudent {
   
   //获取学生列表(分页返回)
   rpc SearchStudent (SearchStudentRequest) returns (SearchStudentResponse) {} 
+  
+  //获取班级内学生列表
+  rpc GetClassStudents (GetClassStudentsRequest) returns (GetClassStudentsResponse) {} 
   
   //获取某学生信息
   rpc GetStudentInfo (GetStudentInfoRequest) returns (GetStudentInfoResponse) {} 
@@ -51,8 +54,9 @@ message CommonResponse{
 } 
 
 enum USER_SEX{
-    USER_SEX_GIRL = 0;
-    USER_SEX_BOY  = 1 ;   
+	USER_SEX_INIT = 0;
+    USER_SEX_GIRL = 1;
+    USER_SEX_BOY  = 2;   
 }
 
 message StudentApplyInfo{
@@ -68,6 +72,15 @@ message StudentApplyInfo{
 	string username = 8;         //姓名
 	USER_SEX sex = 9;            //性别
 	string submit_time = 10;     //申请时间，格式： yyyy-mm-dd hh:nn:ss
+
+    enum APPROVE_STATUS {
+        APPROVE_STATUS_WAIT = 0;     //等待审批
+        APPROVE_STATUS_PASSED = 1;   //人工审批通过
+        APPROVE_STATUS_REFUSED = 2;  //拒绝
+        APPROVE_STATUS_AUTO_PASSED = 3;  //自动审批通过
+        APPROVE_STATUS_TIMEOUT = 4;  //已过期(用户在上个申请未审批前又提交了一次申请，则上个申请将被设为过期)
+    }
+    APPROVE_STATUS status = 11;
 }
 
 //函数： SearchStudentApply 
@@ -130,6 +143,14 @@ message StudentInfo{
     int32 grade_year = 5;     //学届
     int32 grade = 6;          //年级
     int32 class_no = 7;       //班级序号
+
+    enum STUDENT_STATUS{
+        STUDENT_STATUS_NONE = 0;
+        STUDENT_STATUS_IN_CLASS = 1;
+        STUDENT_STATUS_LEAVE_CLASS = 2;
+        STUDENT_STATUS_LEAVE_SCHOOL = 3;
+    }
+    STUDENT_STATUS status = 8;
 }
 
 //获取学生列表(分页返回)
@@ -157,6 +178,16 @@ message SearchStudentResponse{
     repeated StudentInfo list = 6; //当前页结果列表
 }
 
+message GetClassStudentsRequest{
+    fixed64 schoolid = 3;      //学校id，必填
+    repeated fixed64 classids = 2;     //学生id，必填
+}
+
+message GetClassStudentsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated StudentInfo list = 2; //
+}
+
 //获取学生信息
 message GetStudentInfoRequest{    
     repeated fixed64 studentid = 1;     //学生id，必填
@@ -175,16 +206,10 @@ message GetStudentStatusInfoRequest{
 message GetStudentStatusInfoResponse{   
     RPC_CALL_RESULT result = 1;
     int64 studentid = 2;
-    enum IDENTITY_STATUS{
-        kIdentityStatusNone = 0;   //未在学校中
-        kIdentityStatusApply = 1;  //申请中
-        kIdentityStatusNormal = 2; //正常
-        kIdentityStatusRemove = 3; //被（学校管理员或班主任）移除
-        kIdentityStatusLeave = 4;   //主动离开
-    }
-    IDENTITY_STATUS status = 3;
-    StudentApplyInfo apply_info = 4;
-    StudentInfo student_info = 5;
+    bool exist_student_info = 3;
+    bool exist_apply_info = 4;
+    StudentApplyInfo apply_info = 5;
+    StudentInfo student_info = 6;
 }
 
 //设置学生信息。不通过审批，直接设置学生所属班级，用户批量注册
@@ -196,6 +221,8 @@ message SetStudentInfoRequest{
 //从学校内移除学生。
 message RemoveStudentRequest{  
     fixed64 operatorid = 1;
-    fixed64 schoolid = 2;      
+    fixed64 schoolid = 2;    
     repeated fixed64 students = 3;  
+    bool only_leave_class = 4; //true=只离开班级，不离开学校
+    fixed64 classid = 5;
 }
