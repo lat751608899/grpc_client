@@ -65,6 +65,14 @@ class UserBaseInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string bind_mobile = 11;</code>
      */
     private $bind_mobile = '';
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.account.BELONG_UNIT_TYPE belong_unittype = 12;</code>
+     */
+    private $belong_unittype = 0;
+    /**
+     * Generated from protobuf field <code>fixed64 belong_unitid = 13;</code>
+     */
+    private $belong_unitid = 0;
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -321,6 +329,50 @@ class UserBaseInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->bind_mobile = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.account.BELONG_UNIT_TYPE belong_unittype = 12;</code>
+     * @return int
+     */
+    public function getBelongUnittype()
+    {
+        return $this->belong_unittype;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.account.BELONG_UNIT_TYPE belong_unittype = 12;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setBelongUnittype($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Account\BELONG_UNIT_TYPE::class);
+        $this->belong_unittype = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 belong_unitid = 13;</code>
+     * @return int|string
+     */
+    public function getBelongUnitid()
+    {
+        return $this->belong_unitid;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 belong_unitid = 13;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setBelongUnitid($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->belong_unitid = $var;
 
         return $this;
     }

@@ -5,7 +5,7 @@
 package cfwf.micro_service.account;
 option java_package = "com.cfwf.micro_service.account";
 
-service Account {
+service Account { 
 
   //--------------------------------------- 注册新用户
   //检查手机号是否可用(在调用RegistNewAccountByMobilePhone 之前应先调用此接口检查) CommonRequest.msg==手机号 
@@ -20,6 +20,9 @@ service Account {
   //--------------------------------------- 设置    
   //设置用户的某个身份
   rpc SetUserIdentity (SetUserIdentityRequest) returns (CommonResponse) {} 
+  
+  //设置用户的所属单位
+  rpc SetBelongUnit (SetBelongUnitRequest) returns (CommonResponse) {} 
   
   //设置用户基本信息  传入参数中，UserBaseInfo.main_identity 将会被忽略，而使用系统定义的身份顺序。cb_id可不填写， userid必填
   rpc SetUserBaseInfo (UserBaseInfo) returns (CommonResponse) {}  
@@ -48,8 +51,10 @@ service Account {
   
   //根据 cb id 查询用户基本信息
   rpc QueryUserBaseInfoByCBId (QueryUserBaseInfoByCBIdRequest) returns (QueryUserBaseInfoByCBIdResponse) {}
-	
-  
+
+  //获取用户验证好友方式
+  rpc GetUserFriendCheck (GetUserFriendCheckRequest) returns (GetUserFriendCheckResponse) {}  
+ 
   //搜索用户
   rpc SearchUserBaseInfo (SearchUserBaseInfoRequest) returns (SearchUserBaseInfoResponse) {}
   
@@ -59,6 +64,9 @@ service Account {
   //--------------------------------------- 运维管理    
   //设置用户状态: 限权、 限功能、 限制登录、 屏蔽其所发内容等
   rpc SetUserStatus (SetUserStatusRequest) returns (CommonResponse) {}  
+  
+  // 获取账户绑定的手机号
+  rpc GetBindedPhoneNumber(GetBindedPhoneNumberRequest) returns (GetBindedPhoneNumberResponse) {}
   
 } 
 
@@ -164,6 +172,14 @@ enum USER_IDENTITY_TYPE {
    USER_IDENTITY_TYPE_COMMERCIAL          = 31;   //商业机构用户
 }
  
+enum BELONG_UNIT_TYPE ////所属单位类型
+{
+    BELONG_UNIT_TYPE_NONE = 0;     
+    BELONG_UNIT_TYPE_SCHOOL = 1;   //自动统一
+    BELONG_UNIT_TYPE_EDU_BUREAU = 2; //教育局
+    BELONG_UNIT_TYPE_TEACH_OFFICE = 3;  //教研室
+}
+
 message UserIdentity
 {  
     bool is_student = 1; //是否中小学学生
@@ -199,6 +215,9 @@ message UserBaseInfo
     string mood = 9;
     int32 birthday = 10;
     string bind_mobile = 11; //绑定的手机号
+    
+    BELONG_UNIT_TYPE belong_unittype = 12;
+    fixed64 belong_unitid = 13;
 }
 
 //用户简单信息
@@ -226,6 +245,15 @@ message SetUserIdentityRequest
     bool has_this_identity = 3;
 }
 
+
+message SetBelongUnitRequest
+{
+    fixed64 operatorid = 1;
+    fixed64 userid = 2;
+    BELONG_UNIT_TYPE unit_type = 3;
+    fixed64 unit_id = 4;
+}
+
 // SetUserAllIdentity 设置用户所拥有的全部身份
 message SetUserAllIdentityRequest
 {
@@ -241,6 +269,8 @@ enum USER_INFO_TYPE
     USER_INFO_TYPE_CityId = 3;
     USER_INFO_TYPE_BirthDay = 4;
     USER_INFO_TYPE_Mood = 5;
+	USER_INFO_TYPE_CustomFace = 6;
+	USER_INFO_TYPE_DefaultFace = 7;
 }
 
 message SetUserInfoRequest{ 
@@ -254,6 +284,19 @@ message SetUserFriendCheckRequest
 {
     fixed64 userid = 1;
     FREIND_CHECK_TYPE friend_check = 2;
+}
+
+//获取用户验证好友方式
+message GetUserFriendCheckRequest
+{
+    fixed64 userid = 1;
+}
+
+message GetUserFriendCheckResponse
+{
+    RPC_CALL_RESULT result = 1;
+    fixed64 userid = 2;
+    FREIND_CHECK_TYPE friend_check = 3;
 }
 
 //绑定/修改 手机
@@ -370,3 +413,13 @@ message SetUserStatusRequest
     //待完善
 }
 
+message GetBindedPhoneNumberRequest
+{
+	fixed64 userid = 1;
+}
+
+message GetBindedPhoneNumberResponse
+{
+	RPC_CALL_RESULT result = 1;
+	string phone_no = 2;
+}

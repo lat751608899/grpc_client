@@ -75,6 +75,20 @@ class AccountClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 设置用户的所属单位
+     * @param \Cfwf\Micro_service\Account\SetBelongUnitRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetBelongUnit(\Cfwf\Micro_service\Account\SetBelongUnitRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.account.Account/SetBelongUnit',
+        $argument,
+        ['\Cfwf\Micro_service\Account\CommonResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * 设置用户基本信息  传入参数中，UserBaseInfo.main_identity 将会被忽略，而使用系统定义的身份顺序。cb_id可不填写， userid必填
      * @param \Cfwf\Micro_service\Account\UserBaseInfo $argument input argument
      * @param array $metadata metadata
@@ -202,6 +216,20 @@ class AccountClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 获取用户验证好友方式
+     * @param \Cfwf\Micro_service\Account\GetUserFriendCheckRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetUserFriendCheck(\Cfwf\Micro_service\Account\GetUserFriendCheckRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.account.Account/GetUserFriendCheck',
+        $argument,
+        ['\Cfwf\Micro_service\Account\GetUserFriendCheckResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * 搜索用户
      * @param \Cfwf\Micro_service\Account\SearchUserBaseInfoRequest $argument input argument
      * @param array $metadata metadata
@@ -241,6 +269,20 @@ class AccountClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/cfwf.micro_service.account.Account/SetUserStatus',
         $argument,
         ['\Cfwf\Micro_service\Account\CommonResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 获取账户绑定的手机号
+     * @param \Cfwf\Micro_service\Account\GetBindedPhoneNumberRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetBindedPhoneNumber(\Cfwf\Micro_service\Account\GetBindedPhoneNumberRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.account.Account/GetBindedPhoneNumber',
+        $argument,
+        ['\Cfwf\Micro_service\Account\GetBindedPhoneNumberResponse', 'decode'],
         $metadata, $options);
     }
 

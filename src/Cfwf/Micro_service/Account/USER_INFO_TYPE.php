@@ -33,5 +33,13 @@ class USER_INFO_TYPE
      * Generated from protobuf enum <code>USER_INFO_TYPE_Mood = 5;</code>
      */
     const USER_INFO_TYPE_Mood = 5;
+    /**
+     * Generated from protobuf enum <code>USER_INFO_TYPE_CustomFace = 6;</code>
+     */
+    const USER_INFO_TYPE_CustomFace = 6;
+    /**
+     * Generated from protobuf enum <code>USER_INFO_TYPE_DefaultFace = 7;</code>
+     */
+    const USER_INFO_TYPE_DefaultFace = 7;
 }
 
