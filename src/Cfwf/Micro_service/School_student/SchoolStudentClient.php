@@ -156,4 +156,18 @@ class SchoolStudentClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * 获取班级内学生人数
+     * @param \Cfwf\Micro_service\School_student\GetStudentCountRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetStudentCount(\Cfwf\Micro_service\School_student\GetStudentCountRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.school_student.SchoolStudent/GetStudentCount',
+        $argument,
+        ['\Cfwf\Micro_service\School_student\GetStudentCountResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

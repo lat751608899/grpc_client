@@ -35,6 +35,9 @@ service SchoolStudent {
   
   //从学校内移除学生。
   rpc RemoveStudent (RemoveStudentRequest) returns (CommonResponse) {} 
+  
+  //获取班级内学生人数
+  rpc GetStudentCount(GetStudentCountRequest) returns (GetStudentCountResponse) {} 
 }
 
 //通用rpc调用返回结果
@@ -226,3 +229,22 @@ message RemoveStudentRequest{
     bool only_leave_class = 4; //true=只离开班级，不离开学校
     fixed64 classid = 5;
 }
+
+//获取班级内学生人数
+message GetStudentCountRequest{  
+    fixed64 schoolid = 1;    
+    repeated fixed64 classids = 2;  
+}
+
+message ClassStudentCount{
+    fixed64 classid = 1;
+    int32 student_count=2;
+}
+
+message GetStudentCountResponse{  
+    RPC_CALL_RESULT result = 1;
+    fixed64 schoolid = 2;    
+    repeated ClassStudentCount list = 3;  
+}
+  
+  
