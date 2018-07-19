@@ -4,7 +4,7 @@ syntax = "proto3";
 package cfwf.micro_service.school_student;
 option java_package = "com.cfwf.micro_service.school_student";
 
-service SchoolStudent { 
+service SchoolStudent {
   //获取学生申请列表(分页返回)
   rpc SearchStudentApply (SearchStudentApplyRequest) returns (SearchStudentApplyResponse) {}  
 
