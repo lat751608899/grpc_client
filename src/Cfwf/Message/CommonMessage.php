@@ -64,11 +64,29 @@ class CommonMessage extends \Google\Protobuf\Internal\Message
      */
     private $send_time = '';
     /**
-     *需要接收方确认阅读状态。 此类消息显示时，需要显示“阅读确认”的按钮，用户点击按钮时   
+     *需要接收方确认阅读状态。 此类消息显示时，需要显示“阅读确认”的按钮，用户点击按钮时 
      *
      * Generated from protobuf field <code>bool need_read_confirm = 11;</code>
      */
     private $need_read_confirm = false;
+    /**
+     *发言人头像
+     *
+     * Generated from protobuf field <code>int32 default_face = 12;</code>
+     */
+    private $default_face = 0;
+    /**
+     *发言人自定义头像
+     *
+     * Generated from protobuf field <code>string custom_face = 13;</code>
+     */
+    private $custom_face = '';
+    /**
+     *发言人名称
+     *
+     * Generated from protobuf field <code>string username = 14;</code>
+     */
+    private $username = '';
 
     public function __construct() {
         \GPBMetadata\Message::initOnce();
@@ -312,7 +330,7 @@ class CommonMessage extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *需要接收方确认阅读状态。 此类消息显示时，需要显示“阅读确认”的按钮，用户点击按钮时   
+     *需要接收方确认阅读状态。 此类消息显示时，需要显示“阅读确认”的按钮，用户点击按钮时 
      *
      * Generated from protobuf field <code>bool need_read_confirm = 11;</code>
      * @return bool
@@ -323,7 +341,7 @@ class CommonMessage extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *需要接收方确认阅读状态。 此类消息显示时，需要显示“阅读确认”的按钮，用户点击按钮时   
+     *需要接收方确认阅读状态。 此类消息显示时，需要显示“阅读确认”的按钮，用户点击按钮时 
      *
      * Generated from protobuf field <code>bool need_read_confirm = 11;</code>
      * @param bool $var
@@ -333,6 +351,84 @@ class CommonMessage extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->need_read_confirm = $var;
+
+        return $this;
+    }
+
+    /**
+     *发言人头像
+     *
+     * Generated from protobuf field <code>int32 default_face = 12;</code>
+     * @return int
+     */
+    public function getDefaultFace()
+    {
+        return $this->default_face;
+    }
+
+    /**
+     *发言人头像
+     *
+     * Generated from protobuf field <code>int32 default_face = 12;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setDefaultFace($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->default_face = $var;
+
+        return $this;
+    }
+
+    /**
+     *发言人自定义头像
+     *
+     * Generated from protobuf field <code>string custom_face = 13;</code>
+     * @return string
+     */
+    public function getCustomFace()
+    {
+        return $this->custom_face;
+    }
+
+    /**
+     *发言人自定义头像
+     *
+     * Generated from protobuf field <code>string custom_face = 13;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCustomFace($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->custom_face = $var;
+
+        return $this;
+    }
+
+    /**
+     *发言人名称
+     *
+     * Generated from protobuf field <code>string username = 14;</code>
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     *发言人名称
+     *
+     * Generated from protobuf field <code>string username = 14;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setUsername($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->username = $var;
 
         return $this;
     }

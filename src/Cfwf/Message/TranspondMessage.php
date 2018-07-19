@@ -37,6 +37,24 @@ class TranspondMessage extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string send_time = 5;</code>
      */
     private $send_time = '';
+    /**
+     *发言人头像
+     *
+     * Generated from protobuf field <code>int32 default_face = 6;</code>
+     */
+    private $default_face = 0;
+    /**
+     *发言人自定义头像
+     *
+     * Generated from protobuf field <code>string custom_face = 7;</code>
+     */
+    private $custom_face = '';
+    /**
+     *发言人名称
+     *
+     * Generated from protobuf field <code>string username = 8;</code>
+     */
+    private $username = '';
 
     public function __construct() {
         \GPBMetadata\Message::initOnce();
@@ -153,6 +171,84 @@ class TranspondMessage extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->send_time = $var;
+
+        return $this;
+    }
+
+    /**
+     *发言人头像
+     *
+     * Generated from protobuf field <code>int32 default_face = 6;</code>
+     * @return int
+     */
+    public function getDefaultFace()
+    {
+        return $this->default_face;
+    }
+
+    /**
+     *发言人头像
+     *
+     * Generated from protobuf field <code>int32 default_face = 6;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setDefaultFace($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->default_face = $var;
+
+        return $this;
+    }
+
+    /**
+     *发言人自定义头像
+     *
+     * Generated from protobuf field <code>string custom_face = 7;</code>
+     * @return string
+     */
+    public function getCustomFace()
+    {
+        return $this->custom_face;
+    }
+
+    /**
+     *发言人自定义头像
+     *
+     * Generated from protobuf field <code>string custom_face = 7;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCustomFace($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->custom_face = $var;
+
+        return $this;
+    }
+
+    /**
+     *发言人名称
+     *
+     * Generated from protobuf field <code>string username = 8;</code>
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     *发言人名称
+     *
+     * Generated from protobuf field <code>string username = 8;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setUsername($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->username = $var;
 
         return $this;
     }

@@ -34,41 +34,53 @@ class CommonMessage_MESSAGE_TYPE
      */
     const kMsgTypeFriendChat = 11;
     /**
-     *群组聊天       由 im_group 微服务发出
+     *群组聊天       由 im_group 微服务发出     from_userid:发言人id  send_to:群组id
      *
      * Generated from protobuf enum <code>kMsgTypeGroupChat = 12;</code>
      */
     const kMsgTypeGroupChat = 12;
     /**
-     *群组通知       由 im_group 微服务发出  
+     *群组通知       由 im_group 微服务发出     from_userid:发布人id  send_to:群组id
      *
      * Generated from protobuf enum <code>kMsgTypeGroupInform = 13;</code>
      */
     const kMsgTypeGroupInform = 13;
     /**
-     *申请加好友     由 im_friends 微服务发出 from_userid:自己的userID send_to:对方id  content:申请时填写的验证信息
+     *申请加好友     由 im_friends 微服务发出   from_userid:申请方id  send_to:对方id         content:申请时填写的验证信息
      *
      * Generated from protobuf enum <code>kMsgTypeAddFriendApply = 14;</code>
      */
     const kMsgTypeAddFriendApply = 14;
     /**
-     *回复好友申请   由 im_friends 微服务发出 from_userid:自己的userID send_to:对方id  content内容：json格式{"result":"accept/refuse","msg":"XXX同意/拒绝了你的好友申请"}
+     *回复好友申请   由 im_friends 微服务发出   from_userid:申请处理者id  send_to:申请方id   content内容：json格式{"result":"accept/refuse","msg":"XXX同意/拒绝了你的好友申请"}
      *
      * Generated from protobuf enum <code>kMsgTypeAddFriendReply = 15;</code>
      */
     const kMsgTypeAddFriendReply = 15;
     /**
-     *申请入群       由 im_group 微服务发出 from_userid:申请者id send_to：群组的id content：申请时填写的验证信息
+     *申请入群       由 im_group 微服务发出     from_userid:申请者id      send_to:群组的id   content：申请时填写的验证信息
      *
      * Generated from protobuf enum <code>kMsgTypeJoinGroupApply = 16;</code>
      */
     const kMsgTypeJoinGroupApply = 16;
     /**
-     *回复申请入群   由 im_group 微服务发出 from_userid:处理请求的管理员的id send_to:群组的id content内容：json格式{"result":"accept/refuse","msg":"管理员XXX同意/拒绝了你的进群申请"}
+     *回复申请入群   由 im_group 微服务发出     from_userid:申请处理者id  send_to:申请方id   content内容：json格式{"result":"accept/refuse","msg":"管理员XXX同意/拒绝了你的进群申请"}
      *
      * Generated from protobuf enum <code>kMsgTypeJoinGroupReply = 17;</code>
      */
     const kMsgTypeJoinGroupReply = 17;
+    /**
+     *解散群         由 im_group 微服务发出,自定义群和协作组群会收到该通知     from_userid:操作者id   send_to:群组id  default_face,custom_face,username:操作者个人信息
+     *
+     * Generated from protobuf enum <code>kMsgTypeDeleteGroup = 18;</code>
+     */
+    const kMsgTypeDeleteGroup = 18;
+    /**
+     *好友对聊同步，发送给自己的其他设备  由 im_friends 微服务发出   from_userid:发言人id  send_to:好友id。消息格式同kMsgTypeFriendChat
+     *
+     * Generated from protobuf enum <code>kMsgTypeFriendChatSync = 20;</code>
+     */
+    const kMsgTypeFriendChatSync = 20;
     /**
      *31-40: 系统通知
      *
@@ -88,19 +100,19 @@ class CommonMessage_MESSAGE_TYPE
      */
     const kMsgTypCooperativeInvite = 41;
     /**
-     *协作组-申请
+     *协作组-申请                              from_userid:申请人id      send_to:协作组id    content内容: json格式， 应包含协作组id
      *
      * Generated from protobuf enum <code>kMsgTypCooperativeApply = 42;</code>
      */
     const kMsgTypCooperativeApply = 42;
     /**
-     *协作组-答复申请
+     *协作组-答复申请                          from_userid:申请处理者id  send_to:申请人id    content内容: json格式， 应包含协作组id
      *
      * Generated from protobuf enum <code>kMsgTypCooperativeReply = 43;</code>
      */
     const kMsgTypCooperativeReply = 43;
     /**
-     *协作组-动态
+     *协作组-动态                              from_userid:动态发布者id  send_to:接收人id    content内容: json格式， 应包含协作组id
      *
      * Generated from protobuf enum <code>kMsgTypCooperativeNews = 44;</code>
      */
@@ -113,25 +125,25 @@ class CommonMessage_MESSAGE_TYPE
      */
     const kMsgTypeSchoolInform = 51;
     /**
-     *全校教师通知  由 im_group 微服务发出    
+     *全校教师通知  由 im_group 微服务发出      from_userid:通知发布者id  send_to:schoolid    
      *
      * Generated from protobuf enum <code>kMsgTypeSchoolTeacherInform = 52;</code>
      */
     const kMsgTypeSchoolTeacherInform = 52;
     /**
-     *年级教师通知  由 im_group 微服务发出   
+     *年级教师通知  由 im_group 微服务发出      from_userid:通知发布者id  send_to:(学段)+(学届)，如 12017 = 小学2017届    
      *
      * Generated from protobuf enum <code>kMsgTypeGradeTeacherInform = 53;</code>
      */
     const kMsgTypeGradeTeacherInform = 53;
     /**
-     *教师分组通知  由 im_group 微服务发出 
+     *教师分组通知  由 im_group 微服务发出      from_userid:通知发布者id  send_to:groupid    
      *
      * Generated from protobuf enum <code>kMsgTypeTeacherGroupInform = 54;</code>
      */
     const kMsgTypeTeacherGroupInform = 54;
     /**
-     *班级通知      由 im_group 微服务发出 
+     *班级通知      由 im_group 微服务发出      from_userid:通知发布者id  send_to:classid    
      *
      * Generated from protobuf enum <code>kMsgTypeSchoolClassInform = 55;</code>
      */
@@ -179,7 +191,7 @@ class CommonMessage_MESSAGE_TYPE
      */
     const kMsgTypeTeacherJoinSchoolApply = 73;
     /**
-     *学校管理员对老师入校申请做出了处理  由 school_teacher 微服务发出
+     *学校管理员对老师入校申请做出了处理  由 school_teacher 微服务发出  
      *
      * Generated from protobuf enum <code>kMsgTypeTeacherJoinSchoolReply = 74;</code>
      */
@@ -197,43 +209,43 @@ class CommonMessage_MESSAGE_TYPE
      */
     const kMsgTypeFriendChatDing = 200;
     /**
-     * 由 im_group 微服务发出 
+     * 由 im_group 微服务发出    sendto = groupid
      *
      * Generated from protobuf enum <code>kMsgTypeGroupChatDing = 201;</code>
      */
     const kMsgTypeGroupChatDing = 201;
     /**
-     * 由 im_group 微服务发出 
+     * 由 im_group 微服务发出    sendto = groupid
      *
      * Generated from protobuf enum <code>kMsgTypeGroupInformDing = 202;</code>
      */
     const kMsgTypeGroupInformDing = 202;
     /**
-     * 由 im_group 微服务发出 
+     * 由 im_group 微服务发出    sendto = groupid
      *
      * Generated from protobuf enum <code>kMsgTypeSchoolInformDing = 203;</code>
      */
     const kMsgTypeSchoolInformDing = 203;
     /**
-     * 由 im_group 微服务发出 
+     * 由 im_group 微服务发出    sendto = groupid
      *
      * Generated from protobuf enum <code>kMsgTypeSchoolTeacherInformDing = 204;</code>
      */
     const kMsgTypeSchoolTeacherInformDing = 204;
     /**
-     * 由 im_group 微服务发出 
+     * 由 im_group 微服务发出    sendto = groupid
      *
      * Generated from protobuf enum <code>kMsgTypeGradeTeacherInformDing = 205;</code>
      */
     const kMsgTypeGradeTeacherInformDing = 205;
     /**
-     * 由 im_group 微服务发出 
+     * 由 im_group 微服务发出    sendto = groupid
      *
      * Generated from protobuf enum <code>kMsgTypeTeacherGroupInformDing = 206;</code>
      */
     const kMsgTypeTeacherGroupInformDing = 206;
     /**
-     * 由 im_group 微服务发出 
+     * 由 im_group 微服务发出    sendto = groupid
      *
      * Generated from protobuf enum <code>kMsgTypeSchoolClassInformDing = 207;</code>
      */

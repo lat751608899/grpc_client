@@ -22,17 +22,23 @@ class OnlineMessage_MESSAGE_TYPE
      */
     const kMsgTypeMyInfoChange = 1;
     /**
+     *登录者某项信息变更。   由另一设备调用 im::kCmdSetMySomeInfo 后， account微服务发出
+     *
+     * Generated from protobuf enum <code>kMsgTypeMyInfoItemChange = 2;</code>
+     */
+    const kMsgTypeMyInfoItemChange = 2;
+    /**
      *余额发生变动
      *
-     * Generated from protobuf enum <code>kMsgTypeMyMoneyChange = 2;</code>
+     * Generated from protobuf enum <code>kMsgTypeMyMoneyChange = 3;</code>
      */
-    const kMsgTypeMyMoneyChange = 2;
+    const kMsgTypeMyMoneyChange = 3;
     /**
      *积分发生变动
      *
-     * Generated from protobuf enum <code>kMsgTypeMyScoreChange = 3;</code>
+     * Generated from protobuf enum <code>kMsgTypeMyScoreChange = 4;</code>
      */
-    const kMsgTypeMyScoreChange = 3;
+    const kMsgTypeMyScoreChange = 4;
     /**
      *其他设备上增加了好友。     由 im_friend 微服务发出
      *
@@ -40,7 +46,7 @@ class OnlineMessage_MESSAGE_TYPE
      */
     const kMsgTypeHasAddFriend = 11;
     /**
-     *其他设备上删除了好友。     由 im_friend 微服务发出
+     *其他设备上删除了好友，或者被好友删除(本方也自动移除对方好友)。     由 im_friend 微服务发出
      *
      * Generated from protobuf enum <code>kMsgTypeHasRemoveFriend = 12;</code>
      */
@@ -64,22 +70,28 @@ class OnlineMessage_MESSAGE_TYPE
      */
     const kMsgTypeFriendInfoChange = 21;
     /**
-     *好友上下线   由 online_status 微服务发出。 注意：离线消息不能马上发出，应等待一个超时时间后，客户端未重新上线后再发出，防止因客户端切换网络时频繁触发
+     *好友某项信息变更。 本方调用 im::kCmdSetMySomeInfo 时，给好友发送该消息
      *
-     * Generated from protobuf enum <code>kMsgTypeFriendOnlineStatusChange = 22;</code>
+     * Generated from protobuf enum <code>kMsgTypeFriendInfoItemChange = 22;</code>
      */
-    const kMsgTypeFriendOnlineStatusChange = 22;
+    const kMsgTypeFriendInfoItemChange = 22;
+    /**
+     *好友上下线    由 online_status 微服务发出。 注意：离线消息不能马上发出，应等待一个超时时间后，客户端未重新上线后再发出，防止因客户端切换网络时频繁触发
+     *
+     * Generated from protobuf enum <code>kMsgTypeFriendOnlineStatusChange = 23;</code>
+     */
+    const kMsgTypeFriendOnlineStatusChange = 23;
     /**
      *群成员增加    由 im_group 微服务发出
      *
-     * Generated from protobuf enum <code>kMsgTypeGroupAddMember = 23;</code>
+     * Generated from protobuf enum <code>kMsgTypeGroupAddMember = 24;</code>
      */
-    const kMsgTypeGroupAddMember = 23;
+    const kMsgTypeGroupAddMember = 24;
     /**
      *群成员减少    由 im_group 微服务发出	
      *
-     * Generated from protobuf enum <code>kMsgTypeGroupMemberLeave = 24;</code>
+     * Generated from protobuf enum <code>kMsgTypeGroupMemberLeave = 25;</code>
      */
-    const kMsgTypeGroupMemberLeave = 24;
+    const kMsgTypeGroupMemberLeave = 25;
 }
 

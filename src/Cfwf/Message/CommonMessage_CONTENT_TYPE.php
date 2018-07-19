@@ -14,25 +14,25 @@ class CommonMessage_CONTENT_TYPE
      */
     const kContentTypeNone = 0;
     /**
-     *content内是文字混合内容， 文字+[e:] ,[img: ],[at:],[link:] [file:] 等  [at:]新增， 群聊内 at某(些)用户
+     *content内是文字混合内容， 文字和标签混合。 支持以下标签：        
      *
      * Generated from protobuf enum <code>kContentTypeCommon = 1;</code>
      */
     const kContentTypeCommon = 1;
     /**
-     *content内保存文件信息，json格式：{"resid":file_resid,"filesize":filesize,"filename":filename} 
+     *content内保存文件信息，json格式： {"resid":file_resid,"filesize":filesize,"filename":filename} 
      *
      * Generated from protobuf enum <code>kContentTypeFile = 2;</code>
      */
     const kContentTypeFile = 2;
     /**
-     *content=内保存图片信息，json格式：{"resid":file_resid,"filesize":filesize,"size":size,"url":url}           
+     *content=内保存图片信息，json格式：{"resid":file_resid,"filesize":filesize,"filename":filename}           
      *
      * Generated from protobuf enum <code>kChatContentImage = 3;</code>
      */
     const kChatContentImage = 3;
     /**
-     *content内保存音频信息，json格式：{"resid":file_resid,"filesize":filesize,"duration":duration}  
+     *content内保存音频信息，json格式： {"resid":file_resid,"filesize":filesize,"filename":filename,"duration":duration}  
      *
      * Generated from protobuf enum <code>kChatContentAudio = 4;</code>
      */

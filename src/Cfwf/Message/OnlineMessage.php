@@ -20,7 +20,7 @@ class OnlineMessage extends \Google\Protobuf\Internal\Message
      */
     private $msg_type = 0;
     /**
-     *json格式，根据 msg_type 不同而不同。
+     *json格式，根据 msg_type 不同而不同。   birthday  city sex default_face mood face name  
      *
      * Generated from protobuf field <code>string content = 2;</code>
      */
@@ -54,7 +54,7 @@ class OnlineMessage extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *json格式，根据 msg_type 不同而不同。
+     *json格式，根据 msg_type 不同而不同。   birthday  city sex default_face mood face name  
      *
      * Generated from protobuf field <code>string content = 2;</code>
      * @return string
@@ -65,7 +65,7 @@ class OnlineMessage extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *json格式，根据 msg_type 不同而不同。
+     *json格式，根据 msg_type 不同而不同。   birthday  city sex default_face mood face name  
      *
      * Generated from protobuf field <code>string content = 2;</code>
      * @param string $var
