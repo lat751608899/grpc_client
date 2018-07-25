@@ -217,13 +217,13 @@ class ClientFactory
 					$fieldDataSon = $this->dealField($messageType->getField());
 					$requestSonClass = $messageType->getClass();
 					if($field->getLabel() == GPBLabel::REPEATED){  // repeated 数组格式
-						foreach ($this->where[$key] as $val){
+						foreach ($value[$key] as $val){
 							$requestSon  = new $requestSonClass;
 							$data[] = $this->dealRequest($requestSon, $fieldDataSon,$val);
 						}
 					}else{  // 直接是message形式的
 						$requestSon  = new $requestSonClass;
-						$data = $this->dealRequest($requestSon, $fieldDataSon,$this->where[$key]);
+						$data = $this->dealRequest($requestSon, $fieldDataSon,$value[$key]);
 					}
 					$request->$setter($data);
 				}
