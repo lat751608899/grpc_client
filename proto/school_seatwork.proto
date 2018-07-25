@@ -1,0 +1,221 @@
+﻿syntax = "proto3";
+
+//school_seatwork:  //随堂检测
+
+package cfwf.micro_service.school_seatwork;
+option java_package = "com.cfwf.micro_service.school_seatwork";
+
+
+service SchoolSeatWork { 
+
+  //搜索，获取随堂检测列表
+  rpc SearchSeatWorks (SearchSeatWorksRequest) returns (SearchSeatWorksResponse) {}  
+  
+  //发随堂作业
+  rpc SendSeatWork (SendSeatWorkRequest) returns (SendSeatWorkResponse) {}
+  
+  //删除随堂作业
+  rpc DeleteSeatWork (DeleteSeatWorkRequest) returns (DeleteSeatWorkResponse) {}
+  
+  //获得随机作业题: 应转移到专门的“题库”微服务中
+  rpc GetRandSeatWorkQeustions (GetRandSeatWorkQeustionsRequest) returns (GetRandSeatWorkQeustionsResponse) {}
+  
+  //开始答题，获取题目列表
+  rpc BeginSeatWorkTesting (BeginSeatWorkTestingRequest) returns (BeginSeatWorkTestingResponse) {}
+  
+  //提交测试题答案
+  rpc SubmitMySeatWorkTestingAnswers (SubmitMySeatWorkTestingAnswersRequest) returns (SubmitMySeatWorkTestingAnswersResponse) {}
+  
+} 
+
+//通用rpc调用返回结果
+enum RPC_CALL_RESULT {
+   RPC_CALL_RESULT_NONE        = 0;   //不应出现
+   RPC_CALL_RESULT_SUCCESS     = 1;   //成功
+   RPC_CALL_RESULT_DB_ERROR    = 2;   //数据库出错
+   RPC_CALL_RESULT_INPUT_ERROR = 3;   //传入数据有错，格式错误或者找不到对应条目
+   RPC_CALL_RESULT_ERROR       = 4;   //其他错误
+}
+
+message SeatWorkQuestion
+{
+    int64  id = 1;
+    int32  knowledgepoint_id = 2;     //所属知识点
+
+    enum QUESTION_TYPE{
+        QUESTION_TYPE_NONE = 0;
+        QUESTION_TYPE_RADIO = 1;         //单选
+        QUESTION_TYPE_CHECK = 2;         //多选
+        QUESTION_TYPE_TRUE_OR_FALSE = 3; //判断
+        QUESTION_TYPE_FILLING = 4;       //填空
+    }
+    QUESTION_TYPE  question_type = 3; 
+    int32   option_num = 4;           //若是选择题，选项数目
+    int32   score = 5;                //分值
+    int32   difficulty = 6;           //1-简单 2-中等  3-困难
+
+    enum CONTENT_TYPE{   //content 和 analysis 的格式
+        CONTENT_TYPE_NONE = 0; 
+        CONTENT_TYPE_COMMON = 1;        //文字、小图片混合
+        CONTENT_TYPE_PIC_RES = 2;       //一张大图片，无文字
+    }
+    CONTENT_TYPE content_type = 7; 
+    string  content = 8;              //题目内容  若content_type=CONTENT_TYPE_PIC_RES，此字段存放该图片的 resid
+    string  analysis = 9;             //题目解析  若content_type=CONTENT_TYPE_PIC_RES，此字段存放该图片的 resid
+    string  answer = 10;              //标准答案--判断1-对，2-错；选择：A-F；填空：文本
+
+    //以下两个字段，如果是在 SubmitMySeatWorkTestingAnswersResponse 中，会被填写
+    string  myanswer = 11;            //我的答案
+    int32   myscore = 12;             //我在本题获得的分数
+};
+
+message SeatWorkInfo{ //随堂检测基本信息
+    
+    int64    seatworkid = 1;          //作业条目的id
+    int64    teacherid = 2;           //发布老师id
+    int64    schoolid = 3;
+    int32    grade = 4;
+    repeated int64   sendto_classid = 5; //发送给哪些班级
+    string   sendto_classes = 6;      //发送给哪些班级(班级序号，允余信息)
+    int32    subjectid = 7;
+    int32    knowledgepoint_id = 8;
+    string   titile = 9;
+    repeated SeatWorkQuestion questions = 10; //调用SendSeatWorkRequest 时，只需要填入 SeatWorkQuestion.id
+    enum TIKU{
+        TIKU_NONE = 0;  //旧题库，图片，已不再使用
+        TIKU_NEW = 1;   //日照同事编辑的题库
+       // TIKU_1300 = 2;  //新购题库，尚不可用
+    }
+	TIKU     tiku = 11;               // 所用题库
+    int32    time_limit_second = 12;   //做题限时，单位：秒
+    int64    sendtime = 13;            //发布时间戳  
+}
+
+message SeatWorkStatus{ //随堂检测基本信息
+    //做题状态
+    enum STATUS{
+        STATUS_NONE = 0;
+        STATUS_NOT_START = 1;
+        STATUS_DOING = 2;
+        STATUS_FINISH = 3;
+        STATUS_TIME_OUT = 4; //超时未提交
+    }
+    STATUS   status = 12; //自己在本作业中的做题状态  1=未做   2=正在做  3=已做完
+    int32    score = 13;  //自己在本次作业中得到的总分
+    int32    left_time_sec = 14; //剩余答题秒数
+}
+
+message SeatWorkView{ 
+    SeatWorkInfo seatwork_info = 1;  //questions不会被填写
+    int64 teacherid = 2;           //发布老师的信息   
+    SeatWorkStatus my_status = 3;  //登录者做题状态
+    //做题统计
+    int32    all_studentnum = 4;   //总发送学生数
+    int32    finish_studentnum = 5;//已提交作业的学生数
+};
+
+message SearchSeatWorksRequest{
+	int64 userid = 1;
+    int32 pagesize = 2;        //每页条数
+    int32 page = 3;            //当前页。如果>总页数，则返回最后一页的数据
+ 
+    //查询条件
+    bool be_teacher = 4; //true=作为老师查询， false=作为学生查询
+	int64 schoolid = 5; //学校，必填
+	int32 grade = 6;    //年级，选填
+    int64 classid = 7;  //班级id，选填
+    int32 subjectid = 8;  //学科id，选填
+}
+
+message SearchSeatWorksResponse{
+	RPC_CALL_RESULT result = 1;
+	int32 pagesize = 2;          //每页条数
+    int32 page = 3;              //当前页
+    int32 pagecount = 4;         //总页数
+    int32 recordcount = 5;       //总条数
+    
+	repeated SeatWorkView list = 6; //当前页结果列表
+}
+
+
+message SendSeatWorkRequest{
+	int64 userid = 1;
+	SeatWorkInfo seatwork_info = 2;
+}
+
+message SendSeatWorkResponse{
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+}
+
+message DeleteSeatWorkRequest{
+	int64 userid = 1;
+    bool check_user = 2; //true: 只有随堂检测发布人能删除
+	repeated int64 seatwork_id = 3; 
+}
+   
+message DeleteSeatWorkResponse{
+	RPC_CALL_RESULT result = 1;
+	string msg = 2;
+}
+
+
+message GetRandSeatWorkQeustionsRequest{
+	int64 userid = 1;
+    SeatWorkInfo.TIKU tiku = 2;  //所用题库。目前只能填入 TIKU_NEW 
+    int32 knowledgepoint_id = 3; //知识点id。 当TIKU_NEW时，无知识点设置，此处应填入目录id
+}
+
+message GetRandSeatWorkQeustionsResponse{
+	RPC_CALL_RESULT result = 1;     
+    SeatWorkInfo.TIKU tiku = 2;  //所用题库    
+    int32 knowledgepoint_id = 3;      
+    
+	repeated SeatWorkQuestion list = 4; 
+}
+
+message BeginSeatWorkTestingRequest{
+	int64 userid = 1;
+	int64 seatwork_id = 2; 
+     bool start_count_down = 3; 
+}
+
+message BeginSeatWorkTestingResponse{
+	enum CMD_RESULT {
+       kCmdResultNone            = 0;   //调用失败
+       kCmdResultSuccess         = 1;   //成功，开始答题
+       kCmdResultHasFinished     = 2;   //已结束了，已提交过了答案了
+       kCmdResultHasTimeout      = 3;   //已超时了
+       kCmdResultHasDelete    = 4;      //题目已被删除了
+       kCmdResultServiceError    = 5;    //服务器错误
+    }
+    CMD_RESULT result = 1;
+	SeatWorkInfo seatwork_info = 2;    //如果返回kCmdResultSuccess/kCmdResultHasFinished/kCmdResultHasTimeout，保存随堂检测信息
+    SeatWorkStatus my_status   = 3;    //如果返回kCmdResultSuccess/kCmdResultHasFinished/kCmdResultHasTimeout，保存我的剩余答题时间、得分等
+}
+
+message MySeatWorkAnswer{
+    int64 question_id = 1;
+    string myanswer = 2;
+}
+message SubmitMySeatWorkTestingAnswersRequest{
+	int64 userid = 1;
+	int64 seatwork_id = 2; 
+    repeated MySeatWorkAnswer my_answers = 3; 
+}
+
+message SubmitMySeatWorkTestingAnswersResponse{
+	enum CMD_RESULT {
+       kCmdResultNone            = 0;   //调用失败
+       kCmdResultSuccess         = 1;   //成功
+       kCmdResultHasFinished     = 2;   //已结束了，已提交过了答案了
+       kCmdResultHasTimeout      = 3;   //已超时了
+       kCmdResultHasDelete       = 4;   //题目已被删除了
+       kCmdResultNotBegin        = 5;   //尚未开始答题，就提交答案了
+       kCmdResultServiceError    = 6;    //服务器错误
+    }
+    CMD_RESULT result = 1;
+    SeatWorkInfo seatwork_info = 2;  //如果返回kCmdResultSuccess/kCmdResultHasFinished/kCmdResultHasTimeout，保存随堂检测信息
+	SeatWorkStatus my_status = 3;    //如果返回kCmdResultSuccess/kCmdResultHasFinished/kCmdResultHasTimeout，保存我的得分
+}
+

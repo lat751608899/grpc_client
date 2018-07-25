@@ -74,5 +74,10 @@ return [
 		'product' => '10.183.105.132:30009',
 		'test' => '10.183.105.170:30009',
 		'develop' => '192.168.1.11:30009',
+	],
+	'cfwf.micro_service.school_seatwork.SchoolSeatWork' => [
+		'product' => '10.183.105.132:30309',
+		'test' => '10.183.105.170:30309',
+		'develop' => '192.168.1.11:30309',
 	]
 ];
