@@ -16,11 +16,29 @@ use Google\Protobuf\Internal\GPBUtil;
 class ViewWeikeRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     *微课ID  
+     *微课ID
      *
-     * Generated from protobuf field <code>int64 weike_id = 1;</code>
+     * Generated from protobuf field <code>int32 weike_id = 1;</code>
      */
     private $weike_id = 0;
+    /**
+     *观看者ID
+     *
+     * Generated from protobuf field <code>int64 userid = 2;</code>
+     */
+    private $userid = 0;
+    /**
+     *使用何种设备观看
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.school_weike.DEVICE_TYPE device = 3;</code>
+     */
+    private $device = 0;
+    /**
+     *观看者ip
+     *
+     * Generated from protobuf field <code>string client_ip = 4;</code>
+     */
+    private $client_ip = '';
 
     public function __construct() {
         \GPBMetadata\SchoolWeike::initOnce();
@@ -28,10 +46,10 @@ class ViewWeikeRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *微课ID  
+     *微课ID
      *
-     * Generated from protobuf field <code>int64 weike_id = 1;</code>
-     * @return int|string
+     * Generated from protobuf field <code>int32 weike_id = 1;</code>
+     * @return int
      */
     public function getWeikeId()
     {
@@ -39,16 +57,94 @@ class ViewWeikeRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *微课ID  
+     *微课ID
      *
-     * Generated from protobuf field <code>int64 weike_id = 1;</code>
-     * @param int|string $var
+     * Generated from protobuf field <code>int32 weike_id = 1;</code>
+     * @param int $var
      * @return $this
      */
     public function setWeikeId($var)
     {
-        GPBUtil::checkInt64($var);
+        GPBUtil::checkInt32($var);
         $this->weike_id = $var;
+
+        return $this;
+    }
+
+    /**
+     *观看者ID
+     *
+     * Generated from protobuf field <code>int64 userid = 2;</code>
+     * @return int|string
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+
+    /**
+     *观看者ID
+     *
+     * Generated from protobuf field <code>int64 userid = 2;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setUserid($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->userid = $var;
+
+        return $this;
+    }
+
+    /**
+     *使用何种设备观看
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.school_weike.DEVICE_TYPE device = 3;</code>
+     * @return int
+     */
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    /**
+     *使用何种设备观看
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.school_weike.DEVICE_TYPE device = 3;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setDevice($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\School_weike\DEVICE_TYPE::class);
+        $this->device = $var;
+
+        return $this;
+    }
+
+    /**
+     *观看者ip
+     *
+     * Generated from protobuf field <code>string client_ip = 4;</code>
+     * @return string
+     */
+    public function getClientIp()
+    {
+        return $this->client_ip;
+    }
+
+    /**
+     *观看者ip
+     *
+     * Generated from protobuf field <code>string client_ip = 4;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setClientIp($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->client_ip = $var;
 
         return $this;
     }

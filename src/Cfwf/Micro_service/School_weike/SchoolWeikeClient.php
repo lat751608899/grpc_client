@@ -184,4 +184,18 @@ class SchoolWeikeClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * 批量获取班级微课数量
+     * @param \Cfwf\Micro_service\School_weike\GetSchoolWeikeCountRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetSchoolWeikeCount(\Cfwf\Micro_service\School_weike\GetSchoolWeikeCountRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.school_weike.SchoolWeike/GetSchoolWeikeCount',
+        $argument,
+        ['\Cfwf\Micro_service\School_weike\GetSchoolWeikeCountResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

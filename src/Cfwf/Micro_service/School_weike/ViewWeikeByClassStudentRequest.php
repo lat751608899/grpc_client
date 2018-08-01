@@ -16,9 +16,9 @@ class ViewWeikeByClassStudentRequest extends \Google\Protobuf\Internal\Message
     /**
      *微课ID
      *
-     * Generated from protobuf field <code>int32 id = 1;</code>
+     * Generated from protobuf field <code>int32 weike_id = 1;</code>
      */
-    private $id = 0;
+    private $weike_id = 0;
     /**
      *观看者ID
      *
@@ -37,6 +37,12 @@ class ViewWeikeByClassStudentRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 classid = 4;</code>
      */
     private $classid = 0;
+    /**
+     *观看者ip
+     *
+     * Generated from protobuf field <code>string client_ip = 5;</code>
+     */
+    private $client_ip = '';
 
     public function __construct() {
         \GPBMetadata\SchoolWeike::initOnce();
@@ -46,25 +52,25 @@ class ViewWeikeByClassStudentRequest extends \Google\Protobuf\Internal\Message
     /**
      *微课ID
      *
-     * Generated from protobuf field <code>int32 id = 1;</code>
+     * Generated from protobuf field <code>int32 weike_id = 1;</code>
      * @return int
      */
-    public function getId()
+    public function getWeikeId()
     {
-        return $this->id;
+        return $this->weike_id;
     }
 
     /**
      *微课ID
      *
-     * Generated from protobuf field <code>int32 id = 1;</code>
+     * Generated from protobuf field <code>int32 weike_id = 1;</code>
      * @param int $var
      * @return $this
      */
-    public function setId($var)
+    public function setWeikeId($var)
     {
         GPBUtil::checkInt32($var);
-        $this->id = $var;
+        $this->weike_id = $var;
 
         return $this;
     }
@@ -143,6 +149,32 @@ class ViewWeikeByClassStudentRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->classid = $var;
+
+        return $this;
+    }
+
+    /**
+     *观看者ip
+     *
+     * Generated from protobuf field <code>string client_ip = 5;</code>
+     * @return string
+     */
+    public function getClientIp()
+    {
+        return $this->client_ip;
+    }
+
+    /**
+     *观看者ip
+     *
+     * Generated from protobuf field <code>string client_ip = 5;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setClientIp($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->client_ip = $var;
 
         return $this;
     }

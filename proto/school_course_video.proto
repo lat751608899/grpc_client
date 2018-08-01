@@ -210,8 +210,18 @@ message InsertCourseVideoResponse {
 }
 
 //观看课堂实录，增加观看数
+enum DEVICE_TYPE{
+    DEVICE_TYPE_NONE = 0;     
+	DEVICE_TYPE_PC = 1;       //使用pc端观看
+	DEVICE_TYPE_ANDROID = 2;  //使用android手机观看
+    DEVICE_TYPE_IOS = 3;	  //使用ios手机观看
+    DEVICE_TYPE_WEB = 4;	  //使用网页观看
+}
 message ViewCourseVideoRequest {
 	int64 id = 1; //课程id
+    int64 userid = 2;        //观看者ID
+	DEVICE_TYPE device = 3;  //使用何种设备观看
+    string client_ip = 4;     //观看者ip
 }
 
 message ViewCourseVideoResponse {

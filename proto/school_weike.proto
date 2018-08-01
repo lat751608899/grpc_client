@@ -6,7 +6,7 @@ package cfwf.micro_service.school_weike;
 option java_package = "com.cfwf.micro_service.school_weike";
 
 
-service SchoolWeike {
+service SchoolWeike { 
   //获取微课列表
   rpc GetWeikeList (GetWeikeListRequest) returns (GetWeikeListResponse) {}  
   
@@ -42,6 +42,9 @@ service SchoolWeike {
   
   //非本班学生观看微课
   rpc ViewWeike (ViewWeikeRequest) returns (CommonResponse) {}
+
+  // 批量获取班级微课数量
+  rpc GetSchoolWeikeCount(GetSchoolWeikeCountRequest) returns (GetSchoolWeikeCountResponse) {}
 } 
 
 //通用rpc调用返回结果
@@ -168,15 +171,19 @@ message GetWeikeInfoResponse{
 
 //微课观看设备类型枚举
 enum DEVICE_TYPE{
-	DEVICE_TYPE_PC = 0;       //使用电脑观看
-	DEVICE_TYPE_MOBILEPHONE = 1;	  //使用手机观看
+    DEVICE_TYPE_NONE = 0;     
+	DEVICE_TYPE_PC = 1;       //使用pc端观看
+	DEVICE_TYPE_ANDROID = 2;  //使用android手机观看
+    DEVICE_TYPE_IOS = 3;	  //使用ios手机观看
+    DEVICE_TYPE_WEB = 4;	  //使用网页观看
 }
 
 message ViewWeikeByClassStudentRequest{
-	int32 id = 1;            //微课ID
+	int32 weike_id = 1;      //微课ID
 	int64 userid = 2;        //观看者ID
 	DEVICE_TYPE device = 3;  //使用何种设备观看
 	int32 classid = 4;       //班级ID
+    string client_ip = 5;     //观看者ip
 }
 
 message ViewWeikeByClassStudentResponse{
@@ -283,10 +290,26 @@ message GetClassidResponse {
 
 //非本班学生观看微课
 message ViewWeikeRequest {
-	int64 weike_id = 1;      //微课ID  
+	int32 weike_id = 1;      //微课ID
+	int64 userid = 2;        //观看者ID
+	DEVICE_TYPE device = 3;  //使用何种设备观看
+    string client_ip = 4;     //观看者ip
 }
 
+message GetSchoolWeikeCountRequest{
+	int64 userid = 1;
+    repeated fixed64 classids = 2;
+}
 
+message WeikeCountMap{
+	int64 classid = 1;
+	int32 weike_count = 2;
+}
+
+message GetSchoolWeikeCountResponse{
+	RPC_CALL_RESULT result = 1;
+	repeated WeikeCountMap weike_count = 2;
+}
 
 
 
