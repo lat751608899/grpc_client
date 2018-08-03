@@ -79,5 +79,10 @@ return [
 		'product' => '10.183.105.132:30309',
 		'test' => '10.183.105.170:30309',
 		'develop' => '192.168.3.11:30309',
+	],
+	'cfwf.micro_service.resource_statistics.ResourceStatistics' => [
+		'product' => '10.183.105.132:30102',
+		'test' => '10.183.105.170:30102',
+		'develop' => '192.168.3.11:30102',
 	]
 ];

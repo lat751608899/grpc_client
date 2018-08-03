@@ -1,0 +1,549 @@
+syntax = "proto3";
+
+//resource_statistics:  后台数据统计
+
+package cfwf.micro_service.resource_statistics;
+option java_package = "com.cfwf.micro_service.resource_statistics";
+
+service ResourceStatistics { 
+  /*************************
+  用户统计数据
+  *************************/
+  //用户总数（用户->全部用户->总数  第一期）
+  rpc GetUserCount (GetUserCountRequest) returns (GetUserCountResponse) {}     
+  
+  //获取用户列表（用户->全部用户->列表）
+  rpc GetUserList (GetUserListRequest) returns (GetUserListResponse) {}  
+  
+  //获取用户详情（用户->用户详情）
+  rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse) {}  
+  
+  //活跃用户统计数据（用户->用户统计 第一期）
+  rpc GetActiveUserStatistics (GetActiveUserStatisticsRequest) returns (GetActiveUserStatisticsResponse) {}  
+
+  //新增用户统计数据（用户->用户统计 第一期）
+  rpc GetNewUserStatistics (GetNewUserStatisticsRequest) returns (GetNewUserStatisticsResponse) {}  
+
+  //留存用户统计数据（用户->用户统计 第一期）
+  rpc GetRemainUserStatistics (GetRemainUserStatisticsRequest) returns (GetRemainUserStatisticsResponse) {}  
+  
+  /*************************
+  学校统计数据
+  *************************/
+  //获取学校总数（学校->全部学校->总数 第一期）
+  rpc GetSchoolCount (GetSchoolCountRequest) returns (GetSchoolCountResponse) {}  
+ 
+  //获取学校列表（学校->全部学校->列表）
+  rpc GetSchoolList (GetSchoolListRequest) returns (GetSchoolListResponse) {}  
+  
+  //获取学校详情（学校->学校详情->基本信息）
+  rpc GetSchoolInfo (GetSchoolInfoRequest) returns (GetSchoolInfoResponse) {}  
+ 
+ //获取学校成员列表（学校->学校详情->用户列表）
+  rpc GetSchoolUserList (GetSchoolUserListRequest) returns (GetSchoolUserListResponse) {}
+  
+  //获取学校管理员列表（学校->学校详情->学校管理员）
+  //待完善 rpc GetSchoolManagerList (GetSchoolManagerListRequest) returns (GetSchoolManagerListResponse) {}
+  
+  //获取学校资源列表（学校->学校详情->学校资源）
+  //待完善 rpc GetSchoolResourceList (GetSchoolResourceListRequest) returns (GetSchoolResourceListResponse) {}
+  
+  //获取学校数据（学校->学校详情->学校数据）
+  //待完善 rpc GetSchoolData (GetSchoolDataRequest) returns (GetSchoolDataResponse) {}
+
+  
+  //获取省市区县统计信息(学校->地图->全国、省市、区县  第一期) 
+  rpc GetCityStatistics (GetCityStatisticsRequest) returns (GetCityStatisticsResponse) {}  
+  
+  //获取学校统计信息(学校->地图->学校  第一期) 
+  rpc GetSchoolStatistics (GetSchoolStatisticsRequest) returns (GetSchoolStatisticsResponse) {}  
+  
+  /*************************
+  微课统计数据
+  *************************/
+  //获取微课总数（微课->全部微课->总数 第一期）
+  rpc GetSchoolWeikeCount (GetSchoolWeikeCountRequest) returns (GetSchoolWeikeCountResponse) {}  
+  
+  //获取微课列表 到 school_weike 微服务去请求
+  
+  //获取微课详情（微课->微课详情）
+  //待完善 rpc GetSchoolWeikeInfo (GetSchoolWeikeInfoRequest) returns (GetSchoolWeikeInfoResponse) {}  
+
+  //新增微课统计数据（微课->微课数据->新增微课 第一期）
+  rpc GetNewSchoolWeikeStatistics (GetNewSchoolWeikeStatisticsRequest) returns (GetNewSchoolWeikeStatisticsResponse) {}  
+
+  //微课播放统计数据（微课->微课数据->微课播放 第一期）
+  rpc GetSchoolWeikeViewStatistics (GetSchoolWeikeViewStatisticsRequest) returns (GetSchoolWeikeViewStatisticsResponse) {}  
+  
+  /*************************
+  课堂实录统计数据
+  *************************/
+  //获取课堂实录总数（课堂实录->全部课堂实录->总数 第一期）
+  rpc GetSchoolCourseVideoCount (GetSchoolCourseVideoCountRequest) returns (GetSchoolCourseVideoCountResponse) {}  
+  
+  //获取课堂实录列表 到 school_course_video 微服务去请求
+  
+  //获取课堂实录详情（课堂实录->课堂实录详情）
+  //待完善 rpc GetSchoolCourseVideokeInfo (GetSchoolCourseVideokeInfoRequest) returns (GetSchoolCourseVideokeInfoResponse) {}  
+
+  //新增课堂实录统计数据（课堂实录->课堂实录数据->新增课堂实录 第一期）
+  rpc GetNewSchoolCourseVideoStatistics (GetNewSchoolCourseVideoStatisticsRequest) returns (GetNewSchoolCourseVideoStatisticsResponse) {}  
+
+  //课堂实录播放统计数据（课堂实录->课堂实录数据->课堂实录播放 第一期）
+  rpc GetSchoolCourseVideoViewStatistics (GetSchoolCourseVideoViewStatisticsRequest) returns (GetSchoolCourseVideoViewStatisticsResponse) {}  
+  
+
+}
+
+//通用rpc调用返回结果
+enum RPC_CALL_RESULT {
+   RPC_CALL_RESULT_NONE        = 0;   //不应出现
+   RPC_CALL_RESULT_SUCCESS     = 1;   //成功
+   RPC_CALL_RESULT_DB_ERROR    = 2;   //数据库出错
+   RPC_CALL_RESULT_INPUT_ERROR = 3;   //传入数据有错，格式错误或者找不到对应条目
+   RPC_CALL_RESULT_ERROR       = 4;   //其他错误
+}
+
+/*************************
+用户统计数据
+*************************/
+  
+//GetUserCount
+message GetUserCountRequest{
+    int32 cityid = 1; // 0 = 全国
+}
+
+message GetUserCountResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 cityid = 2;
+    int32 count = 3;
+}
+
+enum USER_IDENTITY
+{
+    USER_IDENTITY_NONE = 0;
+    USER_IDENTITY_STUDENT = 1;
+    USER_IDENTITY_TEACHER = 2;
+    USER_IDENTITY_RESEARCHER = 3; //教研员
+}
+
+enum SCHOOL_PERIOD
+{
+    SCHOOL_PERIOD_NONE = 0;
+    SCHOOL_PERIOD_PRIMARY = 1; //小学
+    SCHOOL_PERIOD_JUNIOR_MIDDLE = 2;  //初中
+    SCHOOL_PERIOD_HIGH_MIDDLE = 3;    //高中
+}
+
+enum USER_SEX
+{
+    USER_SEX_NONE = 0;
+    USER_SEX_WOMAN = 1; //女
+    USER_SEX_MAN = 2;  //男
+}
+
+//GetUserList
+message GetUserListRequest{
+    int32 page_size = 1;        //每页条数
+    int32 page = 2;            //当前页。如果>总页数，则返回最后一页的数据
+    
+    int32 cityid = 3; // 0 = 全国
+    USER_IDENTITY identity = 4; //0=不限
+    SCHOOL_PERIOD period = 5;
+    USER_SEX sex = 6;
+    string keyword = 7;
+}
+
+message UserInfoSimple{
+    int64 userid = 1;
+    string username = 2;
+    string custom_face = 3;
+    int32 default_face = 4;
+    
+    USER_SEX sex = 5;
+    USER_IDENTITY identity = 6;
+    string attri = 7; //分类
+    int32 birthday = 8; //年龄 : 19890522= 1989年5月22日
+    string unit_name = 9; //所属机构(学校)名称
+    string login_time = 10; //最近登录时间
+    string regist_time = 11; //注册时间
+}
+
+message GetUserListResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 page_size = 2;        //每页条数
+    int32 page = 3;             //当前页
+    int32 page_count = 4;       //总页数
+    int32 record_count = 5;     //总条数
+    
+    repeated UserInfoSimple list = 6; //当前页结果列表
+}
+
+  
+//GetUserInfo
+message GetUserInfoRequest{
+    int64 userid = 1; // 0 = 全国
+}
+
+message UserInfo{
+    UserInfoSimple simple_info = 1;
+    
+    //详情内容
+    string real_name = 2; //真实姓名
+    string mobile_phone = 3; //手机号
+    string mood = 5;  //签名， 心情
+    string card_code = 6; //身份证号
+    string address = 7; //地区
+    string teach_info = 8; //任教信息
+    
+    
+    //统计数据
+    //...
+}
+
+message GetUserInfoResponse{
+    RPC_CALL_RESULT result = 1;
+    UserInfo user_info = 2;
+}
+
+
+//GetActiveUserStatistics
+enum MEASUREMENT_UNIT 
+{
+    MEASUREMENT_UNIT_NONE = 0;
+    MEASUREMENT_UNIT_DAY = 1;  //按天统计
+    MEASUREMENT_UNIT_WEEK = 2; //按周统计
+    MEASUREMENT_UNIT_MONTH = 3; //按月统计
+}
+
+message GetActiveUserStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+    MEASUREMENT_UNIT unit = 4; //计量单位
+}
+
+message ActiveUserItem
+{
+    int32 date = 1;  //格式：按天统计：20170102； 按周统计  201700-201752；  按月统计： 201701-201712
+    int32 user_count = 2;
+}
+
+message GetActiveUserStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 max_value = 2; //最大活跃数
+    int32 min_value = 3; //最小活跃数
+    repeated ActiveUserItem list = 4; //统计结果列表
+}
+
+
+//GetNewUserStatistics
+message GetNewUserStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+    MEASUREMENT_UNIT unit = 4; //计量单位
+}
+
+message NewUserItem
+{
+    int32 date = 1;  //格式：同ActiveUserItem
+    int32 teacher_count = 2;
+    int32 student_count = 3;
+}
+
+message GetNewUserStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 max_value = 2; //最大新增数
+    int32 min_value = 3; //最小新增数
+    int32 percentage = 4; //新增百分比.  50 表示 50%的新增比 
+    repeated NewUserItem list = 5;//统计结果列表
+}
+
+//GetRemainUserStatistics
+message GetRemainUserStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+}
+
+message RemainUserItem
+{
+    int32 date = 1;  //格式：20170102
+    int32 new_usercount = 2; //新增用户数
+    repeated int32 remain_percentage = 3; //留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 12, 分别表示 第1天->第10天， 第15天，第30天 的留存比
+}
+
+message GetRemainUserStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated RemainUserItem list = 5;//统计结果列表
+}
+
+/*************************
+学校统计数据
+*************************/
+//GetSchoolCount
+message GetSchoolCountRequest{
+    int32 cityid = 1; // 0 = 全国
+}
+
+message GetSchoolCountResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 cityid = 2;
+    int32 yun_sheng = 3; //有云平台的省数目
+    int32 yun_shi = 4; //有云平台的市数目
+    int32 school_count = 5; //学校数目， 根据request.cityid统计
+} 
+
+//GetSchoolList
+enum SCHOOL_TYPE //1小学,2初中,3高中,4小学和初中,5初中和高中,6小学、初中、高中全有
+{
+    SCHOOL_TYPE_NONE          = 0; 
+    SCHOOL_TYPE_PRIMARY       = 1; //小学
+    SCHOOL_TYPE_JUNIOR_MIDDLE = 2; //初中
+    SCHOOL_TYPE_HIGH_MIDDLE   = 3; //高中    
+    SCHOOL_TYPE_YEARS_9       = 4; //9年一贯制， 小学和初中
+    SCHOOL_TYPE_MIDDLE        = 5; //初中和高中
+    SCHOOL_TYPE_YEARS_12      = 6; //12年一贯制， 小学、初中、高中全有
+}
+message GetSchoolListRequest{
+    int32 page_size = 1;       //每页条数
+    int32 page = 2;            //当前页。如果>总页数，则返回最后一页的数据
+    
+    int32 cityid = 3; // 0 = 全国
+    SCHOOL_TYPE period = 4;
+    string begin_date = 5; //录入日期筛选，格式: 2018-01-01
+    string end_date = 6;   //录入日期筛选，格式: 2018-05-11
+}
+
+message SchoolInfoSimple{
+    int64 schoolid = 1;
+    string school_name = 2;
+    SCHOOL_TYPE school_type = 3;
+    
+    int32 teacher_count = 4; //教师总数
+    int32 teacher_registered_count = 5; //已注册教师数
+
+    int32 student_count = 6; //学生总数
+    int32 student_registered_count = 7; //已注册学生数
+    
+    int32 video_count = 8; //总视频数: 微课数+课堂实录数
+    int32 article_count = 9; //总文章数
+    int32 broadcast_count = 10; //总直播数
+        
+    double coordinate_x = 11; //坐标，经度
+    double coordinate_y = 12; //坐标，纬度  
+}
+
+message GetSchoolListResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 page_size = 2;        //每页条数
+    int32 page = 3;             //当前页
+    int32 page_count = 4;       //总页数
+    int32 record_count = 5;     //总条数
+    
+    repeated SchoolInfoSimple list = 6; //当前页结果列表
+}
+  
+//GetSchoolInfo
+message GetSchoolInfoRequest{
+    int64 schoolid = 1; // 0 = 全国
+}
+
+message SchoolInfo{
+    SchoolInfoSimple simple_info = 1;
+
+    string address = 2; //地址
+    int32 classroom_count = 3; //教室数量
+    int32 lubo_install_count = 4; //录播设备安装套数
+    int32 zhibo_install_count =5; //直播设备安装套数
+    
+    string zip_code = 6; //邮编
+    string tel = 7; //电话
+    string fax = 8; //传真
+    
+    string first_term_start_date = 9; //开学时间，上学期
+    string second_term_start_date = 10; //开学时间，下学期
+    
+    string schoolmaster_name = 11; //校长名称
+    USER_SEX schoolmaster_sex = 12; //校长性别
+    int64 schoolmaster_userid = 13; //校长用户id
+    string schoolmaster_tel = 14; //校长电话
+}
+
+
+message GetSchoolInfoResponse{
+    RPC_CALL_RESULT result = 1;
+    SchoolInfo school_info = 2;
+}
+
+//GetSchoolUserList
+message GetSchoolUserListRequest{
+    int32 page_size = 1;        //每页条数
+    int32 page = 2;            //当前页。如果>总页数，则返回最后一页的数据
+    
+    int64 schoolid = 3; // 必填，学校id
+    USER_IDENTITY identity = 4; //0=不限
+    string keyword = 5; 
+}
+
+message GetSchoolUserListResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 page_size = 2;        //每页条数
+    int32 page = 3;             //当前页
+    int32 page_count = 4;       //总页数
+    int32 record_count = 5;     //总条数
+    
+    repeated UserInfoSimple list = 6; //当前页结果列表
+}
+
+  
+//获取省市区县统计信息(学校->地图->全国、省市、区县  第一期) 
+//GetCityStatistics
+message GetCityStatisticsRequest{
+    int32 parent_cityid = 1;        //0=获取全国省市列表
+}
+
+enum CITY_LEVEL
+{
+    CITY_LEVEL_COUNTRY = 0; //国家
+    CITY_LEVEL_SHENG = 1; //省
+    CITY_LEVEL_SHI = 2; //地级市
+    CITY_LEVEL_XIAN = 3; //区县
+    CITY_LEVEL_ZHEN = 4; //乡镇
+}
+
+message CityStatisticsInfo
+{
+    int32 cityid = 1;
+    CITY_LEVEL level = 2;
+    string name = 3;
+    int32 school_count = 4;
+    int32 teacher_count = 5;
+    int32 student_count = 6;
+}
+
+message GetCityStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 parent_cityid = 2;        //0=获取全国省市列表
+    repeated CityStatisticsInfo list = 3;
+}
+
+
+//获取学校统计信息(学校->地图->学校  第一期) 
+//GetSchoolStatistics
+message GetSchoolStatisticsRequest{
+    int32 cityid = 1;        //0=获取全国省市列表
+}
+
+message GetSchoolStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated SchoolInfoSimple list = 2;
+}
+
+/*************************
+微课统计数据
+*************************/
+//GetSchoolWeikeCount
+message GetSchoolWeikeCountRequest{
+    int32 cityid = 1; // 0 = 全国
+}
+
+message GetSchoolWeikeCountResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 cityid = 2;
+    int32 count = 3;
+}
+
+message GetNewSchoolWeikeStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+    MEASUREMENT_UNIT unit = 4; //计量单位
+}
+
+message NewSchoolWeikeItem
+{
+    int32 date = 1;  //格式：同 ActiveUserItem
+    int32 new_count = 2;
+}
+
+message GetNewSchoolWeikeStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated NewSchoolWeikeItem list = 5;//统计结果列表
+}
+
+message GetSchoolWeikeViewStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+    MEASUREMENT_UNIT unit = 4; //计量单位
+}
+
+message SchoolWeikeViewItem
+{
+    int32 date = 1;  //格式：同 ActiveUserItem
+    int32 pc_view_count = 2;
+    int32 app_view_count = 3;
+	int32 web_view_count = 4;
+}
+
+message GetSchoolWeikeViewStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated SchoolWeikeViewItem list = 5;//统计结果列表
+}
+
+/*************************
+课堂实录统计数据
+*************************/
+//GetSchoolCourseVideoCount
+message GetSchoolCourseVideoCountRequest{
+    int32 cityid = 1; // 0 = 全国
+}
+
+message GetSchoolCourseVideoCountResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 cityid = 2;
+    int32 count = 3;
+}
+
+message GetNewSchoolCourseVideoStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+    MEASUREMENT_UNIT unit = 4; //计量单位
+}
+
+message NewSchoolCourseVideoItem
+{
+    int32 date = 1;  //格式：同 ActiveUserItem
+    int32 new_count = 2;
+}
+
+message GetNewSchoolCourseVideoStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated NewSchoolCourseVideoItem list = 5;//统计结果列表
+}
+
+message GetSchoolCourseVideoViewStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+    MEASUREMENT_UNIT unit = 4; //计量单位
+}
+
+message SchoolCourseVideoViewItem
+{
+    int32 date = 1;  //格式：同 ActiveUserItem
+    int32 pc_view_count = 2;
+    int32 app_view_count = 3;
+	int32 web_view_count = 4;
+}
+
+message GetSchoolCourseVideoViewStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated SchoolCourseVideoViewItem list = 5;//统计结果列表
+}
