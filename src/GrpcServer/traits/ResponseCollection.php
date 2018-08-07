@@ -8,6 +8,8 @@
 
 namespace GrpcServer\traits;
 
+use Google\Protobuf\Internal\RepeatedField;
+
 trait ResponseCollection
 {
 	public function column($value,$index = '')
@@ -32,5 +34,26 @@ trait ResponseCollection
 			}
 		}
 		return $array;
+	}
+
+	public function toArray()
+	{
+		$res = [];
+		foreach ($this->field as $field){
+			$getter = $field->getGetter();
+			$name = $field->getName();
+			$data = $this->container->$getter();
+			if($data instanceof RepeatedField){
+				$data = new self($data);
+				$new = [];
+				foreach($data as $val){
+					$new[] = $val->toArray();
+				}
+				$res[$name] = $new;
+			}else{
+				$res[$name] = $data;
+			}
+		}
+		return $res;
 	}
 }
