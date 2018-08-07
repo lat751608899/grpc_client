@@ -181,4 +181,9 @@ class GrpcResponse implements \ArrayAccess,\Iterator,\Countable
 		}
 		throw new \Exception('only repeated fields support count');
 	}
+
+	public function getContainerClass()
+	{
+		return get_class($this->container);
+	}
 }
