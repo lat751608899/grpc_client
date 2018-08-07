@@ -50,7 +50,7 @@ class GrpcResponse implements \ArrayAccess,\Iterator,\Countable
 	 */
 	public function offsetExists($offset)
 	{
-		// TODO: Implement offsetExists() method.
+		return $this->checkField($offset);
 	}
 
 	/**
