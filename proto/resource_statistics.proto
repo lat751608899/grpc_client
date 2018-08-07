@@ -7,11 +7,14 @@ option java_package = "com.cfwf.micro_service.resource_statistics";
 
 service ResourceStatistics { 
   /*************************
+  获取统计总数：学校数、用户数、视频数、文章数
+  *************************/
+  rpc GetResourceCount (GetResourceCountRequest) returns (GetResourceCountResponse) {}     
+
+  /*************************
   用户统计数据
   *************************/
-  //用户总数（用户->全部用户->总数  第一期）
-  rpc GetUserCount (GetUserCountRequest) returns (GetUserCountResponse) {}     
-  
+
   //获取用户列表（用户->全部用户->列表）
   rpc GetUserList (GetUserListRequest) returns (GetUserListResponse) {}  
   
@@ -30,9 +33,7 @@ service ResourceStatistics {
   /*************************
   学校统计数据
   *************************/
-  //获取学校总数（学校->全部学校->总数 第一期）
-  rpc GetSchoolCount (GetSchoolCountRequest) returns (GetSchoolCountResponse) {}  
- 
+
   //获取学校列表（学校->全部学校->列表）
   rpc GetSchoolList (GetSchoolListRequest) returns (GetSchoolListResponse) {}  
   
@@ -105,19 +106,28 @@ enum RPC_CALL_RESULT {
 }
 
 /*************************
-用户统计数据
+获取统计总数：学校数、用户数、视频数、文章数
 *************************/
-  
-//GetUserCount
-message GetUserCountRequest{
-    int32 cityid = 1; // 0 = 全国
+//GetResourceCount
+message GetResourceCountRequest{
+    int32 cityid = 1; // 0 = 获取全国统计数
 }
 
-message GetUserCountResponse{
-    RPC_CALL_RESULT result = 1;
+message GetResourceCountResponse{
+    RPC_CALL_RESULT result = 1;   
     int32 cityid = 2;
-    int32 count = 3;
+    int32 yun_sheng = 3; //全国有云平台的省数目
+    int32 yun_shi = 4;   //全国有云平台的市数目
+    int32 user_count = 5;  //  cityid以及其子节点 的全部用户数 
+    int32 school_count = 6;//  cityid以及其子节点 的全部学校数 
+    int32 video_count = 7; //  cityid以及其子节点 的全部视频数 
+    int32 article_count = 8;//  cityid以及其子节点 的全部文章数 
 }
+ 
+
+/*************************
+用户统计数据
+*************************/
 
 enum USER_IDENTITY
 {
@@ -272,7 +282,7 @@ message RemainUserItem
 {
     int32 date = 1;  //格式：20170102
     int32 new_usercount = 2; //新增用户数
-    repeated int32 remain_percentage = 3; //留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 12, 分别表示 第1天->第10天， 第15天，第30天 的留存比
+    repeated int32 remain_percentage = 3; //留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 13, 分别表示 第0天->第10天， 第15天，第30天 的留存比
 }
 
 message GetRemainUserStatisticsResponse{
@@ -283,18 +293,6 @@ message GetRemainUserStatisticsResponse{
 /*************************
 学校统计数据
 *************************/
-//GetSchoolCount
-message GetSchoolCountRequest{
-    int32 cityid = 1; // 0 = 全国
-}
-
-message GetSchoolCountResponse{
-    RPC_CALL_RESULT result = 1;
-    int32 cityid = 2;
-    int32 yun_sheng = 3; //有云平台的省数目
-    int32 yun_shi = 4; //有云平台的市数目
-    int32 school_count = 5; //学校数目， 根据request.cityid统计
-} 
 
 //GetSchoolList
 enum SCHOOL_TYPE //1小学,2初中,3高中,4小学和初中,5初中和高中,6小学、初中、高中全有

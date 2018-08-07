@@ -17,20 +17,26 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 用户总数（用户->全部用户->总数  第一期）
-     * @param \Cfwf\Micro_service\Resource_statistics\GetUserCountRequest $argument input argument
+     * ************************
+     * 获取统计总数：学校数、用户数、视频数、文章数
+     * ***********************
+     * @param \Cfwf\Micro_service\Resource_statistics\GetResourceCountRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function GetUserCount(\Cfwf\Micro_service\Resource_statistics\GetUserCountRequest $argument,
+    public function GetResourceCount(\Cfwf\Micro_service\Resource_statistics\GetResourceCountRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetUserCount',
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetResourceCount',
         $argument,
-        ['\Cfwf\Micro_service\Resource_statistics\GetUserCountResponse', 'decode'],
+        ['\Cfwf\Micro_service\Resource_statistics\GetResourceCountResponse', 'decode'],
         $metadata, $options);
     }
 
     /**
+     * ************************
+     * 用户统计数据
+     * ***********************
+     *
      * 获取用户列表（用户->全部用户->列表）
      * @param \Cfwf\Micro_service\Resource_statistics\GetUserListRequest $argument input argument
      * @param array $metadata metadata
@@ -105,20 +111,6 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
      * 学校统计数据
      * ***********************
      *
-     * 获取学校总数（学校->全部学校->总数 第一期）
-     * @param \Cfwf\Micro_service\Resource_statistics\GetSchoolCountRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function GetSchoolCount(\Cfwf\Micro_service\Resource_statistics\GetSchoolCountRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetSchoolCount',
-        $argument,
-        ['\Cfwf\Micro_service\Resource_statistics\GetSchoolCountResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
      * 获取学校列表（学校->全部学校->列表）
      * @param \Cfwf\Micro_service\Resource_statistics\GetSchoolListRequest $argument input argument
      * @param array $metadata metadata

@@ -9,14 +9,14 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *GetSchoolCount
+ *GetResourceCount
  *
- * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.GetSchoolCountRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.GetResourceCountRequest</code>
  */
-class GetSchoolCountRequest extends \Google\Protobuf\Internal\Message
+class GetResourceCountRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * 0 = 全国
+     * 0 = 获取全国统计数
      *
      * Generated from protobuf field <code>int32 cityid = 1;</code>
      */
@@ -28,7 +28,7 @@ class GetSchoolCountRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * 0 = 全国
+     * 0 = 获取全国统计数
      *
      * Generated from protobuf field <code>int32 cityid = 1;</code>
      * @return int
@@ -39,7 +39,7 @@ class GetSchoolCountRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * 0 = 全国
+     * 0 = 获取全国统计数
      *
      * Generated from protobuf field <code>int32 cityid = 1;</code>
      * @param int $var

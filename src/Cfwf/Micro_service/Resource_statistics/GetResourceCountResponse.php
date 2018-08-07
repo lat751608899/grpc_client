@@ -9,9 +9,9 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.GetSchoolCountResponse</code>
+ * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.GetResourceCountResponse</code>
  */
-class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
+class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>.cfwf.micro_service.resource_statistics.RPC_CALL_RESULT result = 1;</code>
@@ -22,23 +22,41 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
      */
     private $cityid = 0;
     /**
-     *有云平台的省数目
+     *全国有云平台的省数目
      *
      * Generated from protobuf field <code>int32 yun_sheng = 3;</code>
      */
     private $yun_sheng = 0;
     /**
-     *有云平台的市数目
+     *全国有云平台的市数目
      *
      * Generated from protobuf field <code>int32 yun_shi = 4;</code>
      */
     private $yun_shi = 0;
     /**
-     *学校数目， 根据request.cityid统计
+     *  cityid以及其子节点 的全部用户数 
      *
-     * Generated from protobuf field <code>int32 school_count = 5;</code>
+     * Generated from protobuf field <code>int32 user_count = 5;</code>
+     */
+    private $user_count = 0;
+    /**
+     *  cityid以及其子节点 的全部学校数 
+     *
+     * Generated from protobuf field <code>int32 school_count = 6;</code>
      */
     private $school_count = 0;
+    /**
+     *  cityid以及其子节点 的全部视频数 
+     *
+     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     */
+    private $video_count = 0;
+    /**
+     *  cityid以及其子节点 的全部文章数 
+     *
+     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     */
+    private $article_count = 0;
 
     public function __construct() {
         \GPBMetadata\ResourceStatistics::initOnce();
@@ -90,7 +108,7 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *有云平台的省数目
+     *全国有云平台的省数目
      *
      * Generated from protobuf field <code>int32 yun_sheng = 3;</code>
      * @return int
@@ -101,7 +119,7 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *有云平台的省数目
+     *全国有云平台的省数目
      *
      * Generated from protobuf field <code>int32 yun_sheng = 3;</code>
      * @param int $var
@@ -116,7 +134,7 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *有云平台的市数目
+     *全国有云平台的市数目
      *
      * Generated from protobuf field <code>int32 yun_shi = 4;</code>
      * @return int
@@ -127,7 +145,7 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *有云平台的市数目
+     *全国有云平台的市数目
      *
      * Generated from protobuf field <code>int32 yun_shi = 4;</code>
      * @param int $var
@@ -142,9 +160,35 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *学校数目， 根据request.cityid统计
+     *  cityid以及其子节点 的全部用户数 
      *
-     * Generated from protobuf field <code>int32 school_count = 5;</code>
+     * Generated from protobuf field <code>int32 user_count = 5;</code>
+     * @return int
+     */
+    public function getUserCount()
+    {
+        return $this->user_count;
+    }
+
+    /**
+     *  cityid以及其子节点 的全部用户数 
+     *
+     * Generated from protobuf field <code>int32 user_count = 5;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setUserCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->user_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *  cityid以及其子节点 的全部学校数 
+     *
+     * Generated from protobuf field <code>int32 school_count = 6;</code>
      * @return int
      */
     public function getSchoolCount()
@@ -153,9 +197,9 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *学校数目， 根据request.cityid统计
+     *  cityid以及其子节点 的全部学校数 
      *
-     * Generated from protobuf field <code>int32 school_count = 5;</code>
+     * Generated from protobuf field <code>int32 school_count = 6;</code>
      * @param int $var
      * @return $this
      */
@@ -163,6 +207,58 @@ class GetSchoolCountResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->school_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *  cityid以及其子节点 的全部视频数 
+     *
+     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     * @return int
+     */
+    public function getVideoCount()
+    {
+        return $this->video_count;
+    }
+
+    /**
+     *  cityid以及其子节点 的全部视频数 
+     *
+     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setVideoCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->video_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *  cityid以及其子节点 的全部文章数 
+     *
+     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     * @return int
+     */
+    public function getArticleCount()
+    {
+        return $this->article_count;
+    }
+
+    /**
+     *  cityid以及其子节点 的全部文章数 
+     *
+     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setArticleCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->article_count = $var;
 
         return $this;
     }

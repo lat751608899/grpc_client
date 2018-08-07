@@ -26,7 +26,7 @@ class RemainUserItem extends \Google\Protobuf\Internal\Message
      */
     private $new_usercount = 0;
     /**
-     *留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 12, 分别表示 第1天->第10天， 第15天，第30天 的留存比
+     *留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 13, 分别表示 第0天->第10天， 第15天，第30天 的留存比
      *
      * Generated from protobuf field <code>repeated int32 remain_percentage = 3;</code>
      */
@@ -90,7 +90,7 @@ class RemainUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 12, 分别表示 第1天->第10天， 第15天，第30天 的留存比
+     *留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 13, 分别表示 第0天->第10天， 第15天，第30天 的留存比
      *
      * Generated from protobuf field <code>repeated int32 remain_percentage = 3;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -101,7 +101,7 @@ class RemainUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 12, 分别表示 第1天->第10天， 第15天，第30天 的留存比
+     *留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 13, 分别表示 第0天->第10天， 第15天，第30天 的留存比
      *
      * Generated from protobuf field <code>repeated int32 remain_percentage = 3;</code>
      * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
