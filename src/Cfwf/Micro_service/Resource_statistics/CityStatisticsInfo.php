@@ -37,6 +37,26 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 student_count = 6;</code>
      */
     private $student_count = 0;
+    /**
+     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     */
+    private $video_count = 0;
+    /**
+     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     */
+    private $article_count = 0;
+    /**
+     *坐标，经度
+     *
+     * Generated from protobuf field <code>double coordinate_x = 9;</code>
+     */
+    private $coordinate_x = 0.0;
+    /**
+     *坐标，纬度  
+     *
+     * Generated from protobuf field <code>double coordinate_y = 10;</code>
+     */
+    private $coordinate_y = 0.0;
 
     public function __construct() {
         \GPBMetadata\ResourceStatistics::initOnce();
@@ -171,6 +191,102 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->student_count = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     * @return int
+     */
+    public function getVideoCount()
+    {
+        return $this->video_count;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setVideoCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->video_count = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     * @return int
+     */
+    public function getArticleCount()
+    {
+        return $this->article_count;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setArticleCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->article_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *坐标，经度
+     *
+     * Generated from protobuf field <code>double coordinate_x = 9;</code>
+     * @return float
+     */
+    public function getCoordinateX()
+    {
+        return $this->coordinate_x;
+    }
+
+    /**
+     *坐标，经度
+     *
+     * Generated from protobuf field <code>double coordinate_x = 9;</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setCoordinateX($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->coordinate_x = $var;
+
+        return $this;
+    }
+
+    /**
+     *坐标，纬度  
+     *
+     * Generated from protobuf field <code>double coordinate_y = 10;</code>
+     * @return float
+     */
+    public function getCoordinateY()
+    {
+        return $this->coordinate_y;
+    }
+
+    /**
+     *坐标，纬度  
+     *
+     * Generated from protobuf field <code>double coordinate_y = 10;</code>
+     * @param float $var
+     * @return $this
+     */
+    public function setCoordinateY($var)
+    {
+        GPBUtil::checkDouble($var);
+        $this->coordinate_y = $var;
 
         return $this;
     }

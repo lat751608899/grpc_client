@@ -17,7 +17,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class GetCityStatisticsRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     *0=获取全国省市列表
+     *0=获取全国省级列表
      *
      * Generated from protobuf field <code>int32 parent_cityid = 1;</code>
      */
@@ -29,7 +29,7 @@ class GetCityStatisticsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=获取全国省市列表
+     *0=获取全国省级列表
      *
      * Generated from protobuf field <code>int32 parent_cityid = 1;</code>
      * @return int
@@ -40,7 +40,7 @@ class GetCityStatisticsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=获取全国省市列表
+     *0=获取全国省级列表
      *
      * Generated from protobuf field <code>int32 parent_cityid = 1;</code>
      * @param int $var

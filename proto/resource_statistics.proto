@@ -402,7 +402,7 @@ message GetSchoolUserListResponse{
 //获取省市区县统计信息(学校->地图->全国、省市、区县  第一期) 
 //GetCityStatistics
 message GetCityStatisticsRequest{
-    int32 parent_cityid = 1;        //0=获取全国省市列表
+    int32 parent_cityid = 1;        //0=获取全国省级列表
 }
 
 enum CITY_LEVEL
@@ -422,6 +422,11 @@ message CityStatisticsInfo
     int32 school_count = 4;
     int32 teacher_count = 5;
     int32 student_count = 6;
+    int32 video_count = 7;
+    int32 article_count = 8;
+    
+    double coordinate_x = 9; //坐标，经度
+    double coordinate_y = 10; //坐标，纬度  
 }
 
 message GetCityStatisticsResponse{
