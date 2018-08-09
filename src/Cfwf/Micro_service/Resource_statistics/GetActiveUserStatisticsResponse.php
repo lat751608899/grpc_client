@@ -18,17 +18,11 @@ class GetActiveUserStatisticsResponse extends \Google\Protobuf\Internal\Message
      */
     private $result = 0;
     /**
-     *最大活跃数
+     *活跃用户总数
      *
-     * Generated from protobuf field <code>int32 max_value = 2;</code>
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
      */
-    private $max_value = 0;
-    /**
-     *最小活跃数
-     *
-     * Generated from protobuf field <code>int32 min_value = 3;</code>
-     */
-    private $min_value = 0;
+    private $total_count = 0;
     /**
      *统计结果列表
      *
@@ -64,53 +58,27 @@ class GetActiveUserStatisticsResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *最大活跃数
+     *活跃用户总数
      *
-     * Generated from protobuf field <code>int32 max_value = 2;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
+     * @return int|string
      */
-    public function getMaxValue()
+    public function getTotalCount()
     {
-        return $this->max_value;
+        return $this->total_count;
     }
 
     /**
-     *最大活跃数
+     *活跃用户总数
      *
-     * Generated from protobuf field <code>int32 max_value = 2;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
+     * @param int|string $var
      * @return $this
      */
-    public function setMaxValue($var)
+    public function setTotalCount($var)
     {
-        GPBUtil::checkInt32($var);
-        $this->max_value = $var;
-
-        return $this;
-    }
-
-    /**
-     *最小活跃数
-     *
-     * Generated from protobuf field <code>int32 min_value = 3;</code>
-     * @return int
-     */
-    public function getMinValue()
-    {
-        return $this->min_value;
-    }
-
-    /**
-     *最小活跃数
-     *
-     * Generated from protobuf field <code>int32 min_value = 3;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setMinValue($var)
-    {
-        GPBUtil::checkInt32($var);
-        $this->min_value = $var;
+        GPBUtil::checkInt64($var);
+        $this->total_count = $var;
 
         return $this;
     }

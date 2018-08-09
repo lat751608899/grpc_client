@@ -21,13 +21,16 @@ service ResourceStatistics {
   //获取用户详情（用户->用户详情）
   rpc GetUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse) {}  
   
-  //活跃用户统计数据（用户->用户统计 第一期）
+  //活跃用户统计数据（用户->用户数据 第一期）
   rpc GetActiveUserStatistics (GetActiveUserStatisticsRequest) returns (GetActiveUserStatisticsResponse) {}  
 
-  //新增用户统计数据（用户->用户统计 第一期）
+   //日活跃平均数（用户->用户数据 第一期）
+  rpc GetDayActiveUserStatistics (GetDayActiveUserStatisticsRequest) returns (GetDayActiveUserStatisticsResponse) {}  
+  
+  //新增用户统计数据（用户->用户数据 第一期）
   rpc GetNewUserStatistics (GetNewUserStatisticsRequest) returns (GetNewUserStatisticsResponse) {}  
 
-  //留存用户统计数据（用户->用户统计 第一期）
+  //留存用户统计数据（用户->用户数据 第一期）
   rpc GetRemainUserStatistics (GetRemainUserStatisticsRequest) returns (GetRemainUserStatisticsResponse) {}  
   
   /*************************
@@ -242,12 +245,29 @@ message ActiveUserItem
 
 message GetActiveUserStatisticsResponse{
     RPC_CALL_RESULT result = 1;
-    int32 max_value = 2; //最大活跃数
-    int32 min_value = 3; //最小活跃数
+    int64 total_count = 2; //活跃用户总数
     repeated ActiveUserItem list = 4; //统计结果列表
 }
 
+//GetDayActiveUserStatistics (GetDayActiveUserStatisticsRequest) returns (GetDayActiveUserStatisticsResponse) {}  
+message GetDayActiveUserStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+}
 
+message DayActiveUserItem
+{
+    int32 hour = 1;  //格式：0-23  一段时期内0点-23点的平均活跃用户数
+    int32 user_count = 2;
+}
+
+message GetDayActiveUserStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated DayActiveUserItem list = 2; //共24条， 0-23点的日平均活跃用户数
+}
+ 
+ 
 //GetNewUserStatistics
 message GetNewUserStatisticsRequest{
     int32 cityid = 1; // 0 = 全国
@@ -265,10 +285,8 @@ message NewUserItem
 
 message GetNewUserStatisticsResponse{
     RPC_CALL_RESULT result = 1;
-    int32 max_value = 2; //最大新增数
-    int32 min_value = 3; //最小新增数
-    int32 percentage = 4; //新增百分比.  50 表示 50%的新增比 
-    repeated NewUserItem list = 5;//统计结果列表
+    int64 total_count = 2; //新增用户总数
+    repeated NewUserItem list = 5;//按时间新增用户数列表
 }
 
 //GetRemainUserStatistics
@@ -431,7 +449,7 @@ message CityStatisticsInfo
 
 message GetCityStatisticsResponse{
     RPC_CALL_RESULT result = 1;
-    int32 parent_cityid = 2;        //0=获取全国省市列表
+    int32 parent_cityid = 2;        //0=获取全国省级列表
     repeated CityStatisticsInfo list = 3;
 }
 
@@ -439,7 +457,7 @@ message GetCityStatisticsResponse{
 //获取学校统计信息(学校->地图->学校  第一期) 
 //GetSchoolStatistics
 message GetSchoolStatisticsRequest{
-    int32 cityid = 1;        //0=获取全国省市列表
+    int32 cityid = 1;        //必须填写，不能为0。返回此city,以及下级地区 所有的学校列表
 }
 
 message GetSchoolStatisticsResponse{
@@ -458,7 +476,8 @@ message GetSchoolWeikeCountRequest{
 message GetSchoolWeikeCountResponse{
     RPC_CALL_RESULT result = 1;
     int32 cityid = 2;
-    int32 count = 3;
+    int32 count = 3; //微课总数
+    int32 view_count = 4; //播放总数
 }
 
 message GetNewSchoolWeikeStatisticsRequest{
@@ -476,7 +495,8 @@ message NewSchoolWeikeItem
 
 message GetNewSchoolWeikeStatisticsResponse{
     RPC_CALL_RESULT result = 1;
-    repeated NewSchoolWeikeItem list = 5;//统计结果列表
+    int64 total_count = 2; //新增总数
+    repeated NewSchoolWeikeItem list = 5;//按时间新增数列表
 }
 
 message GetSchoolWeikeViewStatisticsRequest{
@@ -496,7 +516,8 @@ message SchoolWeikeViewItem
 
 message GetSchoolWeikeViewStatisticsResponse{
     RPC_CALL_RESULT result = 1;
-    repeated SchoolWeikeViewItem list = 5;//统计结果列表
+    int64 total_new_count = 2; //新增总数
+    repeated SchoolWeikeViewItem list = 5;//按时间播放数列表
 }
 
 /*************************
@@ -510,7 +531,8 @@ message GetSchoolCourseVideoCountRequest{
 message GetSchoolCourseVideoCountResponse{
     RPC_CALL_RESULT result = 1;
     int32 cityid = 2;
-    int32 count = 3;
+    int32 count = 3; //课堂实录总数
+    int32 view_count = 4; //播放总数
 }
 
 message GetNewSchoolCourseVideoStatisticsRequest{
@@ -528,7 +550,8 @@ message NewSchoolCourseVideoItem
 
 message GetNewSchoolCourseVideoStatisticsResponse{
     RPC_CALL_RESULT result = 1;
-    repeated NewSchoolCourseVideoItem list = 5;//统计结果列表
+    int64 total_count = 2; //新增总数
+    repeated NewSchoolCourseVideoItem list = 5;//按时间新增数列表
 }
 
 message GetSchoolCourseVideoViewStatisticsRequest{
@@ -548,5 +571,6 @@ message SchoolCourseVideoViewItem
 
 message GetSchoolCourseVideoViewStatisticsResponse{
     RPC_CALL_RESULT result = 1;
-    repeated SchoolCourseVideoViewItem list = 5;//统计结果列表
+    int64 total_new_count = 2; //新增总数
+    repeated SchoolCourseVideoViewItem list = 5;//按时间播放数列表
 }

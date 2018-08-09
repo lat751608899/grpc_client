@@ -18,7 +18,13 @@ class GetNewSchoolWeikeStatisticsResponse extends \Google\Protobuf\Internal\Mess
      */
     private $result = 0;
     /**
-     *统计结果列表
+     *新增总数
+     *
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
+     */
+    private $total_count = 0;
+    /**
+     *按时间新增数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.NewSchoolWeikeItem list = 5;</code>
      */
@@ -52,7 +58,33 @@ class GetNewSchoolWeikeStatisticsResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     *统计结果列表
+     *新增总数
+     *
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
+     * @return int|string
+     */
+    public function getTotalCount()
+    {
+        return $this->total_count;
+    }
+
+    /**
+     *新增总数
+     *
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setTotalCount($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->total_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *按时间新增数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.NewSchoolWeikeItem list = 5;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -63,7 +95,7 @@ class GetNewSchoolWeikeStatisticsResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     *统计结果列表
+     *按时间新增数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.NewSchoolWeikeItem list = 5;</code>
      * @param \Cfwf\Micro_service\Resource_statistics\NewSchoolWeikeItem[]|\Google\Protobuf\Internal\RepeatedField $var

@@ -18,25 +18,13 @@ class GetNewUserStatisticsResponse extends \Google\Protobuf\Internal\Message
      */
     private $result = 0;
     /**
-     *最大新增数
+     *新增用户总数
      *
-     * Generated from protobuf field <code>int32 max_value = 2;</code>
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
      */
-    private $max_value = 0;
+    private $total_count = 0;
     /**
-     *最小新增数
-     *
-     * Generated from protobuf field <code>int32 min_value = 3;</code>
-     */
-    private $min_value = 0;
-    /**
-     *新增百分比.  50 表示 50%的新增比 
-     *
-     * Generated from protobuf field <code>int32 percentage = 4;</code>
-     */
-    private $percentage = 0;
-    /**
-     *统计结果列表
+     *按时间新增用户数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.NewUserItem list = 5;</code>
      */
@@ -70,85 +58,33 @@ class GetNewUserStatisticsResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *最大新增数
+     *新增用户总数
      *
-     * Generated from protobuf field <code>int32 max_value = 2;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
+     * @return int|string
      */
-    public function getMaxValue()
+    public function getTotalCount()
     {
-        return $this->max_value;
+        return $this->total_count;
     }
 
     /**
-     *最大新增数
+     *新增用户总数
      *
-     * Generated from protobuf field <code>int32 max_value = 2;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 total_count = 2;</code>
+     * @param int|string $var
      * @return $this
      */
-    public function setMaxValue($var)
+    public function setTotalCount($var)
     {
-        GPBUtil::checkInt32($var);
-        $this->max_value = $var;
+        GPBUtil::checkInt64($var);
+        $this->total_count = $var;
 
         return $this;
     }
 
     /**
-     *最小新增数
-     *
-     * Generated from protobuf field <code>int32 min_value = 3;</code>
-     * @return int
-     */
-    public function getMinValue()
-    {
-        return $this->min_value;
-    }
-
-    /**
-     *最小新增数
-     *
-     * Generated from protobuf field <code>int32 min_value = 3;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setMinValue($var)
-    {
-        GPBUtil::checkInt32($var);
-        $this->min_value = $var;
-
-        return $this;
-    }
-
-    /**
-     *新增百分比.  50 表示 50%的新增比 
-     *
-     * Generated from protobuf field <code>int32 percentage = 4;</code>
-     * @return int
-     */
-    public function getPercentage()
-    {
-        return $this->percentage;
-    }
-
-    /**
-     *新增百分比.  50 表示 50%的新增比 
-     *
-     * Generated from protobuf field <code>int32 percentage = 4;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setPercentage($var)
-    {
-        GPBUtil::checkInt32($var);
-        $this->percentage = $var;
-
-        return $this;
-    }
-
-    /**
-     *统计结果列表
+     *按时间新增用户数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.NewUserItem list = 5;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -159,7 +95,7 @@ class GetNewUserStatisticsResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *统计结果列表
+     *按时间新增用户数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.NewUserItem list = 5;</code>
      * @param \Cfwf\Micro_service\Resource_statistics\NewUserItem[]|\Google\Protobuf\Internal\RepeatedField $var

@@ -65,7 +65,7 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 活跃用户统计数据（用户->用户统计 第一期）
+     * 活跃用户统计数据（用户->用户数据 第一期）
      * @param \Cfwf\Micro_service\Resource_statistics\GetActiveUserStatisticsRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -79,7 +79,21 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 新增用户统计数据（用户->用户统计 第一期）
+     * 日活跃平均数（用户->用户数据 第一期）
+     * @param \Cfwf\Micro_service\Resource_statistics\GetDayActiveUserStatisticsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetDayActiveUserStatistics(\Cfwf\Micro_service\Resource_statistics\GetDayActiveUserStatisticsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetDayActiveUserStatistics',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetDayActiveUserStatisticsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 新增用户统计数据（用户->用户数据 第一期）
      * @param \Cfwf\Micro_service\Resource_statistics\GetNewUserStatisticsRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -93,7 +107,7 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 留存用户统计数据（用户->用户统计 第一期）
+     * 留存用户统计数据（用户->用户数据 第一期）
      * @param \Cfwf\Micro_service\Resource_statistics\GetRemainUserStatisticsRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options

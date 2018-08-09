@@ -18,7 +18,7 @@ class GetCityStatisticsResponse extends \Google\Protobuf\Internal\Message
      */
     private $result = 0;
     /**
-     *0=获取全国省市列表
+     *0=获取全国省级列表
      *
      * Generated from protobuf field <code>int32 parent_cityid = 2;</code>
      */
@@ -56,7 +56,7 @@ class GetCityStatisticsResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=获取全国省市列表
+     *0=获取全国省级列表
      *
      * Generated from protobuf field <code>int32 parent_cityid = 2;</code>
      * @return int
@@ -67,7 +67,7 @@ class GetCityStatisticsResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=获取全国省市列表
+     *0=获取全国省级列表
      *
      * Generated from protobuf field <code>int32 parent_cityid = 2;</code>
      * @param int $var

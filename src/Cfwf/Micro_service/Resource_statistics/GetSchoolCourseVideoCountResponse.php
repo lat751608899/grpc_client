@@ -22,9 +22,17 @@ class GetSchoolCourseVideoCountResponse extends \Google\Protobuf\Internal\Messag
      */
     private $cityid = 0;
     /**
+     *课堂实录总数
+     *
      * Generated from protobuf field <code>int32 count = 3;</code>
      */
     private $count = 0;
+    /**
+     *播放总数
+     *
+     * Generated from protobuf field <code>int32 view_count = 4;</code>
+     */
+    private $view_count = 0;
 
     public function __construct() {
         \GPBMetadata\ResourceStatistics::initOnce();
@@ -76,6 +84,8 @@ class GetSchoolCourseVideoCountResponse extends \Google\Protobuf\Internal\Messag
     }
 
     /**
+     *课堂实录总数
+     *
      * Generated from protobuf field <code>int32 count = 3;</code>
      * @return int
      */
@@ -85,6 +95,8 @@ class GetSchoolCourseVideoCountResponse extends \Google\Protobuf\Internal\Messag
     }
 
     /**
+     *课堂实录总数
+     *
      * Generated from protobuf field <code>int32 count = 3;</code>
      * @param int $var
      * @return $this
@@ -93,6 +105,32 @@ class GetSchoolCourseVideoCountResponse extends \Google\Protobuf\Internal\Messag
     {
         GPBUtil::checkInt32($var);
         $this->count = $var;
+
+        return $this;
+    }
+
+    /**
+     *播放总数
+     *
+     * Generated from protobuf field <code>int32 view_count = 4;</code>
+     * @return int
+     */
+    public function getViewCount()
+    {
+        return $this->view_count;
+    }
+
+    /**
+     *播放总数
+     *
+     * Generated from protobuf field <code>int32 view_count = 4;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setViewCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->view_count = $var;
 
         return $this;
     }

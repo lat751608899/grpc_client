@@ -18,7 +18,13 @@ class GetSchoolCourseVideoViewStatisticsResponse extends \Google\Protobuf\Intern
      */
     private $result = 0;
     /**
-     *统计结果列表
+     *新增总数
+     *
+     * Generated from protobuf field <code>int64 total_new_count = 2;</code>
+     */
+    private $total_new_count = 0;
+    /**
+     *按时间播放数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.SchoolCourseVideoViewItem list = 5;</code>
      */
@@ -52,7 +58,33 @@ class GetSchoolCourseVideoViewStatisticsResponse extends \Google\Protobuf\Intern
     }
 
     /**
-     *统计结果列表
+     *新增总数
+     *
+     * Generated from protobuf field <code>int64 total_new_count = 2;</code>
+     * @return int|string
+     */
+    public function getTotalNewCount()
+    {
+        return $this->total_new_count;
+    }
+
+    /**
+     *新增总数
+     *
+     * Generated from protobuf field <code>int64 total_new_count = 2;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setTotalNewCount($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->total_new_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *按时间播放数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.SchoolCourseVideoViewItem list = 5;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
@@ -63,7 +95,7 @@ class GetSchoolCourseVideoViewStatisticsResponse extends \Google\Protobuf\Intern
     }
 
     /**
-     *统计结果列表
+     *按时间播放数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.SchoolCourseVideoViewItem list = 5;</code>
      * @param \Cfwf\Micro_service\Resource_statistics\SchoolCourseVideoViewItem[]|\Google\Protobuf\Internal\RepeatedField $var

@@ -17,7 +17,7 @@ use Google\Protobuf\Internal\GPBUtil;
 class GetSchoolStatisticsRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     *0=获取全国省市列表
+     *必须填写，不能为0。返回此city,以及下级地区 所有的学校列表
      *
      * Generated from protobuf field <code>int32 cityid = 1;</code>
      */
@@ -29,7 +29,7 @@ class GetSchoolStatisticsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=获取全国省市列表
+     *必须填写，不能为0。返回此city,以及下级地区 所有的学校列表
      *
      * Generated from protobuf field <code>int32 cityid = 1;</code>
      * @return int
@@ -40,7 +40,7 @@ class GetSchoolStatisticsRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=获取全国省市列表
+     *必须填写，不能为0。返回此city,以及下级地区 所有的学校列表
      *
      * Generated from protobuf field <code>int32 cityid = 1;</code>
      * @param int $var
