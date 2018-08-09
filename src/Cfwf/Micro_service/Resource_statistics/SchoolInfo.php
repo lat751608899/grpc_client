@@ -26,19 +26,19 @@ class SchoolInfo extends \Google\Protobuf\Internal\Message
     /**
      *教室数量
      *
-     * Generated from protobuf field <code>int32 classroom_count = 3;</code>
+     * Generated from protobuf field <code>int64 classroom_count = 3;</code>
      */
     private $classroom_count = 0;
     /**
      *录播设备安装套数
      *
-     * Generated from protobuf field <code>int32 lubo_install_count = 4;</code>
+     * Generated from protobuf field <code>int64 lubo_install_count = 4;</code>
      */
     private $lubo_install_count = 0;
     /**
      *直播设备安装套数
      *
-     * Generated from protobuf field <code>int32 zhibo_install_count = 5;</code>
+     * Generated from protobuf field <code>int64 zhibo_install_count = 5;</code>
      */
     private $zhibo_install_count = 0;
     /**
@@ -152,8 +152,8 @@ class SchoolInfo extends \Google\Protobuf\Internal\Message
     /**
      *教室数量
      *
-     * Generated from protobuf field <code>int32 classroom_count = 3;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 classroom_count = 3;</code>
+     * @return int|string
      */
     public function getClassroomCount()
     {
@@ -163,13 +163,13 @@ class SchoolInfo extends \Google\Protobuf\Internal\Message
     /**
      *教室数量
      *
-     * Generated from protobuf field <code>int32 classroom_count = 3;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 classroom_count = 3;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setClassroomCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->classroom_count = $var;
 
         return $this;
@@ -178,8 +178,8 @@ class SchoolInfo extends \Google\Protobuf\Internal\Message
     /**
      *录播设备安装套数
      *
-     * Generated from protobuf field <code>int32 lubo_install_count = 4;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 lubo_install_count = 4;</code>
+     * @return int|string
      */
     public function getLuboInstallCount()
     {
@@ -189,13 +189,13 @@ class SchoolInfo extends \Google\Protobuf\Internal\Message
     /**
      *录播设备安装套数
      *
-     * Generated from protobuf field <code>int32 lubo_install_count = 4;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 lubo_install_count = 4;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setLuboInstallCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->lubo_install_count = $var;
 
         return $this;
@@ -204,8 +204,8 @@ class SchoolInfo extends \Google\Protobuf\Internal\Message
     /**
      *直播设备安装套数
      *
-     * Generated from protobuf field <code>int32 zhibo_install_count = 5;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 zhibo_install_count = 5;</code>
+     * @return int|string
      */
     public function getZhiboInstallCount()
     {
@@ -215,13 +215,13 @@ class SchoolInfo extends \Google\Protobuf\Internal\Message
     /**
      *直播设备安装套数
      *
-     * Generated from protobuf field <code>int32 zhibo_install_count = 5;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 zhibo_install_count = 5;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setZhiboInstallCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->zhibo_install_count = $var;
 
         return $this;

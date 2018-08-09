@@ -22,7 +22,7 @@ class RemainUserItem extends \Google\Protobuf\Internal\Message
     /**
      *新增用户数
      *
-     * Generated from protobuf field <code>int32 new_usercount = 2;</code>
+     * Generated from protobuf field <code>int64 new_usercount = 2;</code>
      */
     private $new_usercount = 0;
     /**
@@ -66,8 +66,8 @@ class RemainUserItem extends \Google\Protobuf\Internal\Message
     /**
      *新增用户数
      *
-     * Generated from protobuf field <code>int32 new_usercount = 2;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 new_usercount = 2;</code>
+     * @return int|string
      */
     public function getNewUsercount()
     {
@@ -77,13 +77,13 @@ class RemainUserItem extends \Google\Protobuf\Internal\Message
     /**
      *新增用户数
      *
-     * Generated from protobuf field <code>int32 new_usercount = 2;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 new_usercount = 2;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setNewUsercount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->new_usercount = $var;
 
         return $this;

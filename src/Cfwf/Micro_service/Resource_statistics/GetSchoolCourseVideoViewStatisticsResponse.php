@@ -24,6 +24,12 @@ class GetSchoolCourseVideoViewStatisticsResponse extends \Google\Protobuf\Intern
      */
     private $total_new_count = 0;
     /**
+     *播放总数
+     *
+     * Generated from protobuf field <code>int64 total_view_count = 3;</code>
+     */
+    private $total_view_count = 0;
+    /**
      *按时间播放数列表
      *
      * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.SchoolCourseVideoViewItem list = 5;</code>
@@ -79,6 +85,32 @@ class GetSchoolCourseVideoViewStatisticsResponse extends \Google\Protobuf\Intern
     {
         GPBUtil::checkInt64($var);
         $this->total_new_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *播放总数
+     *
+     * Generated from protobuf field <code>int64 total_view_count = 3;</code>
+     * @return int|string
+     */
+    public function getTotalViewCount()
+    {
+        return $this->total_view_count;
+    }
+
+    /**
+     *播放总数
+     *
+     * Generated from protobuf field <code>int64 total_view_count = 3;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setTotalViewCount($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->total_view_count = $var;
 
         return $this;
     }

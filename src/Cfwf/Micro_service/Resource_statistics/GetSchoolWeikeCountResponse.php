@@ -24,13 +24,13 @@ class GetSchoolWeikeCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *微课总数
      *
-     * Generated from protobuf field <code>int32 count = 3;</code>
+     * Generated from protobuf field <code>int64 count = 3;</code>
      */
     private $count = 0;
     /**
      *播放总数
      *
-     * Generated from protobuf field <code>int32 view_count = 4;</code>
+     * Generated from protobuf field <code>int64 view_count = 4;</code>
      */
     private $view_count = 0;
 
@@ -86,8 +86,8 @@ class GetSchoolWeikeCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *微课总数
      *
-     * Generated from protobuf field <code>int32 count = 3;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 count = 3;</code>
+     * @return int|string
      */
     public function getCount()
     {
@@ -97,13 +97,13 @@ class GetSchoolWeikeCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *微课总数
      *
-     * Generated from protobuf field <code>int32 count = 3;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 count = 3;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->count = $var;
 
         return $this;
@@ -112,8 +112,8 @@ class GetSchoolWeikeCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *播放总数
      *
-     * Generated from protobuf field <code>int32 view_count = 4;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 view_count = 4;</code>
+     * @return int|string
      */
     public function getViewCount()
     {
@@ -123,13 +123,13 @@ class GetSchoolWeikeCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *播放总数
      *
-     * Generated from protobuf field <code>int32 view_count = 4;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 view_count = 4;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setViewCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->view_count = $var;
 
         return $this;

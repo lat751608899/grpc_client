@@ -36,25 +36,25 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部用户数 
      *
-     * Generated from protobuf field <code>int32 user_count = 5;</code>
+     * Generated from protobuf field <code>int64 user_count = 5;</code>
      */
     private $user_count = 0;
     /**
      *  cityid以及其子节点 的全部学校数 
      *
-     * Generated from protobuf field <code>int32 school_count = 6;</code>
+     * Generated from protobuf field <code>int64 school_count = 6;</code>
      */
     private $school_count = 0;
     /**
      *  cityid以及其子节点 的全部视频数 
      *
-     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     * Generated from protobuf field <code>int64 video_count = 7;</code>
      */
     private $video_count = 0;
     /**
      *  cityid以及其子节点 的全部文章数 
      *
-     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     * Generated from protobuf field <code>int64 article_count = 8;</code>
      */
     private $article_count = 0;
 
@@ -162,8 +162,8 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部用户数 
      *
-     * Generated from protobuf field <code>int32 user_count = 5;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 user_count = 5;</code>
+     * @return int|string
      */
     public function getUserCount()
     {
@@ -173,13 +173,13 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部用户数 
      *
-     * Generated from protobuf field <code>int32 user_count = 5;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 user_count = 5;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setUserCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->user_count = $var;
 
         return $this;
@@ -188,8 +188,8 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部学校数 
      *
-     * Generated from protobuf field <code>int32 school_count = 6;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 school_count = 6;</code>
+     * @return int|string
      */
     public function getSchoolCount()
     {
@@ -199,13 +199,13 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部学校数 
      *
-     * Generated from protobuf field <code>int32 school_count = 6;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 school_count = 6;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setSchoolCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->school_count = $var;
 
         return $this;
@@ -214,8 +214,8 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部视频数 
      *
-     * Generated from protobuf field <code>int32 video_count = 7;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 video_count = 7;</code>
+     * @return int|string
      */
     public function getVideoCount()
     {
@@ -225,13 +225,13 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部视频数 
      *
-     * Generated from protobuf field <code>int32 video_count = 7;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 video_count = 7;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setVideoCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->video_count = $var;
 
         return $this;
@@ -240,8 +240,8 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部文章数 
      *
-     * Generated from protobuf field <code>int32 article_count = 8;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 article_count = 8;</code>
+     * @return int|string
      */
     public function getArticleCount()
     {
@@ -251,13 +251,13 @@ class GetResourceCountResponse extends \Google\Protobuf\Internal\Message
     /**
      *  cityid以及其子节点 的全部文章数 
      *
-     * Generated from protobuf field <code>int32 article_count = 8;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 article_count = 8;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setArticleCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->article_count = $var;
 
         return $this;

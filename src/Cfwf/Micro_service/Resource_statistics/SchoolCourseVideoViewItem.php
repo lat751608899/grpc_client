@@ -20,15 +20,15 @@ class SchoolCourseVideoViewItem extends \Google\Protobuf\Internal\Message
      */
     private $date = 0;
     /**
-     * Generated from protobuf field <code>int32 pc_view_count = 2;</code>
+     * Generated from protobuf field <code>int64 pc_view_count = 2;</code>
      */
     private $pc_view_count = 0;
     /**
-     * Generated from protobuf field <code>int32 app_view_count = 3;</code>
+     * Generated from protobuf field <code>int64 app_view_count = 3;</code>
      */
     private $app_view_count = 0;
     /**
-     * Generated from protobuf field <code>int32 web_view_count = 4;</code>
+     * Generated from protobuf field <code>int64 web_view_count = 4;</code>
      */
     private $web_view_count = 0;
 
@@ -64,8 +64,8 @@ class SchoolCourseVideoViewItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 pc_view_count = 2;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 pc_view_count = 2;</code>
+     * @return int|string
      */
     public function getPcViewCount()
     {
@@ -73,21 +73,21 @@ class SchoolCourseVideoViewItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 pc_view_count = 2;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 pc_view_count = 2;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setPcViewCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->pc_view_count = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>int32 app_view_count = 3;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 app_view_count = 3;</code>
+     * @return int|string
      */
     public function getAppViewCount()
     {
@@ -95,21 +95,21 @@ class SchoolCourseVideoViewItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 app_view_count = 3;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 app_view_count = 3;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setAppViewCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->app_view_count = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>int32 web_view_count = 4;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 web_view_count = 4;</code>
+     * @return int|string
      */
     public function getWebViewCount()
     {
@@ -117,13 +117,13 @@ class SchoolCourseVideoViewItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 web_view_count = 4;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 web_view_count = 4;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setWebViewCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->web_view_count = $var;
 
         return $this;

@@ -26,23 +26,23 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
      */
     private $name = '';
     /**
-     * Generated from protobuf field <code>int32 school_count = 4;</code>
+     * Generated from protobuf field <code>int64 school_count = 4;</code>
      */
     private $school_count = 0;
     /**
-     * Generated from protobuf field <code>int32 teacher_count = 5;</code>
+     * Generated from protobuf field <code>int64 teacher_count = 5;</code>
      */
     private $teacher_count = 0;
     /**
-     * Generated from protobuf field <code>int32 student_count = 6;</code>
+     * Generated from protobuf field <code>int64 student_count = 6;</code>
      */
     private $student_count = 0;
     /**
-     * Generated from protobuf field <code>int32 video_count = 7;</code>
+     * Generated from protobuf field <code>int64 video_count = 7;</code>
      */
     private $video_count = 0;
     /**
-     * Generated from protobuf field <code>int32 article_count = 8;</code>
+     * Generated from protobuf field <code>int64 article_count = 8;</code>
      */
     private $article_count = 0;
     /**
@@ -130,8 +130,8 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 school_count = 4;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 school_count = 4;</code>
+     * @return int|string
      */
     public function getSchoolCount()
     {
@@ -139,21 +139,21 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 school_count = 4;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 school_count = 4;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setSchoolCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->school_count = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>int32 teacher_count = 5;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 teacher_count = 5;</code>
+     * @return int|string
      */
     public function getTeacherCount()
     {
@@ -161,21 +161,21 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 teacher_count = 5;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 teacher_count = 5;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setTeacherCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->teacher_count = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>int32 student_count = 6;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 student_count = 6;</code>
+     * @return int|string
      */
     public function getStudentCount()
     {
@@ -183,21 +183,21 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 student_count = 6;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 student_count = 6;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setStudentCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->student_count = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>int32 video_count = 7;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 video_count = 7;</code>
+     * @return int|string
      */
     public function getVideoCount()
     {
@@ -205,21 +205,21 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 video_count = 7;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 video_count = 7;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setVideoCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->video_count = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>int32 article_count = 8;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 article_count = 8;</code>
+     * @return int|string
      */
     public function getArticleCount()
     {
@@ -227,13 +227,13 @@ class CityStatisticsInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 article_count = 8;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 article_count = 8;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setArticleCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->article_count = $var;
 
         return $this;

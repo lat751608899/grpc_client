@@ -28,43 +28,43 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *教师总数
      *
-     * Generated from protobuf field <code>int32 teacher_count = 4;</code>
+     * Generated from protobuf field <code>int64 teacher_count = 4;</code>
      */
     private $teacher_count = 0;
     /**
      *已注册教师数
      *
-     * Generated from protobuf field <code>int32 teacher_registered_count = 5;</code>
+     * Generated from protobuf field <code>int64 teacher_registered_count = 5;</code>
      */
     private $teacher_registered_count = 0;
     /**
      *学生总数
      *
-     * Generated from protobuf field <code>int32 student_count = 6;</code>
+     * Generated from protobuf field <code>int64 student_count = 6;</code>
      */
     private $student_count = 0;
     /**
      *已注册学生数
      *
-     * Generated from protobuf field <code>int32 student_registered_count = 7;</code>
+     * Generated from protobuf field <code>int64 student_registered_count = 7;</code>
      */
     private $student_registered_count = 0;
     /**
      *总视频数: 微课数+课堂实录数
      *
-     * Generated from protobuf field <code>int32 video_count = 8;</code>
+     * Generated from protobuf field <code>int64 video_count = 8;</code>
      */
     private $video_count = 0;
     /**
      *总文章数
      *
-     * Generated from protobuf field <code>int32 article_count = 9;</code>
+     * Generated from protobuf field <code>int64 article_count = 9;</code>
      */
     private $article_count = 0;
     /**
      *总直播数
      *
-     * Generated from protobuf field <code>int32 broadcast_count = 10;</code>
+     * Generated from protobuf field <code>int64 broadcast_count = 10;</code>
      */
     private $broadcast_count = 0;
     /**
@@ -154,8 +154,8 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *教师总数
      *
-     * Generated from protobuf field <code>int32 teacher_count = 4;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 teacher_count = 4;</code>
+     * @return int|string
      */
     public function getTeacherCount()
     {
@@ -165,13 +165,13 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *教师总数
      *
-     * Generated from protobuf field <code>int32 teacher_count = 4;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 teacher_count = 4;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setTeacherCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->teacher_count = $var;
 
         return $this;
@@ -180,8 +180,8 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *已注册教师数
      *
-     * Generated from protobuf field <code>int32 teacher_registered_count = 5;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 teacher_registered_count = 5;</code>
+     * @return int|string
      */
     public function getTeacherRegisteredCount()
     {
@@ -191,13 +191,13 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *已注册教师数
      *
-     * Generated from protobuf field <code>int32 teacher_registered_count = 5;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 teacher_registered_count = 5;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setTeacherRegisteredCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->teacher_registered_count = $var;
 
         return $this;
@@ -206,8 +206,8 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *学生总数
      *
-     * Generated from protobuf field <code>int32 student_count = 6;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 student_count = 6;</code>
+     * @return int|string
      */
     public function getStudentCount()
     {
@@ -217,13 +217,13 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *学生总数
      *
-     * Generated from protobuf field <code>int32 student_count = 6;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 student_count = 6;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setStudentCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->student_count = $var;
 
         return $this;
@@ -232,8 +232,8 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *已注册学生数
      *
-     * Generated from protobuf field <code>int32 student_registered_count = 7;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 student_registered_count = 7;</code>
+     * @return int|string
      */
     public function getStudentRegisteredCount()
     {
@@ -243,13 +243,13 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *已注册学生数
      *
-     * Generated from protobuf field <code>int32 student_registered_count = 7;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 student_registered_count = 7;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setStudentRegisteredCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->student_registered_count = $var;
 
         return $this;
@@ -258,8 +258,8 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *总视频数: 微课数+课堂实录数
      *
-     * Generated from protobuf field <code>int32 video_count = 8;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 video_count = 8;</code>
+     * @return int|string
      */
     public function getVideoCount()
     {
@@ -269,13 +269,13 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *总视频数: 微课数+课堂实录数
      *
-     * Generated from protobuf field <code>int32 video_count = 8;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 video_count = 8;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setVideoCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->video_count = $var;
 
         return $this;
@@ -284,8 +284,8 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *总文章数
      *
-     * Generated from protobuf field <code>int32 article_count = 9;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 article_count = 9;</code>
+     * @return int|string
      */
     public function getArticleCount()
     {
@@ -295,13 +295,13 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *总文章数
      *
-     * Generated from protobuf field <code>int32 article_count = 9;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 article_count = 9;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setArticleCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->article_count = $var;
 
         return $this;
@@ -310,8 +310,8 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *总直播数
      *
-     * Generated from protobuf field <code>int32 broadcast_count = 10;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 broadcast_count = 10;</code>
+     * @return int|string
      */
     public function getBroadcastCount()
     {
@@ -321,13 +321,13 @@ class SchoolInfoSimple extends \Google\Protobuf\Internal\Message
     /**
      *总直播数
      *
-     * Generated from protobuf field <code>int32 broadcast_count = 10;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 broadcast_count = 10;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setBroadcastCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->broadcast_count = $var;
 
         return $this;

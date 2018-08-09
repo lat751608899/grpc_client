@@ -79,6 +79,9 @@ service ResourceStatistics {
   //微课播放统计数据（微课->微课数据->微课播放 第一期）
   rpc GetSchoolWeikeViewStatistics (GetSchoolWeikeViewStatisticsRequest) returns (GetSchoolWeikeViewStatisticsResponse) {}  
   
+  //微课日均播放数据
+  rpc GetSchoolWeikeDayViewStatistics (GetSchoolWeikeDayViewStatisticsRequest) returns (GetSchoolWeikeDayViewStatisticsResponse) {}  
+  
   /*************************
   课堂实录统计数据
   *************************/
@@ -96,7 +99,9 @@ service ResourceStatistics {
   //课堂实录播放统计数据（课堂实录->课堂实录数据->课堂实录播放 第一期）
   rpc GetSchoolCourseVideoViewStatistics (GetSchoolCourseVideoViewStatisticsRequest) returns (GetSchoolCourseVideoViewStatisticsResponse) {}  
   
-
+  //课堂实录日均播放数据
+  rpc GetSchoolCourseVideoDayViewStatistics (GetSchoolCourseVideoDayViewStatisticsRequest) returns (GetSchoolCourseVideoDayViewStatisticsResponse) {}  
+  
 }
 
 //通用rpc调用返回结果
@@ -121,10 +126,10 @@ message GetResourceCountResponse{
     int32 cityid = 2;
     int32 yun_sheng = 3; //全国有云平台的省数目
     int32 yun_shi = 4;   //全国有云平台的市数目
-    int32 user_count = 5;  //  cityid以及其子节点 的全部用户数 
-    int32 school_count = 6;//  cityid以及其子节点 的全部学校数 
-    int32 video_count = 7; //  cityid以及其子节点 的全部视频数 
-    int32 article_count = 8;//  cityid以及其子节点 的全部文章数 
+    int64 user_count = 5;  //  cityid以及其子节点 的全部用户数 
+    int64 school_count = 6;//  cityid以及其子节点 的全部学校数 
+    int64 video_count = 7; //  cityid以及其子节点 的全部视频数 
+    int64 article_count = 8;//  cityid以及其子节点 的全部文章数 
 }
  
 
@@ -240,7 +245,7 @@ message GetActiveUserStatisticsRequest{
 message ActiveUserItem
 {
     int32 date = 1;  //格式：按天统计：20170102； 按周统计  201700-201752；  按月统计： 201701-201712
-    int32 user_count = 2;
+    int64 user_count = 2;
 }
 
 message GetActiveUserStatisticsResponse{
@@ -259,7 +264,7 @@ message GetDayActiveUserStatisticsRequest{
 message DayActiveUserItem
 {
     int32 hour = 1;  //格式：0-23  一段时期内0点-23点的平均活跃用户数
-    int32 user_count = 2;
+    int64 user_count = 2;
 }
 
 message GetDayActiveUserStatisticsResponse{
@@ -279,8 +284,8 @@ message GetNewUserStatisticsRequest{
 message NewUserItem
 {
     int32 date = 1;  //格式：同ActiveUserItem
-    int32 teacher_count = 2;
-    int32 student_count = 3;
+    int64 teacher_count = 2;
+    int64 student_count = 3;
 }
 
 message GetNewUserStatisticsResponse{
@@ -299,7 +304,7 @@ message GetRemainUserStatisticsRequest{
 message RemainUserItem
 {
     int32 date = 1;  //格式：20170102
-    int32 new_usercount = 2; //新增用户数
+    int64 new_usercount = 2; //新增用户数
     repeated int32 remain_percentage = 3; //留存比例， 50 表示 50%的留存比 。 remain_percentage.size() == 13, 分别表示 第0天->第10天， 第15天，第30天 的留存比
 }
 
@@ -338,15 +343,15 @@ message SchoolInfoSimple{
     string school_name = 2;
     SCHOOL_TYPE school_type = 3;
     
-    int32 teacher_count = 4; //教师总数
-    int32 teacher_registered_count = 5; //已注册教师数
+    int64 teacher_count = 4; //教师总数
+    int64 teacher_registered_count = 5; //已注册教师数
 
-    int32 student_count = 6; //学生总数
-    int32 student_registered_count = 7; //已注册学生数
+    int64 student_count = 6; //学生总数
+    int64 student_registered_count = 7; //已注册学生数
     
-    int32 video_count = 8; //总视频数: 微课数+课堂实录数
-    int32 article_count = 9; //总文章数
-    int32 broadcast_count = 10; //总直播数
+    int64 video_count = 8; //总视频数: 微课数+课堂实录数
+    int64 article_count = 9; //总文章数
+    int64 broadcast_count = 10; //总直播数
         
     double coordinate_x = 11; //坐标，经度
     double coordinate_y = 12; //坐标，纬度  
@@ -372,9 +377,9 @@ message SchoolInfo{
     SchoolInfoSimple simple_info = 1;
 
     string address = 2; //地址
-    int32 classroom_count = 3; //教室数量
-    int32 lubo_install_count = 4; //录播设备安装套数
-    int32 zhibo_install_count =5; //直播设备安装套数
+    int64 classroom_count = 3; //教室数量
+    int64 lubo_install_count = 4; //录播设备安装套数
+    int64 zhibo_install_count =5; //直播设备安装套数
     
     string zip_code = 6; //邮编
     string tel = 7; //电话
@@ -437,11 +442,11 @@ message CityStatisticsInfo
     int32 cityid = 1;
     CITY_LEVEL level = 2;
     string name = 3;
-    int32 school_count = 4;
-    int32 teacher_count = 5;
-    int32 student_count = 6;
-    int32 video_count = 7;
-    int32 article_count = 8;
+    int64 school_count = 4;
+    int64 teacher_count = 5;
+    int64 student_count = 6;
+    int64 video_count = 7;
+    int64 article_count = 8;
     
     double coordinate_x = 9; //坐标，经度
     double coordinate_y = 10; //坐标，纬度  
@@ -476,8 +481,8 @@ message GetSchoolWeikeCountRequest{
 message GetSchoolWeikeCountResponse{
     RPC_CALL_RESULT result = 1;
     int32 cityid = 2;
-    int32 count = 3; //微课总数
-    int32 view_count = 4; //播放总数
+    int64 count = 3; //微课总数
+    int64 view_count = 4; //播放总数
 }
 
 message GetNewSchoolWeikeStatisticsRequest{
@@ -490,7 +495,7 @@ message GetNewSchoolWeikeStatisticsRequest{
 message NewSchoolWeikeItem
 {
     int32 date = 1;  //格式：同 ActiveUserItem
-    int32 new_count = 2;
+    int64 new_count = 2;
 }
 
 message GetNewSchoolWeikeStatisticsResponse{
@@ -509,16 +514,36 @@ message GetSchoolWeikeViewStatisticsRequest{
 message SchoolWeikeViewItem
 {
     int32 date = 1;  //格式：同 ActiveUserItem
-    int32 pc_view_count = 2;
-    int32 app_view_count = 3;
-	int32 web_view_count = 4;
+    int64 pc_view_count = 2;
+    int64 app_view_count = 3;
+	int64 web_view_count = 4;
 }
 
 message GetSchoolWeikeViewStatisticsResponse{
     RPC_CALL_RESULT result = 1;
     int64 total_new_count = 2; //新增总数
+    int64 total_view_count = 3; //播放总数
     repeated SchoolWeikeViewItem list = 5;//按时间播放数列表
 }
+
+
+message GetSchoolWeikeDayViewStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+}
+
+message VideoDayViewItem
+{
+    int32 hour = 1;  //格式：0-23  一段时期内0点-23点的平均活跃用户数
+    int64 view_count = 2;
+}
+
+message GetSchoolWeikeDayViewStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated VideoDayViewItem list = 2; //共24条， 0-23点的日平均活跃用户数
+}
+
 
 /*************************
 课堂实录统计数据
@@ -531,8 +556,8 @@ message GetSchoolCourseVideoCountRequest{
 message GetSchoolCourseVideoCountResponse{
     RPC_CALL_RESULT result = 1;
     int32 cityid = 2;
-    int32 count = 3; //课堂实录总数
-    int32 view_count = 4; //播放总数
+    int64 count = 3; //课堂实录总数
+    int64 view_count = 4; //播放总数
 }
 
 message GetNewSchoolCourseVideoStatisticsRequest{
@@ -545,7 +570,7 @@ message GetNewSchoolCourseVideoStatisticsRequest{
 message NewSchoolCourseVideoItem
 {
     int32 date = 1;  //格式：同 ActiveUserItem
-    int32 new_count = 2;
+    int64 new_count = 2;
 }
 
 message GetNewSchoolCourseVideoStatisticsResponse{
@@ -564,13 +589,28 @@ message GetSchoolCourseVideoViewStatisticsRequest{
 message SchoolCourseVideoViewItem
 {
     int32 date = 1;  //格式：同 ActiveUserItem
-    int32 pc_view_count = 2;
-    int32 app_view_count = 3;
-	int32 web_view_count = 4;
+    int64 pc_view_count = 2;
+    int64 app_view_count = 3;
+	int64 web_view_count = 4;
 }
 
 message GetSchoolCourseVideoViewStatisticsResponse{
     RPC_CALL_RESULT result = 1;
     int64 total_new_count = 2; //新增总数
+    int64 total_view_count = 3; //播放总数
     repeated SchoolCourseVideoViewItem list = 5;//按时间播放数列表
 }
+
+//课堂实录日均播放数据（微课->微课数据->微课播放 第一期）
+message GetSchoolCourseVideoDayViewStatisticsRequest{
+    int32 cityid = 1; // 0 = 全国
+    string begin_date = 2; //统计开始日期，格式: 2018-01-01
+    string end_date = 3;   //统计截至日期，格式: 2018-05-11
+}
+
+message GetSchoolCourseVideoDayViewStatisticsResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated VideoDayViewItem list = 2; //共24条， 0-23点的日平均活跃用户数
+}
+
+

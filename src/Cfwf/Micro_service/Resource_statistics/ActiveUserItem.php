@@ -20,7 +20,7 @@ class ActiveUserItem extends \Google\Protobuf\Internal\Message
      */
     private $date = 0;
     /**
-     * Generated from protobuf field <code>int32 user_count = 2;</code>
+     * Generated from protobuf field <code>int64 user_count = 2;</code>
      */
     private $user_count = 0;
 
@@ -56,8 +56,8 @@ class ActiveUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 user_count = 2;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 user_count = 2;</code>
+     * @return int|string
      */
     public function getUserCount()
     {
@@ -65,13 +65,13 @@ class ActiveUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 user_count = 2;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 user_count = 2;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setUserCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->user_count = $var;
 
         return $this;

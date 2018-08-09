@@ -20,11 +20,11 @@ class NewUserItem extends \Google\Protobuf\Internal\Message
      */
     private $date = 0;
     /**
-     * Generated from protobuf field <code>int32 teacher_count = 2;</code>
+     * Generated from protobuf field <code>int64 teacher_count = 2;</code>
      */
     private $teacher_count = 0;
     /**
-     * Generated from protobuf field <code>int32 student_count = 3;</code>
+     * Generated from protobuf field <code>int64 student_count = 3;</code>
      */
     private $student_count = 0;
 
@@ -60,8 +60,8 @@ class NewUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 teacher_count = 2;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 teacher_count = 2;</code>
+     * @return int|string
      */
     public function getTeacherCount()
     {
@@ -69,21 +69,21 @@ class NewUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 teacher_count = 2;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 teacher_count = 2;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setTeacherCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->teacher_count = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>int32 student_count = 3;</code>
-     * @return int
+     * Generated from protobuf field <code>int64 student_count = 3;</code>
+     * @return int|string
      */
     public function getStudentCount()
     {
@@ -91,13 +91,13 @@ class NewUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 student_count = 3;</code>
-     * @param int $var
+     * Generated from protobuf field <code>int64 student_count = 3;</code>
+     * @param int|string $var
      * @return $this
      */
     public function setStudentCount($var)
     {
-        GPBUtil::checkInt32($var);
+        GPBUtil::checkInt64($var);
         $this->student_count = $var;
 
         return $this;

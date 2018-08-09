@@ -255,6 +255,20 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 微课日均播放数据
+     * @param \Cfwf\Micro_service\Resource_statistics\GetSchoolWeikeDayViewStatisticsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetSchoolWeikeDayViewStatistics(\Cfwf\Micro_service\Resource_statistics\GetSchoolWeikeDayViewStatisticsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetSchoolWeikeDayViewStatistics',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetSchoolWeikeDayViewStatisticsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * ************************
      * 课堂实录统计数据
      * ***********************
@@ -302,6 +316,20 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetSchoolCourseVideoViewStatistics',
         $argument,
         ['\Cfwf\Micro_service\Resource_statistics\GetSchoolCourseVideoViewStatisticsResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 课堂实录日均播放数据
+     * @param \Cfwf\Micro_service\Resource_statistics\GetSchoolCourseVideoDayViewStatisticsRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetSchoolCourseVideoDayViewStatistics(\Cfwf\Micro_service\Resource_statistics\GetSchoolCourseVideoDayViewStatisticsRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetSchoolCourseVideoDayViewStatistics',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetSchoolCourseVideoDayViewStatisticsResponse', 'decode'],
         $metadata, $options);
     }
 

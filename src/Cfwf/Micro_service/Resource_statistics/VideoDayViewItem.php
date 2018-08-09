@@ -9,9 +9,9 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.DayActiveUserItem</code>
+ * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.VideoDayViewItem</code>
  */
-class DayActiveUserItem extends \Google\Protobuf\Internal\Message
+class VideoDayViewItem extends \Google\Protobuf\Internal\Message
 {
     /**
      *格式：0-23  一段时期内0点-23点的平均活跃用户数
@@ -20,9 +20,9 @@ class DayActiveUserItem extends \Google\Protobuf\Internal\Message
      */
     private $hour = 0;
     /**
-     * Generated from protobuf field <code>int64 user_count = 2;</code>
+     * Generated from protobuf field <code>int64 view_count = 2;</code>
      */
-    private $user_count = 0;
+    private $view_count = 0;
 
     public function __construct() {
         \GPBMetadata\ResourceStatistics::initOnce();
@@ -56,23 +56,23 @@ class DayActiveUserItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int64 user_count = 2;</code>
+     * Generated from protobuf field <code>int64 view_count = 2;</code>
      * @return int|string
      */
-    public function getUserCount()
+    public function getViewCount()
     {
-        return $this->user_count;
+        return $this->view_count;
     }
 
     /**
-     * Generated from protobuf field <code>int64 user_count = 2;</code>
+     * Generated from protobuf field <code>int64 view_count = 2;</code>
      * @param int|string $var
      * @return $this
      */
-    public function setUserCount($var)
+    public function setViewCount($var)
     {
         GPBUtil::checkInt64($var);
-        $this->user_count = $var;
+        $this->view_count = $var;
 
         return $this;
     }
