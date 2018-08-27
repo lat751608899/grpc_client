@@ -216,15 +216,24 @@ class ClientFactory
 				}else{  //message类型的
 					$fieldDataSon = $this->dealField($messageType->getField());
 					$requestSonClass = $messageType->getClass();
-					if($field->getLabel() == GPBLabel::REPEATED){  // repeated 数组格式
-						foreach ($value[$key] as $val){
-							$requestSon  = new $requestSonClass;
-							$data[] = $this->dealRequest($requestSon, $fieldDataSon,$val);
-						}
-					}else{  // 直接是message形式的
-						$requestSon  = new $requestSonClass;
-						$data = $this->dealRequest($requestSon, $fieldDataSon,$value[$key]);
-					}
+                    if ($value[$key] instanceof Message) { // request class
+                        $data = $value[$key];
+                    } else { // 数组格式
+                        // repeated 数组格式
+                        if($field->getLabel() == GPBLabel::REPEATED){
+                            foreach ($value[$key] as $val){
+                                if ($val instanceof Message) {
+                                    $data[] = $val;
+                                } else {
+                                    $requestSon  = new $requestSonClass;
+                                    $data[] = $this->dealRequest($requestSon, $fieldDataSon,$val);
+                                }
+                            }
+                        }else{  // 直接是message形式的
+                            $requestSon  = new $requestSonClass;
+                            $data = $this->dealRequest($requestSon, $fieldDataSon,$value[$key]);
+                        }
+                    }
 					$request->$setter($data);
 				}
 			}
