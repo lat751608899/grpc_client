@@ -69,6 +69,12 @@ class SearchSchoolClassRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool include_archived = 9;</code>
      */
     private $include_archived = false;
+    /**
+     *也搜索已删除的班级
+     *
+     * Generated from protobuf field <code>bool include_deleted = 10;</code>
+     */
+    private $include_deleted = false;
 
     public function __construct() {
         \GPBMetadata\SchoolClass::initOnce();
@@ -305,6 +311,32 @@ class SearchSchoolClassRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->include_archived = $var;
+
+        return $this;
+    }
+
+    /**
+     *也搜索已删除的班级
+     *
+     * Generated from protobuf field <code>bool include_deleted = 10;</code>
+     * @return bool
+     */
+    public function getIncludeDeleted()
+    {
+        return $this->include_deleted;
+    }
+
+    /**
+     *也搜索已删除的班级
+     *
+     * Generated from protobuf field <code>bool include_deleted = 10;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIncludeDeleted($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->include_deleted = $var;
 
         return $this;
     }

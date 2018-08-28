@@ -69,6 +69,12 @@ class SchoolClassInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool be_archived = 9;</code>
      */
     private $be_archived = false;
+    /**
+     *是否已删除
+     *
+     * Generated from protobuf field <code>bool be_deleted = 10;</code>
+     */
+    private $be_deleted = false;
 
     public function __construct() {
         \GPBMetadata\SchoolClass::initOnce();
@@ -305,6 +311,32 @@ class SchoolClassInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->be_archived = $var;
+
+        return $this;
+    }
+
+    /**
+     *是否已删除
+     *
+     * Generated from protobuf field <code>bool be_deleted = 10;</code>
+     * @return bool
+     */
+    public function getBeDeleted()
+    {
+        return $this->be_deleted;
+    }
+
+    /**
+     *是否已删除
+     *
+     * Generated from protobuf field <code>bool be_deleted = 10;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setBeDeleted($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->be_deleted = $var;
 
         return $this;
     }

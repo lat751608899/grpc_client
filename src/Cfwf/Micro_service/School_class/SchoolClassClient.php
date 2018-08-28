@@ -31,7 +31,7 @@ class SchoolClassClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 获取某班级信息
+     * 获取某班级信息：可指定是否创建不存在的班级
      * @param \Cfwf\Micro_service\School_class\GetSchoolClassInfoRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -45,7 +45,21 @@ class SchoolClassClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 获取某班级信息
+     * 批量获取某班级信息：可指定是否创建不存在的班级
+     * @param \Cfwf\Micro_service\School_class\GetSchoolClassesInfoRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetSchoolClassesInfo(\Cfwf\Micro_service\School_class\GetSchoolClassesInfoRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.school_class.SchoolClass/GetSchoolClassesInfo',
+        $argument,
+        ['\Cfwf\Micro_service\School_class\GetSchoolClassesInfoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 获取某班级信息： 可以获取已删除的班级信息
      * @param \Cfwf\Micro_service\School_class\GetSchoolClassInfoByIdRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
@@ -55,6 +69,20 @@ class SchoolClassClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/cfwf.micro_service.school_class.SchoolClass/GetSchoolClassInfoById',
         $argument,
         ['\Cfwf\Micro_service\School_class\GetSchoolClassInfoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 获取多个班级信息： 可以获取已删除的班级信息
+     * @param \Cfwf\Micro_service\School_class\GetSchoolClassesInfoByIdRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetSchoolClassesInfoById(\Cfwf\Micro_service\School_class\GetSchoolClassesInfoByIdRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.school_class.SchoolClass/GetSchoolClassesInfoById',
+        $argument,
+        ['\Cfwf\Micro_service\School_class\GetSchoolClassesInfoByIdResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -123,6 +151,20 @@ class SchoolClassClient extends \Grpc\BaseStub {
     public function SetSchoolClassTeacher(\Cfwf\Micro_service\School_class\SetSchoolClassTeacherRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.school_class.SchoolClass/SetSchoolClassTeacher',
+        $argument,
+        ['\Cfwf\Micro_service\School_class\CommonResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 清除某人的班主任身份（在此人离开学校时调用）
+     * @param \Cfwf\Micro_service\School_class\ClearSchoolClassTeacherRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function ClearSchoolClassTeacher(\Cfwf\Micro_service\School_class\ClearSchoolClassTeacherRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.school_class.SchoolClass/ClearSchoolClassTeacher',
         $argument,
         ['\Cfwf\Micro_service\School_class\CommonResponse', 'decode'],
         $metadata, $options);

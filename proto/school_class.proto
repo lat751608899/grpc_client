@@ -5,15 +5,21 @@ syntax = "proto3";
 package cfwf.micro_service.school_class;
 option java_package = "com.cfwf.micro_service.school_class";
 
-service SchoolClass {
+service SchoolClass { 
   //获取学校班级(分页返回)
   rpc SearchSchoolClass (SearchSchoolClassRequest) returns (SearchSchoolClassResponse) {}  
 
-  //获取某班级信息
+  //获取某班级信息：可指定是否创建不存在的班级
   rpc GetSchoolClassInfo (GetSchoolClassInfoRequest) returns (GetSchoolClassInfoResponse) {} 
+  
+  //批量获取某班级信息：可指定是否创建不存在的班级
+  rpc GetSchoolClassesInfo (GetSchoolClassesInfoRequest) returns (GetSchoolClassesInfoResponse) {} 
 
-  //获取某班级信息
+  //获取某班级信息： 可以获取已删除的班级信息
   rpc GetSchoolClassInfoById (GetSchoolClassInfoByIdRequest) returns (GetSchoolClassInfoResponse) {} 
+
+  // 获取多个班级信息： 可以获取已删除的班级信息
+  rpc GetSchoolClassesInfoById (GetSchoolClassesInfoByIdRequest) returns (GetSchoolClassesInfoByIdResponse) {}
   
   //创建班级
   rpc CreateSchoolClass(CreateSchoolClassRequest) returns (CreateSchoolClassResponse) {}
@@ -29,6 +35,9 @@ service SchoolClass {
  
   //设置班主任
   rpc SetSchoolClassTeacher (SetSchoolClassTeacherRequest) returns (CommonResponse) {}
+
+  //清除某人的班主任身份（在此人离开学校时调用）
+  rpc ClearSchoolClassTeacher (ClearSchoolClassTeacherRequest) returns (CommonResponse) {}
   
   //获取某用户为班主任的班级
   rpc SearchClassByHeadTeacher (SearchClassByHeadTeacherRequest) returns (SearchClassByHeadTeacherResponse) {}
@@ -66,6 +75,7 @@ message SchoolClassInfo{
     fixed64 assist_teacherid = 8;  //副班主任id
     
     bool be_archived = 9;        //是否已归档： 创建班级的
+    bool be_deleted = 10;        //是否已删除
 }
 
 //查询班级信息列表(SearchSchoolClass) 
@@ -81,6 +91,7 @@ message SearchSchoolClassRequest{
     string class_no = 8;       //班级序号: 可多个: 1,2,3 ...   
     
     bool include_archived = 9; //也搜索已归档的班级
+    bool include_deleted = 10; //也搜索已删除的班级
 }
 
 message SearchSchoolClassResponse{
@@ -114,6 +125,26 @@ message GetSchoolClassInfoRequest{
 message GetSchoolClassInfoResponse{
     RPC_CALL_RESULT result = 1;
     SchoolClassInfo info = 2;
+}
+
+message SimpleClassInfo{  
+    fixed64 schoolid = 1;       //学校id
+    
+    int32 period = 2;           //阶段： 1=小学  2=初中 3=高中
+    int32 grade_year = 3;       //学届  如果period 和grade_year不为0，则忽略 grade
+    int32 grade = 4;            //当前年级：使用此字段，会存在需要判断升年级时间的问题    
+    int32 class_no = 5;         //班级序号
+}
+
+message GetSchoolClassesInfoRequest{
+    repeated SimpleClassInfo class_infos = 1;
+    bool create_if_not_exist = 2; //如果不存在该班级是否自动创建
+    fixed64 operatorid = 3;
+}
+
+message GetSchoolClassesInfoResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated SchoolClassInfo list = 2;
 }
 
 
@@ -161,6 +192,12 @@ message SetSchoolClassTeacherRequest{
     fixed64 assist_teacherid = 5;     //副班主任
 }
 
+message ClearSchoolClassTeacherRequest{
+    fixed64 operatorid = 1;
+    fixed64 schoolid = 2;     //学校id
+    fixed64 teacherid = 3;     //清除此老师的班主任身份
+}
+
   
 //获取某用户为班主任的班级
 message SearchClassByHeadTeacherRequest{
@@ -173,4 +210,11 @@ message SearchClassByHeadTeacherResponse{
     repeated SchoolClassInfo list = 2; //结果列表，不分页，返回全部
 }
 
+message GetSchoolClassesInfoByIdRequest{
+	repeated fixed64 classid = 1;
+}
 
+message GetSchoolClassesInfoByIdResponse{
+	RPC_CALL_RESULT result = 1;
+	repeated SchoolClassInfo list = 2; //结果列表，不分页，返回全部
+}
