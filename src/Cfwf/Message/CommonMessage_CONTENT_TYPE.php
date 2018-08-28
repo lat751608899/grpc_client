@@ -49,5 +49,11 @@ class CommonMessage_CONTENT_TYPE
      * Generated from protobuf enum <code>kChatContentUndo = 6;</code>
      */
     const kChatContentUndo = 6;
+    /**
+     *详情消息，有详情连接的消息。 催读消息使用此类型。格式：  
+     *
+     * Generated from protobuf enum <code>kChatContentDetail = 7;</code>
+     */
+    const kChatContentDetail = 7;
 }
 

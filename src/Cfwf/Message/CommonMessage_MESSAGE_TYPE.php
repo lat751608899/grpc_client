@@ -161,17 +161,11 @@ class CommonMessage_MESSAGE_TYPE
      */
     const kMsgTypeSchoolResearch = 67;
     /**
-     *评课通知
+     *评课通知		
      *
      * Generated from protobuf enum <code>kMsgTypeSchoolPingKe = 68;</code>
      */
     const kMsgTypeSchoolPingKe = 68;
-    /**
-     *学生离开了班级，本班老师会收到这个通知 from_userid:离开的学生id send_to:classid content:classid
-     *
-     * Generated from protobuf enum <code>kMsgTypeStudentLeaveClass = 69;</code>
-     */
-    const kMsgTypeStudentLeaveClass = 69;
     /**
      *申请和应答
      *
@@ -191,64 +185,34 @@ class CommonMessage_MESSAGE_TYPE
      */
     const kMsgTypeTeacherJoinSchoolApply = 73;
     /**
-     *学校管理员对老师入校申请做出了处理  由 school_teacher 微服务发出  
+     *学校管理员对老师入校申请做出了处理  由 school_teacher 微服务发出 msgid:对应的申请消息的msgid from_userid:操作的老师的id send_to:申请的老师id content：{"result":"accept"/"reject", "schoolid":schoolid}	
      *
      * Generated from protobuf enum <code>kMsgTypeTeacherJoinSchoolReply = 74;</code>
      */
     const kMsgTypeTeacherJoinSchoolReply = 74;
+    /**
+     *学生离开了班级，本班老师会收到这个通知 from_userid:离开的学生id send_to:classid content:classid
+     *
+     * Generated from protobuf enum <code>kMsgTypeStudentLeaveClass = 75;</code>
+     */
+    const kMsgTypeStudentLeaveClass = 75;
+    /**
+     *老师将学生移除班级，本班老师和相应学生会收到这个通知 from_userid:执行操作的老师id   send_to:classid content:被移除的studentid       
+     *
+     * Generated from protobuf enum <code>kMsgTypeRemoveStudentFromClass = 76;</code>
+     */
+    const kMsgTypeRemoveStudentFromClass = 76;
+    /**
+     *班主任老师将移除班级，本班其他老师和相应的老师 会收到这个通知 from_userid:执行操作的老师id   send_to:classid content:被移除的teacherid       
+     *
+     * Generated from protobuf enum <code>kMsgTypeRemoveTeacherFromClass = 77;</code>
+     */
+    const kMsgTypeRemoveTeacherFromClass = 77;
     /**
      *其他学校业务通知
      *
      * Generated from protobuf enum <code>kMsgTypeSchoolClassActivity = 80;</code>
      */
     const kMsgTypeSchoolClassActivity = 80;
-    /**
-     *200-255 “钉”一下消息，催读消息 （由“人”(而非系统)发出的消息/通知，有“钉”消息）
-     *
-     * Generated from protobuf enum <code>kMsgTypeFriendChatDing = 200;</code>
-     */
-    const kMsgTypeFriendChatDing = 200;
-    /**
-     * 由 im_group 微服务发出    sendto = groupid
-     *
-     * Generated from protobuf enum <code>kMsgTypeGroupChatDing = 201;</code>
-     */
-    const kMsgTypeGroupChatDing = 201;
-    /**
-     * 由 im_group 微服务发出    sendto = groupid
-     *
-     * Generated from protobuf enum <code>kMsgTypeGroupInformDing = 202;</code>
-     */
-    const kMsgTypeGroupInformDing = 202;
-    /**
-     * 由 im_group 微服务发出    sendto = groupid
-     *
-     * Generated from protobuf enum <code>kMsgTypeSchoolInformDing = 203;</code>
-     */
-    const kMsgTypeSchoolInformDing = 203;
-    /**
-     * 由 im_group 微服务发出    sendto = groupid
-     *
-     * Generated from protobuf enum <code>kMsgTypeSchoolTeacherInformDing = 204;</code>
-     */
-    const kMsgTypeSchoolTeacherInformDing = 204;
-    /**
-     * 由 im_group 微服务发出    sendto = groupid
-     *
-     * Generated from protobuf enum <code>kMsgTypeGradeTeacherInformDing = 205;</code>
-     */
-    const kMsgTypeGradeTeacherInformDing = 205;
-    /**
-     * 由 im_group 微服务发出    sendto = groupid
-     *
-     * Generated from protobuf enum <code>kMsgTypeTeacherGroupInformDing = 206;</code>
-     */
-    const kMsgTypeTeacherGroupInformDing = 206;
-    /**
-     * 由 im_group 微服务发出    sendto = groupid
-     *
-     * Generated from protobuf enum <code>kMsgTypeSchoolClassInformDing = 207;</code>
-     */
-    const kMsgTypeSchoolClassInformDing = 207;
 }
 

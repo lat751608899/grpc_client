@@ -25,6 +25,10 @@ class PostCommonMessageToSchoolClassRequest extends \Google\Protobuf\Internal\Me
      * Generated from protobuf field <code>repeated fixed64 send_to_classids = 3;</code>
      */
     private $send_to_classids;
+    /**
+     * Generated from protobuf field <code>bool only_sendto_student = 4;</code>
+     */
+    private $only_sendto_student = false;
 
     public function __construct() {
         \GPBMetadata\PostMessage::initOnce();
@@ -93,6 +97,28 @@ class PostCommonMessageToSchoolClassRequest extends \Google\Protobuf\Internal\Me
     {
         $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::FIXED64);
         $this->send_to_classids = $arr;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool only_sendto_student = 4;</code>
+     * @return bool
+     */
+    public function getOnlySendtoStudent()
+    {
+        return $this->only_sendto_student;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool only_sendto_student = 4;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setOnlySendtoStudent($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->only_sendto_student = $var;
 
         return $this;
     }
