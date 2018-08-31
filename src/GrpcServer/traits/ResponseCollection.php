@@ -44,11 +44,13 @@ trait ResponseCollection
 			$name = $field->getName();
 			$data = $this->container->$getter();
 			if($data instanceof RepeatedField){
-				$data = new self($data);
-				$new = [];
-				foreach($data as $val){
-					$new[] = $val->toArray();
-				}
+                $new = [];
+			    if ($data->count() > 0){
+                    $data = new self($data);
+                    foreach($data as $val){
+                        $new[] = $val->toArray();
+                    }
+                }
 				$res[$name] = $new;
 			}else{
 				$res[$name] = $data;
