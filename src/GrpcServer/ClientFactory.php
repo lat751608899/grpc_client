@@ -220,6 +220,7 @@ class ClientFactory
                         $data = $value[$key];
                     } else { // 数组格式
                         // repeated 数组格式
+                        $data = [];  // 要清空data
                         if($field->getLabel() == GPBLabel::REPEATED){
                             foreach ($value[$key] as $val){
                                 if ($val instanceof Message) {
