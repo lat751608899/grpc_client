@@ -22,9 +22,15 @@ class GetUpgradeFileListRequest extends \Google\Protobuf\Internal\Message
     /**
      *客户端版本号
      *
-     * Generated from protobuf field <code>string local_version = 2;</code>
+     * Generated from protobuf field <code>string client_version = 2;</code>
      */
-    private $local_version = '';
+    private $client_version = '';
+    /**
+     *客户端ip
+     *
+     * Generated from protobuf field <code>string client_ip = 3;</code>
+     */
+    private $client_ip = '';
 
     public function __construct() {
         \GPBMetadata\Monitor::initOnce();
@@ -60,25 +66,51 @@ class GetUpgradeFileListRequest extends \Google\Protobuf\Internal\Message
     /**
      *客户端版本号
      *
-     * Generated from protobuf field <code>string local_version = 2;</code>
+     * Generated from protobuf field <code>string client_version = 2;</code>
      * @return string
      */
-    public function getLocalVersion()
+    public function getClientVersion()
     {
-        return $this->local_version;
+        return $this->client_version;
     }
 
     /**
      *客户端版本号
      *
-     * Generated from protobuf field <code>string local_version = 2;</code>
+     * Generated from protobuf field <code>string client_version = 2;</code>
      * @param string $var
      * @return $this
      */
-    public function setLocalVersion($var)
+    public function setClientVersion($var)
     {
         GPBUtil::checkString($var, True);
-        $this->local_version = $var;
+        $this->client_version = $var;
+
+        return $this;
+    }
+
+    /**
+     *客户端ip
+     *
+     * Generated from protobuf field <code>string client_ip = 3;</code>
+     * @return string
+     */
+    public function getClientIp()
+    {
+        return $this->client_ip;
+    }
+
+    /**
+     *客户端ip
+     *
+     * Generated from protobuf field <code>string client_ip = 3;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setClientIp($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->client_ip = $var;
 
         return $this;
     }

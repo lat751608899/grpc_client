@@ -171,6 +171,7 @@ message ClientVersionInfo {
     string userid = 9;         //发布人
     VersionStatus status = 10;    //状态。 发布或修改时不用填写
     int32  download_count = 11;   //已下载次数。 发布或修改时不用填写
+    string create_time = 12; //版本创建时间，发布时间。发布或修改时不用填写
 }
 
 message PublishNewClientVersionRequest{
@@ -234,16 +235,18 @@ message GetCurrentClientVersionRequest{
 }
 
 message GetCurrentClientVersionResponse{
-    int32 os = 1;             //1=pc 2=android 3=ios
-    string version = 2;       //版本号
-    string setupfile_url = 3; //安装文件下载地址，全路径 
-    int32 setupfile_size = 4; //安装文件大小，单位： Byte
-    string description = 5;    //升级说明
+    RPC_CALL_RESULT result = 1;
+    int32 os = 2;             //1=pc 2=android 3=ios
+    string version = 3;       //版本号
+    string setupfile_url = 4; //安装文件下载地址，全路径 
+    int32 setupfile_size = 5; //安装文件大小，单位： Byte
+    string description = 6;    //升级说明
 }
 
 message GetUpgradeFileListRequest{
    int32 os = 1;  //目前固定为1 (pc)
-   string local_version = 2; //客户端版本号
+   string client_version = 2; //客户端版本号
+   string client_ip = 3; //客户端ip
 }
 
 message VersionUpgradeFiles{

@@ -14,33 +14,37 @@ use Google\Protobuf\Internal\GPBUtil;
 class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
 {
     /**
+     * Generated from protobuf field <code>.cfwf.micro_service.monitor.RPC_CALL_RESULT result = 1;</code>
+     */
+    private $result = 0;
+    /**
      *1=pc 2=android 3=ios
      *
-     * Generated from protobuf field <code>int32 os = 1;</code>
+     * Generated from protobuf field <code>int32 os = 2;</code>
      */
     private $os = 0;
     /**
      *版本号
      *
-     * Generated from protobuf field <code>string version = 2;</code>
+     * Generated from protobuf field <code>string version = 3;</code>
      */
     private $version = '';
     /**
      *安装文件下载地址，全路径 
      *
-     * Generated from protobuf field <code>string setupfile_url = 3;</code>
+     * Generated from protobuf field <code>string setupfile_url = 4;</code>
      */
     private $setupfile_url = '';
     /**
      *安装文件大小，单位： Byte
      *
-     * Generated from protobuf field <code>int32 setupfile_size = 4;</code>
+     * Generated from protobuf field <code>int32 setupfile_size = 5;</code>
      */
     private $setupfile_size = 0;
     /**
      *升级说明
      *
-     * Generated from protobuf field <code>string description = 5;</code>
+     * Generated from protobuf field <code>string description = 6;</code>
      */
     private $description = '';
 
@@ -50,9 +54,31 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Generated from protobuf field <code>.cfwf.micro_service.monitor.RPC_CALL_RESULT result = 1;</code>
+     * @return int
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.monitor.RPC_CALL_RESULT result = 1;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setResult($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Monitor\RPC_CALL_RESULT::class);
+        $this->result = $var;
+
+        return $this;
+    }
+
+    /**
      *1=pc 2=android 3=ios
      *
-     * Generated from protobuf field <code>int32 os = 1;</code>
+     * Generated from protobuf field <code>int32 os = 2;</code>
      * @return int
      */
     public function getOs()
@@ -63,7 +89,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *1=pc 2=android 3=ios
      *
-     * Generated from protobuf field <code>int32 os = 1;</code>
+     * Generated from protobuf field <code>int32 os = 2;</code>
      * @param int $var
      * @return $this
      */
@@ -78,7 +104,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *版本号
      *
-     * Generated from protobuf field <code>string version = 2;</code>
+     * Generated from protobuf field <code>string version = 3;</code>
      * @return string
      */
     public function getVersion()
@@ -89,7 +115,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *版本号
      *
-     * Generated from protobuf field <code>string version = 2;</code>
+     * Generated from protobuf field <code>string version = 3;</code>
      * @param string $var
      * @return $this
      */
@@ -104,7 +130,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *安装文件下载地址，全路径 
      *
-     * Generated from protobuf field <code>string setupfile_url = 3;</code>
+     * Generated from protobuf field <code>string setupfile_url = 4;</code>
      * @return string
      */
     public function getSetupfileUrl()
@@ -115,7 +141,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *安装文件下载地址，全路径 
      *
-     * Generated from protobuf field <code>string setupfile_url = 3;</code>
+     * Generated from protobuf field <code>string setupfile_url = 4;</code>
      * @param string $var
      * @return $this
      */
@@ -130,7 +156,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *安装文件大小，单位： Byte
      *
-     * Generated from protobuf field <code>int32 setupfile_size = 4;</code>
+     * Generated from protobuf field <code>int32 setupfile_size = 5;</code>
      * @return int
      */
     public function getSetupfileSize()
@@ -141,7 +167,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *安装文件大小，单位： Byte
      *
-     * Generated from protobuf field <code>int32 setupfile_size = 4;</code>
+     * Generated from protobuf field <code>int32 setupfile_size = 5;</code>
      * @param int $var
      * @return $this
      */
@@ -156,7 +182,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *升级说明
      *
-     * Generated from protobuf field <code>string description = 5;</code>
+     * Generated from protobuf field <code>string description = 6;</code>
      * @return string
      */
     public function getDescription()
@@ -167,7 +193,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     /**
      *升级说明
      *
-     * Generated from protobuf field <code>string description = 5;</code>
+     * Generated from protobuf field <code>string description = 6;</code>
      * @param string $var
      * @return $this
      */

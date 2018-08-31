@@ -79,6 +79,12 @@ class ClientVersionInfo extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 download_count = 11;</code>
      */
     private $download_count = 0;
+    /**
+     *版本创建时间，发布时间。发布或修改时不用填写
+     *
+     * Generated from protobuf field <code>string create_time = 12;</code>
+     */
+    private $create_time = '';
 
     public function __construct() {
         \GPBMetadata\Monitor::initOnce();
@@ -367,6 +373,32 @@ class ClientVersionInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->download_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *版本创建时间，发布时间。发布或修改时不用填写
+     *
+     * Generated from protobuf field <code>string create_time = 12;</code>
+     * @return string
+     */
+    public function getCreateTime()
+    {
+        return $this->create_time;
+    }
+
+    /**
+     *版本创建时间，发布时间。发布或修改时不用填写
+     *
+     * Generated from protobuf field <code>string create_time = 12;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCreateTime($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->create_time = $var;
 
         return $this;
     }
