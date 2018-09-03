@@ -27,6 +27,9 @@ service Monitor {
   rpc ModifyClientVersion (ModifyClientVersionRequest) returns (ModifyClientVersionResponse) {}
   //撤销版本
   rpc CancelClientVersion (CancelClientVersionRequest) returns (CancelClientVersionResponse) {}  
+  //删除版本
+  rpc DeleteClientVersion (DeleteClientVersionRequest) returns (DeleteClientVersionResponse) {}
+  
   //获取版本列表
   rpc GetClientVersionList (GetClientVersionListRequest) returns (GetClientVersionListResponse) {}
   //增加下载次数
@@ -202,6 +205,17 @@ message CancelClientVersionRequest{
 message CancelClientVersionResponse {
     RPC_CALL_RESULT result = 1;
 }
+
+message DeleteClientVersionRequest{
+   string operatorid = 1;    //操作人
+   int32 os = 2;             //1=pc 2=android 3=ios
+   string version = 3;       //版本号
+}
+
+message DeleteClientVersionResponse {
+    RPC_CALL_RESULT result = 1;
+}
+
 
 message GetClientVersionListRequest{
    int32 page_size = 1;       //每页条数

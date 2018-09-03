@@ -131,6 +131,20 @@ class MonitorClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 删除版本
+     * @param \Cfwf\Micro_service\Monitor\DeleteClientVersionRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function DeleteClientVersion(\Cfwf\Micro_service\Monitor\DeleteClientVersionRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.monitor.Monitor/DeleteClientVersion',
+        $argument,
+        ['\Cfwf\Micro_service\Monitor\DeleteClientVersionResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * 获取版本列表
      * @param \Cfwf\Micro_service\Monitor\GetClientVersionListRequest $argument input argument
      * @param array $metadata metadata
