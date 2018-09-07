@@ -7,16 +7,11 @@ namespace Cfwf\Micro_service\Account;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *------------------------------------------------------------------------------ 运维管理
- * SetUserStatus 搜索用户
- *
- * Generated from protobuf message <code>cfwf.micro_service.account.SetUserStatusRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.account.GetBindedPhoneNumberRequest</code>
  */
-class SetUserStatusRequest extends \Google\Protobuf\Internal\Message
+class GetBindedPhoneNumberRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     *待完善
-     *
      * Generated from protobuf field <code>fixed64 userid = 1;</code>
      */
     private $userid = 0;
@@ -27,8 +22,6 @@ class SetUserStatusRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *待完善
-     *
      * Generated from protobuf field <code>fixed64 userid = 1;</code>
      * @return int|string
      */
@@ -38,8 +31,6 @@ class SetUserStatusRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *待完善
-     *
      * Generated from protobuf field <code>fixed64 userid = 1;</code>
      * @param int|string $var
      * @return $this

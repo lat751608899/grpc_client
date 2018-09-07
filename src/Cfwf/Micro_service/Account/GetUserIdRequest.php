@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Account;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -19,6 +17,10 @@ class GetUserIdRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string loginid = 1;</code>
      */
     private $loginid = '';
+    /**
+     * Generated from protobuf field <code>bool get_identity_info = 2;</code>
+     */
+    private $get_identity_info = false;
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -47,6 +49,28 @@ class GetUserIdRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->loginid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool get_identity_info = 2;</code>
+     * @return bool
+     */
+    public function getGetIdentityInfo()
+    {
+        return $this->get_identity_info;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool get_identity_info = 2;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setGetIdentityInfo($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->get_identity_info = $var;
 
         return $this;
     }

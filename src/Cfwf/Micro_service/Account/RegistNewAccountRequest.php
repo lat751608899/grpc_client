@@ -7,32 +7,32 @@ namespace Cfwf\Micro_service\Account;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * RegistNewAccountByMobilePhone 本服务不管理用户密码。密码需调用 tokencheck微服务设置。调用该函数之前，必须保证mobile_phone是已经验证过的。
+ *注册，可指定账号
  *
- * Generated from protobuf message <code>cfwf.micro_service.account.RegistNewAccountByMobilePhoneRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.account.RegistNewAccountRequest</code>
  */
-class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Message
+class RegistNewAccountRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     *全局唯一，公开，方便使用者标识用户、对好友进行查找定位，用于替换数字型的公开的userid。不用作登录帐号。可指定，若不指定则系统自动生成
+     *可填可不填
      *
      * Generated from protobuf field <code>string cb_id = 1;</code>
      */
     private $cb_id = '';
     /**
-     *必须填写
+     *可填可不填
      *
      * Generated from protobuf field <code>string mobile_phone = 2;</code>
      */
     private $mobile_phone = '';
     /**
-     *用户民、昵称
+     *用户民、昵称，必填
      *
      * Generated from protobuf field <code>string username = 3;</code>
      */
     private $username = '';
     /**
-     *密码
+     *密码，必填
      *
      * Generated from protobuf field <code>string password = 4;</code>
      */
@@ -43,6 +43,18 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
      * Generated from protobuf field <code>.cfwf.micro_service.account.USER_IDENTITY_TYPE identity = 5;</code>
      */
     private $identity = 0;
+    /**
+     *如果指定，则该userid在系统内不能存在
+     *
+     * Generated from protobuf field <code>fixed64 userid = 6;</code>
+     */
+    private $userid = 0;
+    /**
+     *可填可不填
+     *
+     * Generated from protobuf field <code>string email = 7;</code>
+     */
+    private $email = '';
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -50,7 +62,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *全局唯一，公开，方便使用者标识用户、对好友进行查找定位，用于替换数字型的公开的userid。不用作登录帐号。可指定，若不指定则系统自动生成
+     *可填可不填
      *
      * Generated from protobuf field <code>string cb_id = 1;</code>
      * @return string
@@ -61,7 +73,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *全局唯一，公开，方便使用者标识用户、对好友进行查找定位，用于替换数字型的公开的userid。不用作登录帐号。可指定，若不指定则系统自动生成
+     *可填可不填
      *
      * Generated from protobuf field <code>string cb_id = 1;</code>
      * @param string $var
@@ -76,7 +88,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *必须填写
+     *可填可不填
      *
      * Generated from protobuf field <code>string mobile_phone = 2;</code>
      * @return string
@@ -87,7 +99,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *必须填写
+     *可填可不填
      *
      * Generated from protobuf field <code>string mobile_phone = 2;</code>
      * @param string $var
@@ -102,7 +114,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *用户民、昵称
+     *用户民、昵称，必填
      *
      * Generated from protobuf field <code>string username = 3;</code>
      * @return string
@@ -113,7 +125,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *用户民、昵称
+     *用户民、昵称，必填
      *
      * Generated from protobuf field <code>string username = 3;</code>
      * @param string $var
@@ -128,7 +140,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *密码
+     *密码，必填
      *
      * Generated from protobuf field <code>string password = 4;</code>
      * @return string
@@ -139,7 +151,7 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     }
 
     /**
-     *密码
+     *密码，必填
      *
      * Generated from protobuf field <code>string password = 4;</code>
      * @param string $var
@@ -175,6 +187,58 @@ class RegistNewAccountByMobilePhoneRequest extends \Google\Protobuf\Internal\Mes
     {
         GPBUtil::checkEnum($var, \Cfwf\Micro_service\Account\USER_IDENTITY_TYPE::class);
         $this->identity = $var;
+
+        return $this;
+    }
+
+    /**
+     *如果指定，则该userid在系统内不能存在
+     *
+     * Generated from protobuf field <code>fixed64 userid = 6;</code>
+     * @return int|string
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+
+    /**
+     *如果指定，则该userid在系统内不能存在
+     *
+     * Generated from protobuf field <code>fixed64 userid = 6;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setUserid($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->userid = $var;
+
+        return $this;
+    }
+
+    /**
+     *可填可不填
+     *
+     * Generated from protobuf field <code>string email = 7;</code>
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     *可填可不填
+     *
+     * Generated from protobuf field <code>string email = 7;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setEmail($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->email = $var;
 
         return $this;
     }

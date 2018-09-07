@@ -4,14 +4,12 @@
 
 namespace Cfwf\Micro_service\Account;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.account.SetUserInfoRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.account.SetUserInfoItemRequest</code>
  */
-class SetUserInfoRequest extends \Google\Protobuf\Internal\Message
+class SetUserInfoItemRequest extends \Google\Protobuf\Internal\Message
 {
     /**
      *客户端指令，第一个字段总是自己的id
@@ -27,6 +25,14 @@ class SetUserInfoRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string value = 3;</code>
      */
     private $value = '';
+    /**
+     * Generated from protobuf field <code>int32 operatorid = 4;</code>
+     */
+    private $operatorid = 0;
+    /**
+     * Generated from protobuf field <code>int32 from_os = 5;</code>
+     */
+    private $from_os = 0;
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -99,6 +105,50 @@ class SetUserInfoRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->value = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 operatorid = 4;</code>
+     * @return int
+     */
+    public function getOperatorid()
+    {
+        return $this->operatorid;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 operatorid = 4;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setOperatorid($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->operatorid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 from_os = 5;</code>
+     * @return int
+     */
+    public function getFromOs()
+    {
+        return $this->from_os;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 from_os = 5;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setFromOs($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->from_os = $var;
 
         return $this;
     }

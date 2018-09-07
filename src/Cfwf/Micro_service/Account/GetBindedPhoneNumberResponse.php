@@ -7,18 +7,18 @@ namespace Cfwf\Micro_service\Account;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.account.QueryUserBaseInfoByCBIdResponse</code>
+ * Generated from protobuf message <code>cfwf.micro_service.account.GetBindedPhoneNumberResponse</code>
  */
-class QueryUserBaseInfoByCBIdResponse extends \Google\Protobuf\Internal\Message
+class GetBindedPhoneNumberResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>.cfwf.micro_service.account.RPC_CALL_RESULT result = 1;</code>
      */
     private $result = 0;
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserBaseInfo baseinfo = 2;</code>
+     * Generated from protobuf field <code>string phone_no = 2;</code>
      */
-    private $baseinfo = null;
+    private $phone_no = '';
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -48,23 +48,23 @@ class QueryUserBaseInfoByCBIdResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserBaseInfo baseinfo = 2;</code>
-     * @return \Cfwf\Micro_service\Account\UserBaseInfo
+     * Generated from protobuf field <code>string phone_no = 2;</code>
+     * @return string
      */
-    public function getBaseinfo()
+    public function getPhoneNo()
     {
-        return $this->baseinfo;
+        return $this->phone_no;
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserBaseInfo baseinfo = 2;</code>
-     * @param \Cfwf\Micro_service\Account\UserBaseInfo $var
+     * Generated from protobuf field <code>string phone_no = 2;</code>
+     * @param string $var
      * @return $this
      */
-    public function setBaseinfo($var)
+    public function setPhoneNo($var)
     {
-        GPBUtil::checkMessage($var, \Cfwf\Micro_service\Account\UserBaseInfo::class);
-        $this->baseinfo = $var;
+        GPBUtil::checkString($var, True);
+        $this->phone_no = $var;
 
         return $this;
     }

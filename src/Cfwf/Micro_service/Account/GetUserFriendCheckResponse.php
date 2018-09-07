@@ -7,22 +7,22 @@ namespace Cfwf\Micro_service\Account;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.account.GetUserIdResponse</code>
+ * Generated from protobuf message <code>cfwf.micro_service.account.GetUserFriendCheckResponse</code>
  */
-class GetUserIdResponse extends \Google\Protobuf\Internal\Message
+class GetUserFriendCheckResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>.cfwf.micro_service.account.RPC_CALL_RESULT result = 1;</code>
      */
     private $result = 0;
     /**
-     * Generated from protobuf field <code>uint64 userid = 2;</code>
+     * Generated from protobuf field <code>fixed64 userid = 2;</code>
      */
     private $userid = 0;
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identity = 3;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.account.FREIND_CHECK_TYPE friend_check = 3;</code>
      */
-    private $identity = null;
+    private $friend_check = 0;
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -52,7 +52,7 @@ class GetUserIdResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 userid = 2;</code>
+     * Generated from protobuf field <code>fixed64 userid = 2;</code>
      * @return int|string
      */
     public function getUserid()
@@ -61,7 +61,7 @@ class GetUserIdResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>uint64 userid = 2;</code>
+     * Generated from protobuf field <code>fixed64 userid = 2;</code>
      * @param int|string $var
      * @return $this
      */
@@ -74,23 +74,23 @@ class GetUserIdResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identity = 3;</code>
-     * @return \Cfwf\Micro_service\Account\UserIdentity
+     * Generated from protobuf field <code>.cfwf.micro_service.account.FREIND_CHECK_TYPE friend_check = 3;</code>
+     * @return int
      */
-    public function getIdentity()
+    public function getFriendCheck()
     {
-        return $this->identity;
+        return $this->friend_check;
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identity = 3;</code>
-     * @param \Cfwf\Micro_service\Account\UserIdentity $var
+     * Generated from protobuf field <code>.cfwf.micro_service.account.FREIND_CHECK_TYPE friend_check = 3;</code>
+     * @param int $var
      * @return $this
      */
-    public function setIdentity($var)
+    public function setFriendCheck($var)
     {
-        GPBUtil::checkMessage($var, \Cfwf\Micro_service\Account\UserIdentity::class);
-        $this->identity = $var;
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Account\FREIND_CHECK_TYPE::class);
+        $this->friend_check = $var;
 
         return $this;
     }

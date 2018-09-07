@@ -14,6 +14,9 @@ service Account {
   //使用手机注册
   rpc RegistNewAccountByMobilePhone (RegistNewAccountByMobilePhoneRequest) returns (RegistNewAccountResponse) {}
   
+  //注册，可指定账号。指定账号时，账号必须大于100000，小于 10000000 ，防止和新建账号冲突
+  rpc RegistNewAccount (RegistNewAccountRequest) returns (RegistNewAccountResponse) {}
+  
   //批量注册
   rpc BatchRegistNewAccount (BatchRegistNewAccountRequest) returns (BatchRegistNewAccountResponse) {}
   
@@ -25,10 +28,10 @@ service Account {
   rpc SetBelongUnit (SetBelongUnitRequest) returns (CommonResponse) {} 
   
   //设置用户基本信息  传入参数中，UserBaseInfo.main_identity 将会被忽略，而使用系统定义的身份顺序。cb_id可不填写， userid必填
-  rpc SetUserBaseInfo (UserBaseInfo) returns (CommonResponse) {}  
+  rpc SetUserBaseInfo (SetUserBaseInfoRequest) returns (CommonResponse) {}  
   
   //设置用户某项信息
-  rpc SetUserInfo (SetUserInfoRequest) returns (CommonResponse) {}  
+  rpc SetUserInfoItem (SetUserInfoItemRequest) returns (CommonResponse) {}  
   
   //设置用户验证好友方式
   rpc SetUserFriendCheck (SetUserFriendCheckRequest) returns (CommonResponse) {}  
@@ -98,12 +101,37 @@ enum USER_SEX{
     USER_SEX_BOY  = 2;   
 }
 
+enum USER_IDENTITY_TYPE {
+   USER_IDENTITY_TYPE_NONE                = 0;
+   USER_IDENTITY_TYPE_STUDENT             = 1;   //中小学学生
+   USER_IDENTITY_TYPE_TEACHER             = 2;   //中小学教师
+   USER_IDENTITY_TYPE_SCHOOL_MANAGER      = 3;   //中小学教务管理人员，校长
+   USER_IDENTITY_TYPE_TEACH_RESEARCHER    = 4;   //中小学教研员
+   USER_IDENTITY_TYPE_STUDENT_PARENT      = 5;   //中小学生家长
+   
+   USER_IDENTITY_TYPE_COLLEGE_STUDENT     = 11;   //高职高校学生
+   USER_IDENTITY_TYPE_COLLEGE_TEACHER     = 12;   //高职高校教师
+   USER_IDENTITY_TYPE_COLLEGE_MANAGER     = 13;   //高职高校教务管理人员，校长
+   
+   USER_IDENTITY_TYPE_EDU_MANAGEMENT      = 21;   //教育系统管理人员
+   USER_IDENTITY_TYPE_COMMERCIAL          = 31;   //商业机构用户
+}
+ 
+enum BELONG_UNIT_TYPE ////所属单位类型
+{
+    BELONG_UNIT_TYPE_NONE = 0;     
+    BELONG_UNIT_TYPE_SCHOOL = 1;   //自动统一
+    BELONG_UNIT_TYPE_EDU_BUREAU = 2; //教育局
+    BELONG_UNIT_TYPE_TEACH_OFFICE = 3;  //教研室
+}
+
+
 //----------------------------------------------------------------注册新用户
 
 // RegistNewAccountByMobilePhone 本服务不管理用户密码。密码需调用 tokencheck微服务设置。调用该函数之前，必须保证mobile_phone是已经验证过的。
 message RegistNewAccountByMobilePhoneRequest{
     string cb_id = 1;  //全局唯一，公开，方便使用者标识用户、对好友进行查找定位，用于替换数字型的公开的userid。不用作登录帐号。可指定，若不指定则系统自动生成
-    string mobile_phone = 2;
+    string mobile_phone = 2; //必须填写
     string username = 3; //用户民、昵称
 	string password = 4; //密码
     USER_IDENTITY_TYPE identity = 5; //用户身份
@@ -117,6 +145,18 @@ message RegistNewAccountResponse{
     fixed64 userid = 4;
 }
 
+//注册，可指定账号
+message RegistNewAccountRequest{
+    string cb_id = 1;        //可填可不填
+    string mobile_phone = 2; //可填可不填
+    string username = 3;     //用户民、昵称，必填
+	string password = 4;     //密码，必填
+    USER_IDENTITY_TYPE identity = 5; //用户身份
+    fixed64 userid = 6;      //如果指定，则该userid在系统内不能存在
+    string email = 7;        //可填可不填
+}
+
+  
 //批量注册
 message BatchRegistInfo {
 	string mobile_phone = 1; //手机号
@@ -155,30 +195,6 @@ message ActiveAccountRequest{
 } 
 
 //------------------------------------------------------------------------------ 设置 
-
-enum USER_IDENTITY_TYPE {
-   USER_IDENTITY_TYPE_NONE                = 0;
-   USER_IDENTITY_TYPE_STUDENT             = 1;   //中小学学生
-   USER_IDENTITY_TYPE_TEACHER             = 2;   //中小学教师
-   USER_IDENTITY_TYPE_SCHOOL_MANAGER      = 3;   //中小学教务管理人员，校长
-   USER_IDENTITY_TYPE_TEACH_RESEARCHER    = 4;   //中小学教研员
-   USER_IDENTITY_TYPE_STUDENT_PARENT      = 5;   //中小学生家长
-   
-   USER_IDENTITY_TYPE_COLLEGE_STUDENT     = 11;   //高职高校学生
-   USER_IDENTITY_TYPE_COLLEGE_TEACHER     = 12;   //高职高校教师
-   USER_IDENTITY_TYPE_COLLEGE_MANAGER     = 13;   //高职高校教务管理人员，校长
-   
-   USER_IDENTITY_TYPE_EDU_MANAGEMENT      = 21;   //教育系统管理人员
-   USER_IDENTITY_TYPE_COMMERCIAL          = 31;   //商业机构用户
-}
- 
-enum BELONG_UNIT_TYPE ////所属单位类型
-{
-    BELONG_UNIT_TYPE_NONE = 0;     
-    BELONG_UNIT_TYPE_SCHOOL = 1;   //自动统一
-    BELONG_UNIT_TYPE_EDU_BUREAU = 2; //教育局
-    BELONG_UNIT_TYPE_TEACH_OFFICE = 3;  //教研室
-}
 
 message UserIdentity
 {  
@@ -261,6 +277,12 @@ message SetUserAllIdentityRequest
     UserIdentity identitys = 2;
 }
 
+message SetUserBaseInfoRequest{ 
+    UserBaseInfo user_info =1; 
+    int32 operatorid = 2;
+    int32 from_os = 3;
+}
+
 enum USER_INFO_TYPE
 {
     USER_INFO_TYPE_None = 0;
@@ -273,10 +295,12 @@ enum USER_INFO_TYPE
 	USER_INFO_TYPE_DefaultFace = 7;
 }
 
-message SetUserInfoRequest{ 
+message SetUserInfoItemRequest{ 
     int64 userid =1;     //客户端指令，第一个字段总是自己的id
     USER_INFO_TYPE info_type = 2;
     string value = 3;
+    int32 operatorid = 4;
+    int32 from_os = 5;
 }
 
 //设置用户验证好友方式
@@ -397,11 +421,13 @@ message SearchUserBaseInfoResponse
  
 message GetUserIdRequest{
 	string loginid = 1; //loginid，手机号
+    bool get_identity_info = 2;
 }
 
 message GetUserIdResponse{
 	RPC_CALL_RESULT result = 1;
 	uint64 userid = 2;
+    UserIdentity identity = 3;
 }  
 
 

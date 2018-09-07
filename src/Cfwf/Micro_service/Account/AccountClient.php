@@ -46,6 +46,20 @@ class AccountClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 注册，可指定账号。指定账号时，账号必须大于100000，小于 10000000 ，防止和新建账号冲突
+     * @param \Cfwf\Micro_service\Account\RegistNewAccountRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function RegistNewAccount(\Cfwf\Micro_service\Account\RegistNewAccountRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.account.Account/RegistNewAccount',
+        $argument,
+        ['\Cfwf\Micro_service\Account\RegistNewAccountResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * 批量注册
      * @param \Cfwf\Micro_service\Account\BatchRegistNewAccountRequest $argument input argument
      * @param array $metadata metadata
@@ -90,11 +104,11 @@ class AccountClient extends \Grpc\BaseStub {
 
     /**
      * 设置用户基本信息  传入参数中，UserBaseInfo.main_identity 将会被忽略，而使用系统定义的身份顺序。cb_id可不填写， userid必填
-     * @param \Cfwf\Micro_service\Account\UserBaseInfo $argument input argument
+     * @param \Cfwf\Micro_service\Account\SetUserBaseInfoRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function SetUserBaseInfo(\Cfwf\Micro_service\Account\UserBaseInfo $argument,
+    public function SetUserBaseInfo(\Cfwf\Micro_service\Account\SetUserBaseInfoRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.account.Account/SetUserBaseInfo',
         $argument,
@@ -104,13 +118,13 @@ class AccountClient extends \Grpc\BaseStub {
 
     /**
      * 设置用户某项信息
-     * @param \Cfwf\Micro_service\Account\SetUserInfoRequest $argument input argument
+     * @param \Cfwf\Micro_service\Account\SetUserInfoItemRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function SetUserInfo(\Cfwf\Micro_service\Account\SetUserInfoRequest $argument,
+    public function SetUserInfoItem(\Cfwf\Micro_service\Account\SetUserInfoItemRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.account.Account/SetUserInfo',
+        return $this->_simpleRequest('/cfwf.micro_service.account.Account/SetUserInfoItem',
         $argument,
         ['\Cfwf\Micro_service\Account\CommonResponse', 'decode'],
         $metadata, $options);
