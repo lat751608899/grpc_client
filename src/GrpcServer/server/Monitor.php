@@ -4,11 +4,11 @@ namespace GrpcServer\server;
 
 use GrpcServer\ClientFactory;
 
-class School_student
+class Monitor
 {
 	public $client;
-	public $packageName = 'cfwf.micro_service.school_student';
-	public $serviceName = 'SchoolStudent';
+	public $packageName = 'cfwf.micro_service.monitor';
+	public $serviceName = 'Monitor';
 
 	public function __construct()
 	{
@@ -20,67 +20,79 @@ class School_student
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchStudentApply($where)
+	public function GetMicroServiceAddress($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function ApproveStudentApply($where)
+	public function GetDatabaseServerAddress($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function BatchApproveStudentApply($where)
+	public function GetRabbitMqServerAddress($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function StudentSubmitApply($where)
+	public function GetRedisServerAddress($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SearchStudent($where)
+	public function ReportRunStatus($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetClassStudents($where)
+	public function PublishNewClientVersion($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetStudentInfo($where)
+	public function ModifyClientVersion($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetStudentStatusInfo($where)
+	public function CancelClientVersion($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetStudentInfo($where)
+	public function DeleteClientVersion($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function RemoveStudent($where)
+	public function GetClientVersionList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetStudentCount($where)
+	public function AddClientVersionDownloadCount($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetCurrentClientVersion($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetUpgradeFileList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}

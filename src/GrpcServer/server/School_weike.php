@@ -20,8 +20,6 @@ class School_weike
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-
-
 	public function GetWeikeList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
@@ -89,6 +87,12 @@ class School_weike
 	
 
 	public function ViewWeike($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetSchoolWeikeCount($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}

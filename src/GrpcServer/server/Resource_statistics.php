@@ -4,11 +4,11 @@ namespace GrpcServer\server;
 
 use GrpcServer\ClientFactory;
 
-class School_teacher
+class Resource_statistics
 {
 	public $client;
-	public $packageName = 'cfwf.micro_service.school_teacher';
-	public $serviceName = 'SchoolTeacher';
+	public $packageName = 'cfwf.micro_service.resource_statistics';
+	public $serviceName = 'ResourceStatistics';
 
 	public function __construct()
 	{
@@ -20,97 +20,121 @@ class School_teacher
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchTeacherApply($where)
+	public function GetResourceCount($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetTeacherApply($where)
+	public function GetUserList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function ApproveTeacherApply($where)
+	public function GetUserInfo($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function RejectTeacherApply($where)
+	public function GetActiveUserStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function BatchApproveTeacherApply($where)
+	public function GetDayActiveUserStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function BatchRejectTeacherApply($where)
+	public function GetNewUserStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function TeacherSubmitApply($where)
+	public function GetRemainUserStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SearchTeacher($where)
+	public function GetSchoolList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetTeacherInfo($where)
+	public function GetSchoolInfo($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetApprovePatternsForTeacherApply($where)
+	public function GetSchoolUserList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetApprovePatternsForTeacherApply($where)
+	public function GetCityStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetTeacherClassInfo($where)
+	public function GetSchoolStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetTeacherClassInfoByJson($where)
+	public function GetSchoolWeikeCount($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function AddTeacherToSchool($where)
+	public function GetNewSchoolWeikeStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function RemoveTeacherFromSchool($where)
+	public function GetSchoolWeikeViewStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function RemoveTeacherFromClass($where)
+	public function GetSchoolWeikeDayViewStatistics($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetSchoolCourseVideoCount($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetNewSchoolCourseVideoStatistics($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetSchoolCourseVideoViewStatistics($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetSchoolCourseVideoDayViewStatistics($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}

@@ -4,11 +4,11 @@ namespace GrpcServer\server;
 
 use GrpcServer\ClientFactory;
 
-class School_coursevideo
+class Post_message
 {
 	public $client;
-	public $packageName = 'cfwf.micro_service.school_coursevideo';
-	public $serviceName = 'SchoolCourseVideo';
+	public $packageName = 'cfwf.micro_service.post_message';
+	public $serviceName = 'PostMessageProxy';
 
 	public function __construct()
 	{
@@ -20,43 +20,37 @@ class School_coursevideo
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchCourseVideo($where)
+	public function PostCommonMessageToUsers($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function DeleteCourseVideo($where)
+	public function PostCommonMessageToSchoolClass($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SearchApplyCourseVideo($where)
+	public function PostCommonMessageToCooperativeGroup($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function ApproveCourseVideo($where)
+	public function PostCounterMessageToUsers($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetCourseVideoInfo($where)
+	public function PostCounterMessageToSchoolClass($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function InsertCourseVideo($where)
-	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
-	}
-	
-
-	public function ViewCourseVideo($where)
+	public function PostCounterMessageToCooperativeGroup($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}

@@ -20,8 +20,6 @@ class View_stat
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-
-
 	public function SearchViewCount($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);

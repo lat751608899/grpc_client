@@ -20,8 +20,6 @@ class School_class
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-
-
 	public function SearchSchoolClass($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
@@ -34,7 +32,19 @@ class School_class
 	}
 	
 
+	public function GetSchoolClassesInfo($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
 	public function GetSchoolClassInfoById($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetSchoolClassesInfoById($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
@@ -65,6 +75,12 @@ class School_class
 	
 
 	public function SetSchoolClassTeacher($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function ClearSchoolClassTeacher($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}

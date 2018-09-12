@@ -4,11 +4,11 @@ namespace GrpcServer\server;
 
 use GrpcServer\ClientFactory;
 
-class Account
+class Im_group
 {
 	public $client;
-	public $packageName = 'cfwf.micro_service.account';
-	public $serviceName = 'Account';
+	public $packageName = 'cfwf.micro_service.im_group';
+	public $serviceName = 'IM_Group';
 
 	public function __construct()
 	{
@@ -20,121 +20,145 @@ class Account
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function CheckMobilePhoneAvailable($where)
+	public function GetGroupList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function RegistNewAccountByMobilePhone($where)
+	public function GetGroupMembers($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function RegistNewAccount($where)
+	public function GetGroupApplyList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function BatchRegistNewAccount($where)
+	public function InsertAskEnterGroup($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetUserIdentity($where)
+	public function DealGroupApply($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetBelongUnit($where)
+	public function EnterGroup($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetUserBaseInfo($where)
+	public function LeaveGroup($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetUserInfoItem($where)
+	public function RemoveGruopMember($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetUserFriendCheck($where)
+	public function GetGroupInformList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function BindMobile($where)
+	public function InsertGruopInform($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function DeleteUserMood($where)
+	public function BroadcastCounterMsgToMembers($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetMyBaseInfo($where)
+	public function BroadcastCommonMsgToMembers($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetUserBaseInfo($where)
+	public function DeleteGroupInform($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetUserSimpleInfo($where)
+	public function InsertGruopSpeak($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function QueryUserBaseInfoByCBId($where)
+	public function GetGroupSpeakList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetUserFriendCheck($where)
+	public function GetGruopInfo($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SearchUserBaseInfo($where)
+	public function InsertNewGroup($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetUserId($where)
+	public function DeleteGroup($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetUserStatus($where)
+	public function SearchGroupMember($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetBindedPhoneNumber($where)
+	public function SearchGroup($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function SearchGroupInfo($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function SetSuperAdmin($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function SetAdmins($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function SetGroupName($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}

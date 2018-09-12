@@ -4,11 +4,11 @@ namespace GrpcServer\server;
 
 use GrpcServer\ClientFactory;
 
-class School_coursevideo
+class School_seatwork
 {
 	public $client;
-	public $packageName = 'cfwf.micro_service.school_coursevideo';
-	public $serviceName = 'SchoolCourseVideo';
+	public $packageName = 'cfwf.micro_service.school_seatwork';
+	public $serviceName = 'SchoolSeatWork';
 
 	public function __construct()
 	{
@@ -20,43 +20,37 @@ class School_coursevideo
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchCourseVideo($where)
+	public function SearchSeatWorks($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function DeleteCourseVideo($where)
+	public function SendSeatWork($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SearchApplyCourseVideo($where)
+	public function DeleteSeatWork($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function ApproveCourseVideo($where)
+	public function GetRandSeatWorkQeustions($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetCourseVideoInfo($where)
+	public function BeginSeatWorkTesting($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function InsertCourseVideo($where)
-	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
-	}
-	
-
-	public function ViewCourseVideo($where)
+	public function SubmitMySeatWorkTestingAnswers($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}

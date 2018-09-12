@@ -4,11 +4,11 @@ namespace GrpcServer\server;
 
 use GrpcServer\ClientFactory;
 
-class Online_status
+class %CLASSNAME%
 {
 	public $client;
-	public $packageName = 'cfwf.micro_service.online_status';
-	public $serviceName = 'OnlineStatus';
+	public $packageName = '%PACKAGENAME%';
+	public $serviceName = '%SERVICENAME%';
 
 	public function __construct()
 	{
@@ -19,10 +19,3 @@ class Online_status
 	{
 		return call_user_func_array([$this->client,$method],$option);
 	}
-
-	public function UpdateOnlineStatus($where)
-	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
-	}
-	
-}

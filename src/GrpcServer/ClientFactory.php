@@ -43,6 +43,13 @@ class ClientFactory
 	protected $requestServer;
 	protected $host;
 	protected $webVersion;
+    /**
+     * 调用方法第三个参数 options 其中 timeout 设置超时时间
+     * @var array
+     */
+	private $methodOptions = [
+        'timeout' => 2000000   // 调用超时时间 微秒
+    ];
 
 
 	/**
@@ -136,14 +143,23 @@ class ClientFactory
 			$this->where = $param[0];
 			$param[0] = $this->getRequest($method);
 		}
-		Event::listen($this->clientName.'_request',$param[0]);
+        $param[1] = isset($param[1])? $param[1] : []; // metadata
+        $param[2] = isset($param[2])? array_merge($this->methodOptions,(array)$param[2]) : $this->methodOptions; // options
+        $listenArgs = [$param[0],$method];
+		Event::listen($this->clientName.'_request',$listenArgs);
 		$res = call_user_func_array([$this->client, $method], $param);
 		$response = $res->wait();
 		Event::listen($this->clientName.'_response',$response);
+		if($response[1]->code != 0){ // grpc出问题时返回一个空的 response
+            $response[0] = $this->getNullResponse();
+        }
 		$this->setCode($response[1]);
 		$this->where = [];
 		$this->requestServer = '';
-		return new GrpcResponse($response[0],$response[1]);
+		$res = new GrpcResponse($response[0],$response[1]);
+        $this->saveLog('[ GRPC_RESPONSE ]: '.json_encode($res->toArray()));
+
+		return $res;
 	}
 
 	/**

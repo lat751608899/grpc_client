@@ -65,7 +65,7 @@ class ConfigLoad implements \ArrayAccess
 	 * Temp文件
 	 * @var string
 	 */
-	protected $serverTempFile;
+	protected $serverTempFile = __DIR__.'/server/client.temp';
 	/**
 	 * @var
 	 */
@@ -80,6 +80,8 @@ class ConfigLoad implements \ArrayAccess
 	}
 	';
 
+	protected $rpcClients;
+
 	/**
 	 * ConfigLoad constructor.
 	 * @param bool $enforce true 强制重新生成server
@@ -92,6 +94,7 @@ class ConfigLoad implements \ArrayAccess
 		$this->mapConfigFile = $this->configPath.'map.php';
 		$this->setHostname();
 		$this->setMapName();
+		$this->loadPackageAndMethods();
 	}
 
 	/**
@@ -141,8 +144,13 @@ class ConfigLoad implements \ArrayAccess
 		}
 		$proto = [];
 		foreach ($file as $f){
-			$proto += $this->parseMethods(file_get_contents($f->getPathname()));
+			$tmp = $this->parseMethods(file_get_contents($f->getPathname()));
+			if(!$tmp){
+			    continue;
+            }
+            $proto += $tmp;
 		}
+		$this->rpcClients = $proto;
 		return $proto;
 	}
 
@@ -155,8 +163,12 @@ class ConfigLoad implements \ArrayAccess
 	{
 		$desc = $this->parseMetadata($content);
 		$namespace = $this->getNameSpace($package = $desc->getPackage());
-		$serverName = $desc->getService()[0]->getName();
-		$methods = $desc->getService()[0]->getMethod();
+		$service = $desc->getService();
+		if(count($service) < 1){ // proto 文件中没有方法的不解析
+		   return;
+        }
+        $serverName = $service[0]->getName();
+        $methods = $service[0]->getMethod();
 		$methodsData = [];
 		$serverStr = $this->parseServers($package,$serverName);
 		$file = $this->serverPath.$this->getClassName($package).'.php';
@@ -349,5 +361,23 @@ class ConfigLoad implements \ArrayAccess
 	private function getClassName($package)
 	{
 		return ucfirst(substr($package, strrpos($package, '.')+1));
+	}
+
+    public function getRpcClients($clientName = '')
+    {
+        if(!$clientName){
+            return $this->rpcClients;
+        }
+
+        return isset($this->rpcClients[$clientName]['method'])
+            ? $this->rpcClients[$clientName]['method'] : [];
+	}
+
+    public function getRpcMethodResponse($clientName, $method)
+    {
+        $rpcMethod = $this->getRpcClients($clientName);
+
+        return isset($rpcMethod[$method]['response'])
+            ? $rpcMethod[$method]['response'] : '';
 	}
 }

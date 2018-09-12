@@ -20,8 +20,6 @@ class School_subject
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-
-
 	public function GetTextbookVersion($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);

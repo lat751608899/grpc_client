@@ -1,8 +1,8 @@
 <?php
 namespace GrpcServer\traits;
 
+use Google\Protobuf\Internal\Message;
 use Google\Protobuf\Internal\RepeatedField;
-use \Google\Protobuf\Internal\Message;
 use GrpcServer\Event;
 
 /**
@@ -19,6 +19,15 @@ trait EventTrait
 	 * @var
 	 */
 	protected $clientName;
+
+	protected $methodName;
+
+	protected $clientClassName;
+
+	protected $startTime;
+
+	protected $endTime;
+
 
 	/**
 	 * @param $clientName
@@ -40,13 +49,14 @@ trait EventTrait
 	protected function setResponseEvent($clientName)
 	{
 		Event::add($clientName.'_response', function ($response){
+            $this->endTime = microtime(true);
 			// grpc 有错误 记录日志（目前只有基于thinkphp的日志，以后在开发自己的日志）
 			if ($response[1]->code != 0) {
 				$this->saveLog("Grpc 又崩了。。。,服务名：".$this->clientName.",错误码：".$response[1]->code.",错误信息：".$response[1]->details,'error');
 				$this->error = $response[1];
 				$this->where = [];
 				$this->requestServer = '';
-				throw new \Exception("GRPC 崩了！");
+				// throw new \Exception("GRPC 崩了！");
 			}
 			if(method_exists($response[0], 'getResult')){
 				$result = $response[0]->getResult();
@@ -56,6 +66,7 @@ trait EventTrait
 					// throw new \Exception('grpc server has some problems, result code is :'.$result);
 				}
 			}
+			$this->saveLog('RunTime: '.($this->endTime - $this->startTime)." s");
 		});
 	}
 
@@ -65,9 +76,14 @@ trait EventTrait
 	protected function setRequestEvent($clientName)
 	{
 		Event::add($clientName.'_request', function ($request){
+		    $this->startTime = microtime(true);
 			// 记录request
+            if(count($request) == 2){
+                $this->methodName = $request[1];
+                $request = $request[0];
+            }
 			$data = $this->dealRequestToArray($request);
-			$this->saveLog("[ GRPC_REQUEST ]:".json_encode($data));
+			$this->saveLog("[ GRPC_REQUEST ]: method ".$this->methodName.json_encode($data));
 		});
 	}
 
@@ -132,4 +148,14 @@ trait EventTrait
 		return $data;
 	}
 
+    /**
+     * grpc出问题时返回一个空的 response
+     * @return mixed
+     */
+	protected function getNullResponse()
+    {
+        $responseName = $this->config->getRpcMethodResponse($this->clientName,$this->methodName);
+
+        return new $responseName();
+    }
 }

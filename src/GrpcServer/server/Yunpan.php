@@ -4,11 +4,11 @@ namespace GrpcServer\server;
 
 use GrpcServer\ClientFactory;
 
-class School_student
+class Yunpan
 {
 	public $client;
-	public $packageName = 'cfwf.micro_service.school_student';
-	public $serviceName = 'SchoolStudent';
+	public $packageName = 'cfwf.micro_service.yunpan';
+	public $serviceName = 'YunPan';
 
 	public function __construct()
 	{
@@ -20,67 +20,91 @@ class School_student
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchStudentApply($where)
+	public function GetUserSpace($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function ApproveStudentApply($where)
+	public function SetUserSpace($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function BatchApproveStudentApply($where)
+	public function SearchFileWhenBeginUpload($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function StudentSubmitApply($where)
+	public function SetUploadingFileInfo($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SearchStudent($where)
+	public function SetFileUploadedAndBeloneTo($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetClassStudents($where)
+	public function GetWaittingPreprocessFileList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetStudentInfo($where)
+	public function SetFilePreprocessFinish($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetStudentStatusInfo($where)
+	public function GetWaittingStorageFileList($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function SetStudentInfo($where)
+	public function SetFileStorageFinish($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function RemoveStudent($where)
+	public function SetPicFileStorageFinish($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
 	
 
-	public function GetStudentCount($where)
+	public function GetPicFileThumbnailTypeList($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function AddPicFileThumbnailType($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetDefaultPicFileThumbnailType($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function SetDefaultPicFileThumbnailType($where)
+	{
+		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+	}
+	
+
+	public function GetResFileInfo($where)
 	{
 		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
 	}
