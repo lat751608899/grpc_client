@@ -102,6 +102,51 @@ service ResourceStatistics {
   //课堂实录日均播放数据
   rpc GetSchoolCourseVideoDayViewStatistics (GetSchoolCourseVideoDayViewStatisticsRequest) returns (GetSchoolCourseVideoDayViewStatisticsResponse) {}  
   
+  
+  /*************************
+  教育云网站-数据统计
+  *************************/
+  //首页，站点数据
+  rpc GetWebStatHomePage(GetWebStatHomePageRequest) returns (GetWebStatHomePageResponse) {} 
+  
+  //传入市id，获取统计数据 "全部"， 返回 区县列表
+  rpc GetWebStatCountysAll(GetWebStatCountysAllRequest) returns (GetWebStatCountysAllResponse) {}    
+  //传入市id，获取统计数据 "理论研究"， 返回 区县列表
+  rpc GetWebStatCountysTheory(GetWebStatCountysTheoryRequest) returns (GetWebStatCountysTheoryResponse) {}   
+  //传入市id，获取统计数据 "教学资源"， 返回 区县列表
+  rpc GetWebStatCountysTeachResource(GetWebStatCountysTeachResourceRequest) returns (GetWebStatCountysTeachResourceResponse) {}  
+  //传入市id，获取统计数据 "视频"， 返回 区县列表
+  rpc GetWebStatCountysVideo(GetWebStatCountysVideoRequest) returns (GetWebStatCountysVideoResponse) {}  
+  //传入市id，获取统计数据 "直播"， 返回 区县列表
+  rpc GetWebStatCountysBroadcast(GetWebStatCountysBroadcastRequest) returns (GetWebStatCountysBroadcastResponse) {}  
+  //传入市id，获取统计数据 "课堂评课"， 返回 区县列表
+  rpc GetWebStatCountysPingKe(GetWebStatCountysPingKeRequest) returns (GetWebStatCountysPingKeResponse) {}  
+  //传入市id，获取统计数据 "协作组"， 返回 区县列表
+  rpc GetWebStatCountysXieZuoZu(GetWebStatCountysXieZuoZuRequest) returns (GetWebStatCountysXieZuoZuResponse) {}  
+  
+  //传入区县id，获取统计数据 "全部"， 返回 学校列表
+  rpc GetWebStatSchoolsAll(GetWebStatSchoolsAllRequest) returns (GetWebStatSchoolsAllResponse) {} 
+  //传入区县id，获取统计数据 "理论研究"， 返回 学校列表
+  rpc GetWebStatSchoolsTheory(GetWebStatSchoolsTheoryRequest) returns (GetWebStatSchoolsTheoryResponse) {}  
+  //传入区县id，获取统计数据 "教学资源"， 返回 学校列表
+  rpc GetWebStatSchoolsTeachResource(GetWebStatSchoolsTeachResourceRequest) returns (GetWebStatSchoolsTeachResourceResponse) {}  
+  //传入区县id，获取统计数据 "视频"， 返回 学校列表
+  rpc GetWebStatSchoolsVideo(GetWebStatSchoolsVideoRequest) returns (GetWebStatSchoolsVideoResponse) {}  
+  //传入区县id，获取统计数据 "直播"， 返回 学校列表
+  rpc GetWebStatSchoolsBroadcast(GetWebStatSchoolsBroadcastRequest) returns (GetWebStatSchoolsBroadcastResponse) {}    
+  //传入区县id，获取统计数据 "课堂评课"， 返回 学校列表
+  rpc GetWebStatSchoolsPingKe(GetWebStatSchoolsPingKeRequest) returns (GetWebStatSchoolsPingKeResponse) {}  
+  //传入区县id，获取统计数据 "协作组"， 返回 学校列表
+  rpc GetWebStatSchoolsXieZuoZu(GetWebStatSchoolsXieZuoZuRequest) returns (GetWebStatSchoolsXieZuoZuResponse) {}  
+  
+  //传入学校id，获取统计数据 "理论研究"， 返回 教师列表
+  rpc GetWebStatTeachersTheory(GetWebStatTeachersTheoryRequest) returns (GetWebStatTeachersTheoryResponse) {} 
+  //传入学校id，获取统计数据 "教学资源"， 返回 教师列表
+  rpc GetWebStatTeachersTeachResource(GetWebStatTeachersTeachResourceRequest) returns (GetWebStatTeachersTeachResourceResponse) {}  
+  //传入学校id，获取统计数据 "视频"， 返回 教师列表
+  rpc GetWebStatTeachersVideo(GetWebStatTeachersVideoRequest) returns (GetWebStatTeachersVideoResponse) {}  
+  //传入学校id，获取统计数据 "教研行动"， 返回 教师列表
+  rpc GetWebStatTeachersResearchAction(GetWebStatTeachersResearchActionRequest) returns (GetWebStatTeachersResearchActionResponse) {}  
 }
 
 //通用rpc调用返回结果
@@ -613,4 +658,483 @@ message GetSchoolCourseVideoDayViewStatisticsResponse{
     repeated VideoDayViewItem list = 2; //共24条， 0-23点的日平均活跃用户数
 }
 
+ 
+/*************************
+教育云网站-数据统计
+*************************/
+//首页，站点数据
+message GetWebStatHomePageRequest{
+    int32 cityid = 1;   //地级市id，0=默认表示日照市
+}
+
+message GetWebStatHomePageResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 user_count = 2; //注册用户
+    int32 resource_count = 3; //总资源数
+    int32 article_count = 4; //文章资源
+    int32 video_count = 5; //视频资源
+    int32 xiezuozu_count = 6; //协作组
+    int32 photo_count = 7; //空间照片
+    int32 pingke_count = 8; //评课活动
+    int32 today_count = 9; //今日资源
+    int32 yestoday_count = 10; //昨日资源
+}
+
+// 区县/学校-"所有" 条目信息 
+message WebStatAllItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 theory_count = 3;   //理论研究
+    int32 resource_count = 4; //教学资源
+    int32 video_count = 5; //视频
+    int32 broadcast_count = 6; //直播
+    int32 pingke_count = 7; //课堂评课
+    int32 xiezuozu_count = 8; //协作组
+    int32 teacher_count = 9; //教师空间
+    int32 student_count = 10; //学生空间
+}
+
+// 区县/学校-"理论研究" 条目信息
+message WebStatTheoryItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 kebiao_count = 3;   //课标研究
+    int32 jiaocai_count = 4;  //教材研究
+    int32 ketang_count = 5;   //课堂教学
+    int32 zuoye_count = 6;    //作业研究
+    int32 kaoshi_count = 7;   //考试研究
+    int32 fudao_count = 8;    //学生辅导
+    int32 xinlun_count = 9;   //教学新论
+    int32 shiyan_count = 10;   //实验教学
+    int32 shouduan_count = 11; //教学手段
+    int32 anli_count = 12;     //案例分析
+    int32 yuedu_count = 13;    //文章阅读
+    int32 peixun_count = 14;   //培训作业
+    int32 all_count = 15;      //总数
+    int32 per_person = 16;     //人均
+}
+
+// 区县/学校-"教学资源" 条目信息
+message WebStatTeacheResourceItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 jihua_count = 3;   //计划
+    int32 beike_count = 4;  //单元备课
+    int32 jiaoan_count = 5;   //教案
+    int32 kejian_count = 6;    //课件
+    int32 jiance_count = 7;   //检测
+    int32 fansi_count = 8;    //教学反思
+    int32 suibi_count = 9;   //教学随笔
+    int32 zongjie_count = 10;   //总结
+    int32 all_count = 11;      //总数
+    int32 per_person = 12;     //人均
+}
+
+// 区县/学校-"视频" 条目信息
+message WebStatVideoItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 weike_count = 3;   //微课
+    int32 shilu_count = 4;  //课堂实录
+    int32 all_count = 5;      //总数
+    int32 per_person = 6;     //人均
+}
+
+// 区县/学校-"直播课堂" 条目信息
+message WebStatBroadcastItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 zhibo_count = 3;   //直播课堂
+    int32 all_count = 5;     //总数
+    int32 per_person = 6;    //人均
+}
+
+// 区县/学校-"课堂评课" 条目信息
+message WebStatPingKeItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 pingke_count = 3;  //课堂评课
+    int32 all_count = 5;     //总数
+    int32 per_person = 6;    //人均
+}
+
+// 区县/学校-"协作组" 条目信息
+message WebStatXieZuoZuItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 xiaozhang_count = 3;  //校长工作室
+    int32 mingshi_count = 4;    //名师工作室
+    int32 xinjiaoyu_count = 5;  //新教育
+    int32 xueke_count = 6;      //学科教研
+    int32 keti_count = 7;       //课题研究
+    int32 zhuanti_count = 8;    //专题学习
+    int32 lilun_count = 9;      //理论研究
+    int32 jiaxiao_count = 10;   //家校互动
+    int32 shisheng_count = 11;  //师生交流
+    int32 bumen_count = 12;     //部门管理
+    int32 putong_count = 13;    //普通协作组
+    int32 all_count = 14;       //总数
+    int32 per_person = 15;      //人均
+}
+
+// 学校教师-"教研行动" 条目信息
+message WebStatTeacherResearchActionItem{
+    int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
+    string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
+    
+    int32 xiezuozu_count = 3;  //协作组
+    int32 zhuanti_count = 4;    //专题讨论
+    int32 all_count = 14;       //总数
+}
+
+//传入市id，获取统计数据 "所有"， 返回 区县列表
+message GetWebStatCountysAllRequest{
+    int32 cityid = 1;       // 地级市id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  1=theory_count 2=resource_count 3=video_count ... 按WebStatAllItem 中统计项顺序，从1开始
+}
+
+message GetWebStatCountysAllResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatAllItem list = 2; //第一条表示“本市”的统计总数
+}
+  
+//传入市id，获取统计数据 "理论研究"， 返回 区县列表
+message GetWebStatCountysTheoryRequest{
+    int32 cityid = 1;       // 地级市id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //按 WebStatTheoryItem 中统计项顺序，从1开始
+}
+
+message GetWebStatCountysTheoryResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatTheoryItem list = 2; //第一条表示“本市”的统计总数
+} 
+  
+//传入市id，获取统计数据 "教学资源"， 返回 区县列表
+message GetWebStatCountysTeachResourceRequest{
+    int32 cityid = 1;       // 地级市id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //按 WebStatTeacheResourceItem 中统计项顺序，从1开始
+}
+
+message GetWebStatCountysTeachResourceResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatTeacheResourceItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入市id，获取统计数据 "视频"， 返回 区县列表
+message GetWebStatCountysVideoRequest{
+    int32 cityid = 1;       // 地级市id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //按 WebStatVideoItem 中统计项顺序，从1开始
+}
+
+message GetWebStatCountysVideoResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatVideoItem list = 2; //第一条表示“本市”的统计总数
+}
+
+
+//传入市id，获取统计数据 "直播"， 返回 区县列表
+message GetWebStatCountysBroadcastRequest{
+    int32 cityid = 1;       // 地级市id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //按 WebStatBroadcastItem 中统计项顺序，从1开始
+}
+
+message GetWebStatCountysBroadcastResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatBroadcastItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入市id，获取统计数据 "课堂评课"， 返回 区县列表
+message GetWebStatCountysPingKeRequest{
+    int32 cityid = 1;       // 地级市id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //按 WebStatPingKeItem 中统计项顺序，从1开始
+}
+
+message GetWebStatCountysPingKeResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatPingKeItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入市id，获取统计数据 "协作组"， 返回 区县列表
+message GetWebStatCountysXieZuoZuRequest{
+    int32 cityid = 1;       // 地级市id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //按 WebStatXieZuoZuItem 中统计项顺序，从1开始
+}
+
+message GetWebStatCountysXieZuoZuResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatXieZuoZuItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入区县id，获取统计数据 "所有"， 返回 学校列表
+message GetWebStatSchoolsAllRequest{
+    string edu_id = 1;      //所属区县教育局编号，必填
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //按 WebStatAllItem 中统计项顺序，从1开始
+}
+
+message GetWebStatSchoolsAllResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatAllItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入区县id，获取统计数据 "理论研究"， 返回 学校列表
+message GetWebStatSchoolsTheoryRequest{
+    string edu_id = 1;      //所属区县教育局编号，必填
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限 
+    int32 orderby = 8;      //排名规则 
+}
+
+message GetWebStatSchoolsTheoryResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatTheoryItem list = 2; //第一条表示“本市”的统计总数
+}
+
+
+//传入区县id，获取统计数据 "教学资源"， 返回 学校列表
+message GetWebStatSchoolsTeachResourceRequest{
+    string edu_id = 1;      //所属区县教育局编号，必填
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认) 1=人均排名
+}
+
+message GetWebStatSchoolsTeachResourceResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatTeacheResourceItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入区县id，获取统计数据 "视频"， 返回 学校列表
+message GetWebStatSchoolsVideoRequest{
+    string edu_id = 1;      //所属区县教育局编号，必填
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认) 1=人均排名
+}
+
+message GetWebStatSchoolsVideoResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatVideoItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入区县id，获取统计数据 "直播"， 返回 学校列表
+message GetWebStatSchoolsBroadcastRequest{
+    string edu_id = 1;      //所属区县教育局编号，必填
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认) 1=人均排名
+}
+
+message GetWebStatSchoolsBroadcastResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatBroadcastItem list = 2; //第一条表示“本市”的统计总数
+}
+
+
+//传入区县id，获取统计数据 "课堂评课"， 返回 学校列表
+message GetWebStatSchoolsPingKeRequest{
+    string edu_id = 1;      //所属区县教育局编号，必填
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认) 1=人均排名
+}
+
+message GetWebStatSchoolsPingKeResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatPingKeItem list = 2; //第一条表示“本市”的统计总数
+}
+
+
+//传入区县id，获取统计数据 "协作组"， 返回 学校列表
+message GetWebStatSchoolsXieZuoZuRequest{
+    string edu_id = 1;      //所属区县教育局编号，必填
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认) 1=人均排名
+}
+
+message GetWebStatSchoolsXieZuoZuResponse{
+    RPC_CALL_RESULT result = 1;
+    repeated WebStatXieZuoZuItem list = 2; //第一条表示“本市”的统计总数
+}
+
+//传入学校id，获取统计数据 "理论研究"， 返回 教师列表
+message GetWebStatTeachersTheoryRequest{
+    int32 schoolid = 1;     //学校id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 grade = 6;        //年级， 0=不限
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;       //排名规则  0=总数排名(默认)
+    
+    int32 page_size = 9;    //每页条数
+    int32 page = 10;        //当前页。如果>总页数，则返回最后一页的数据
+}
+
+message GetWebStatTeachersTheoryResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 page_size = 2;        //每页条数
+    int32 page = 3;             //当前页
+    int32 page_count = 4;       //总页数
+    int32 record_count = 5;     //总条数
+    repeated WebStatTheoryItem list = 6; //第一条表示“本市”的统计总数
+}
+
+//传入学校id，获取统计数据 "教学资源"， 返回 教师列表
+message GetWebStatTeachersTeachResourceRequest{
+    int32 schoolid = 1;     //学校id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 grade = 6;        //年级， 0=不限
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认)
+    
+    int32 page_size = 9;    //每页条数
+    int32 page = 10;         //当前页。如果>总页数，则返回最后一页的数据
+}
+
+message GetWebStatTeachersTeachResourceResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 page_size = 2;        //每页条数
+    int32 page = 3;             //当前页
+    int32 page_count = 4;       //总页数
+    int32 record_count = 5;     //总条数
+    repeated WebStatTeacheResourceItem list = 6; //第一条表示“本市”的统计总数
+}
+
+//传入学校id，获取统计数据 "视频"， 返回 教师列表
+message GetWebStatTeachersVideoRequest{
+    int32 schoolid = 1;     //学校id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 grade = 6;        //年级， 0=不限
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认)
+    
+    int32 page_size = 9;    //每页条数
+    int32 page = 10;         //当前页。如果>总页数，则返回最后一页的数据
+}
+
+message GetWebStatTeachersVideoResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 page_size = 2;        //每页条数
+    int32 page = 3;             //当前页
+    int32 page_count = 4;       //总页数
+    int32 record_count = 5;     //总条数
+    repeated WebStatVideoItem list = 6; //第一条表示“本市”的统计总数
+}
+
+
+//传入学校id，获取统计数据 "教研行动"， 返回 教师列表
+message GetWebStatTeachersResearchActionRequest{
+    int32 schoolid = 1;     //学校id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+    int32 grade = 6;        //年级， 0=不限
+    int32 subject = 7;      //学科， 0=不限
+    int32 orderby = 8;      //排名规则  0=总数排名(默认)
+    
+    int32 page_size = 9;    //每页条数
+    int32 page = 10;         //当前页。如果>总页数，则返回最后一页的数据
+}
+
+message GetWebStatTeachersResearchActionResponse{
+    RPC_CALL_RESULT result = 1;
+    
+    int32 page_size = 2;        //每页条数
+    int32 page = 3;             //当前页
+    int32 page_count = 4;       //总页数
+    int32 record_count = 5;     //总条数
+    repeated WebStatTeacherResearchActionItem list = 6; //第一条表示“本市”的统计总数
+}
 

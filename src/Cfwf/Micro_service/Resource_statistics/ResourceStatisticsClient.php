@@ -333,4 +333,274 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * ************************
+     * 教育云网站-数据统计
+     * ***********************
+     *
+     * 首页，站点数据
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatHomePageRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatHomePage(\Cfwf\Micro_service\Resource_statistics\GetWebStatHomePageRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatHomePage',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatHomePageResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入市id，获取统计数据 "全部"， 返回 区县列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatCountysAllRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatCountysAll(\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysAllRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatCountysAll',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysAllResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入市id，获取统计数据 "理论研究"， 返回 区县列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatCountysTheoryRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatCountysTheory(\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysTheoryRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatCountysTheory',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysTheoryResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入市id，获取统计数据 "教学资源"， 返回 区县列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatCountysTeachResourceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatCountysTeachResource(\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysTeachResourceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatCountysTeachResource',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysTeachResourceResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入市id，获取统计数据 "视频"， 返回 区县列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatCountysVideoRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatCountysVideo(\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysVideoRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatCountysVideo',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysVideoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入市id，获取统计数据 "直播"， 返回 区县列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatCountysBroadcastRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatCountysBroadcast(\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysBroadcastRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatCountysBroadcast',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysBroadcastResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入市id，获取统计数据 "课堂评课"， 返回 区县列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatCountysPingKeRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatCountysPingKe(\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysPingKeRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatCountysPingKe',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysPingKeResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入市id，获取统计数据 "协作组"， 返回 区县列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatCountysXieZuoZuRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatCountysXieZuoZu(\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysXieZuoZuRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatCountysXieZuoZu',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatCountysXieZuoZuResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入区县id，获取统计数据 "全部"， 返回 学校列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsAllRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolsAll(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsAllRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolsAll',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsAllResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入区县id，获取统计数据 "理论研究"， 返回 学校列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsTheoryRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolsTheory(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsTheoryRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolsTheory',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsTheoryResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入区县id，获取统计数据 "教学资源"， 返回 学校列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsTeachResourceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolsTeachResource(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsTeachResourceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolsTeachResource',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsTeachResourceResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入区县id，获取统计数据 "视频"， 返回 学校列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsVideoRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolsVideo(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsVideoRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolsVideo',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsVideoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入区县id，获取统计数据 "直播"， 返回 学校列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsBroadcastRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolsBroadcast(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsBroadcastRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolsBroadcast',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsBroadcastResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入区县id，获取统计数据 "课堂评课"， 返回 学校列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsPingKeRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolsPingKe(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsPingKeRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolsPingKe',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsPingKeResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入区县id，获取统计数据 "协作组"， 返回 学校列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsXieZuoZuRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolsXieZuoZu(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsXieZuoZuRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolsXieZuoZu',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolsXieZuoZuResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入学校id，获取统计数据 "理论研究"， 返回 教师列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersTheoryRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatTeachersTheory(\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersTheoryRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatTeachersTheory',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersTheoryResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入学校id，获取统计数据 "教学资源"， 返回 教师列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersTeachResourceRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatTeachersTeachResource(\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersTeachResourceRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatTeachersTeachResource',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersTeachResourceResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入学校id，获取统计数据 "视频"， 返回 教师列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersVideoRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatTeachersVideo(\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersVideoRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatTeachersVideo',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersVideoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 传入学校id，获取统计数据 "教研行动"， 返回 教师列表
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersResearchActionRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatTeachersResearchAction(\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersResearchActionRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatTeachersResearchAction',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatTeachersResearchActionResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }
