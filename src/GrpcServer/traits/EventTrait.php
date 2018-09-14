@@ -155,7 +155,8 @@ trait EventTrait
 	protected function getNullResponse()
     {
         $responseName = $this->config->getRpcMethodResponse($this->clientName,$this->methodName);
-
-        return new $responseName();
+        if(class_exists($responseName)){
+            return new $responseName();
+        }
     }
 }

@@ -43,12 +43,16 @@ trait ResponseCollection
 			$getter = $field->getGetter();
 			$name = $field->getName();
 			$data = $this->container->$getter();
+			// 是 repeated 类型
 			if($data instanceof RepeatedField){
                 $new = [];
 			    if ($data->count() > 0){
-                    $data = new self($data);
+                    // 是 message 类型
+                    if ($field->getMessageType()){
+                        $data = new self($data);
+                    }
                     foreach($data as $val){
-                        $new[] = $val->toArray();
+                        $new[] = !is_object($val) ? $val : $val->toArray();
                     }
                 }
 				$res[$name] = $new;

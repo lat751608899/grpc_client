@@ -180,7 +180,7 @@ class ConfigLoad implements \ArrayAccess
 			$serverStr .= "\n".str_replace('%METHOD%', $value->getName(), $this->methodTemp);
 		}
 		$serverStr .= "\n"."}";
-		file_put_contents($file, $serverStr);
+		//file_put_contents($file, $serverStr);
 
 		return $methodsData;
 	}

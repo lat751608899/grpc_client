@@ -61,7 +61,6 @@ class ClientFactory
 	{
 		error_reporting(-1);
 		set_exception_handler([$this, 'handleException']);
-		$this->setEvent($name);  // 添加监听
 		$this->config = new ConfigLoad();
 		if (!$webVersion) {
 			$webVersion = defined('WEB_VERSION') ? WEB_VERSION : 'develop';
@@ -72,6 +71,7 @@ class ClientFactory
 			$name = $this->config->getNewName($name);
 			$clientName = $this->getClientName($name);
 		}
+        $this->setEvent($name);  // 添加监听
 		$this->host = $host = $this->config->getHostname($name,$this->webVersion = $webVersion);
 		$opts = array_merge($opts, [
 			'credentials' => \Grpc\ChannelCredentials::createInsecure()
@@ -158,7 +158,7 @@ class ClientFactory
 		$this->requestServer = '';
 		$res = new GrpcResponse($response[0],$response[1]);
 
-        //$this->saveLog('[ GRPC_RESPONSE ]: '.json_encode($res->toArray()));
+        $this->saveLog('[ GRPC_RESPONSE ]: '.json_encode($res->toArray()));
 
 		return $res;
 	}
