@@ -157,7 +157,8 @@ class ClientFactory
 		$this->where = [];
 		$this->requestServer = '';
 		$res = new GrpcResponse($response[0],$response[1]);
-        $this->saveLog('[ GRPC_RESPONSE ]: '.json_encode($res->toArray()));
+
+        //$this->saveLog('[ GRPC_RESPONSE ]: '.json_encode($res->toArray()));
 
 		return $res;
 	}
