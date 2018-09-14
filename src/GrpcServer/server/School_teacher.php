@@ -20,99 +20,147 @@ class School_teacher
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchTeacherApply($where)
+	public function SearchTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetTeacherApply($where)
+	public function GetTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function ApproveTeacherApply($where)
+	public function ApproveTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function RejectTeacherApply($where)
+	public function RejectTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function BatchApproveTeacherApply($where)
+	public function BatchApproveTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function BatchRejectTeacherApply($where)
+	public function BatchRejectTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function TeacherSubmitApply($where)
+	public function TeacherSubmitApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SearchTeacher($where)
+	public function SearchTeacher()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetTeacherInfo($where)
+	public function GetTeacherInfo()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SetApprovePatternsForTeacherApply($where)
+	public function SetApprovePatternsForTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetApprovePatternsForTeacherApply($where)
+	public function GetApprovePatternsForTeacherApply()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SetTeacherClassInfo($where)
+	public function SetTeacherClassInfo()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SetTeacherClassInfoByJson($where)
+	public function SetTeacherClassInfoByJson()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function AddTeacherToSchool($where)
+	public function AddTeacherToSchool()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function RemoveTeacherFromSchool($where)
+	public function RemoveTeacherFromSchool()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function RemoveTeacherFromClass($where)
+	public function RemoveTeacherFromClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }

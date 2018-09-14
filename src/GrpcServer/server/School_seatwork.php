@@ -20,39 +20,57 @@ class School_seatwork
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchSeatWorks($where)
+	public function SearchSeatWorks()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SendSeatWork($where)
+	public function SendSeatWork()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function DeleteSeatWork($where)
+	public function DeleteSeatWork()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetRandSeatWorkQeustions($where)
+	public function GetRandSeatWorkQeustions()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function BeginSeatWorkTesting($where)
+	public function BeginSeatWorkTesting()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SubmitMySeatWorkTestingAnswers($where)
+	public function SubmitMySeatWorkTestingAnswers()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }

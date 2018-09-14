@@ -20,21 +20,30 @@ class View_stat
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchViewCount($where)
+	public function SearchViewCount()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function InsertViewLog($where)
+	public function InsertViewLog()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetUserViewCount($where)
+	public function GetUserViewCount()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }

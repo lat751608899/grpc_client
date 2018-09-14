@@ -20,39 +20,57 @@ class Post_message
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function PostCommonMessageToUsers($where)
+	public function PostCommonMessageToUsers()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function PostCommonMessageToSchoolClass($where)
+	public function PostCommonMessageToSchoolClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function PostCommonMessageToCooperativeGroup($where)
+	public function PostCommonMessageToCooperativeGroup()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function PostCounterMessageToUsers($where)
+	public function PostCounterMessageToUsers()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function PostCounterMessageToSchoolClass($where)
+	public function PostCounterMessageToSchoolClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function PostCounterMessageToCooperativeGroup($where)
+	public function PostCounterMessageToCooperativeGroup()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }

@@ -20,75 +20,111 @@ class School_class
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SearchSchoolClass($where)
+	public function SearchSchoolClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetSchoolClassInfo($where)
+	public function GetSchoolClassInfo()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetSchoolClassesInfo($where)
+	public function GetSchoolClassesInfo()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetSchoolClassInfoById($where)
+	public function GetSchoolClassInfoById()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetSchoolClassesInfoById($where)
+	public function GetSchoolClassesInfoById()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function CreateSchoolClass($where)
+	public function CreateSchoolClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function BatchCreateSchoolClass($where)
+	public function BatchCreateSchoolClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function RemoveSchoolClass($where)
+	public function RemoveSchoolClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function ArchiveSchoolClass($where)
+	public function ArchiveSchoolClass()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SetSchoolClassTeacher($where)
+	public function SetSchoolClassTeacher()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function ClearSchoolClassTeacher($where)
+	public function ClearSchoolClassTeacher()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function SearchClassByHeadTeacher($where)
+	public function SearchClassByHeadTeacher()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }

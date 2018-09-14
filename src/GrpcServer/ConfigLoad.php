@@ -74,9 +74,12 @@ class ConfigLoad implements \ArrayAccess
 	 * @var string
 	 */
 	protected $methodTemp = '
-	public function %METHOD%($where)
+	public function %METHOD%()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	';
 
@@ -328,7 +331,9 @@ class ConfigLoad implements \ArrayAccess
 	 */
 	public function getNewName($name)
 	{
-		return array_search($name, $this->MapConfig);
+	    $new = array_search($name, $this->MapConfig);
+
+        return $new ?: $name;
 	}
 
 	/**

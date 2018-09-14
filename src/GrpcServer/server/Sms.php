@@ -20,15 +20,21 @@ class Sms
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function SendVerificationCode($where)
+	public function SendVerificationCode()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function CheckVerificationCode($where)
+	public function CheckVerificationCode()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }

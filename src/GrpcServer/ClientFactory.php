@@ -65,12 +65,8 @@ class ClientFactory
 		if (!$webVersion) {
 			$webVersion = defined('WEB_VERSION') ? WEB_VERSION : 'develop';
 		}
-		// 直接 cfwf.micro_service.school_weike.SchoolWeike
-		$clientName = $this->getClientName($name);
-		if(!class_exists($clientName)){  //  school_weike.SchoolWeike 转 cfwf.micro_service.school_weike.SchoolWeike
-			$name = $this->config->getNewName($name);
-			$clientName = $this->getClientName($name);
-		}
+		// 直接 cfwf.micro_service.school_weike.SchoolWeike  school_weike.SchoolWeike 转 cfwf.micro_service.school_weike.SchoolWeike
+		$clientName = $this->getClientName($name = $this->config->getNewName($name));
         $this->setEvent($name);  // 添加监听
 		$this->host = $host = $this->config->getHostname($name,$this->webVersion = $webVersion);
 		$opts = array_merge($opts, [
@@ -126,6 +122,7 @@ class ClientFactory
 		if(empty($param)){
 			throw new \Exception('the request is requied');
 		}
+
 		return  $this->getResponse($name,$param);
 	}
 

@@ -20,9 +20,12 @@ class Online_status
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function UpdateOnlineStatus($where)
+	public function UpdateOnlineStatus()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }

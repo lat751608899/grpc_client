@@ -20,15 +20,21 @@ class School_subject
 		return call_user_func_array([$this->client,$method],$option);
 	}
 
-	public function GetTextbookVersion($where)
+	public function GetTextbookVersion()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 
-	public function GetTextbookCatalogue($where)
+	public function GetTextbookCatalogue()
 	{
-		return $this->client->where($where)->getResponse(explode("::",__METHOD__)[1]);
+		$method = explode("::",__METHOD__)[1];
+        $args = func_get_args();
+
+        return call_user_func_array([$this->client,$method], $args);
 	}
 	
 }
