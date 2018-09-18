@@ -718,7 +718,7 @@ message WebStatTheoryItem{
 }
 
 // 区县/学校-"教学资源" 条目信息
-message WebStatTeacheResourceItem{
+message WebStatTeachResourceItem{
     int64  id = 1;    // 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
     string name = 2;  // 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
     
@@ -838,12 +838,12 @@ message GetWebStatCountysTeachResourceRequest{
     string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
     int32 period = 6;       //学段， 0=不限 1=小学 2=初中 3=高中
     int32 subject = 7;      //学科， 0=不限
-    int32 orderby = 8;      //按 WebStatTeacheResourceItem 中统计项顺序，从1开始
+    int32 orderby = 8;      //按 WebStatTeachResourceItem 中统计项顺序，从1开始
 }
 
 message GetWebStatCountysTeachResourceResponse{
     RPC_CALL_RESULT result = 1;
-    repeated WebStatTeacheResourceItem list = 2; //第一条表示“本市”的统计总数
+    repeated WebStatTeachResourceItem list = 2; //第一条表示“本市”的统计总数
 }
 
 //传入市id，获取统计数据 "视频"， 返回 区县列表
@@ -964,7 +964,7 @@ message GetWebStatSchoolsTeachResourceRequest{
 
 message GetWebStatSchoolsTeachResourceResponse{
     RPC_CALL_RESULT result = 1;
-    repeated WebStatTeacheResourceItem list = 2; //第一条表示“本市”的统计总数
+    repeated WebStatTeachResourceItem list = 2; //第一条表示“本市”的统计总数
 }
 
 //传入区县id，获取统计数据 "视频"， 返回 学校列表
@@ -1084,7 +1084,7 @@ message GetWebStatTeachersTeachResourceResponse{
     int32 page = 3;             //当前页
     int32 page_count = 4;       //总页数
     int32 record_count = 5;     //总条数
-    repeated WebStatTeacheResourceItem list = 6; //第一条表示“本市”的统计总数
+    repeated WebStatTeachResourceItem list = 6; //第一条表示“本市”的统计总数
 }
 
 //传入学校id，获取统计数据 "视频"， 返回 教师列表

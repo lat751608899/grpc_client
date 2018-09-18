@@ -56,7 +56,7 @@ class GetWebStatCountysTeachResourceRequest extends \Google\Protobuf\Internal\Me
      */
     private $subject = 0;
     /**
-     *按 WebStatTeacheResourceItem 中统计项顺序，从1开始
+     *按 WebStatTeachResourceItem 中统计项顺序，从1开始
      *
      * Generated from protobuf field <code>int32 orderby = 8;</code>
      */
@@ -250,7 +250,7 @@ class GetWebStatCountysTeachResourceRequest extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     *按 WebStatTeacheResourceItem 中统计项顺序，从1开始
+     *按 WebStatTeachResourceItem 中统计项顺序，从1开始
      *
      * Generated from protobuf field <code>int32 orderby = 8;</code>
      * @return int
@@ -261,7 +261,7 @@ class GetWebStatCountysTeachResourceRequest extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     *按 WebStatTeacheResourceItem 中统计项顺序，从1开始
+     *按 WebStatTeachResourceItem 中统计项顺序，从1开始
      *
      * Generated from protobuf field <code>int32 orderby = 8;</code>
      * @param int $var

@@ -18,7 +18,7 @@ class GetWebStatCountysTeachResourceResponse extends \Google\Protobuf\Internal\M
     /**
      *第一条表示“本市”的统计总数
      *
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.WebStatTeacheResourceItem list = 2;</code>
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.WebStatTeachResourceItem list = 2;</code>
      */
     private $list;
 
@@ -52,7 +52,7 @@ class GetWebStatCountysTeachResourceResponse extends \Google\Protobuf\Internal\M
     /**
      *第一条表示“本市”的统计总数
      *
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.WebStatTeacheResourceItem list = 2;</code>
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.WebStatTeachResourceItem list = 2;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getList()
@@ -63,13 +63,13 @@ class GetWebStatCountysTeachResourceResponse extends \Google\Protobuf\Internal\M
     /**
      *第一条表示“本市”的统计总数
      *
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.WebStatTeacheResourceItem list = 2;</code>
-     * @param \Cfwf\Micro_service\Resource_statistics\WebStatTeacheResourceItem[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.resource_statistics.WebStatTeachResourceItem list = 2;</code>
+     * @param \Cfwf\Micro_service\Resource_statistics\WebStatTeachResourceItem[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setList($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\Resource_statistics\WebStatTeacheResourceItem::class);
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\Resource_statistics\WebStatTeachResourceItem::class);
         $this->list = $arr;
 
         return $this;
