@@ -57,6 +57,9 @@ trait ResponseCollection
                 }
 				$res[$name] = $new;
 			}else{
+                if ($field->getMessageType()){ // message 类型的 递归传递
+                    $data = (new self($data))->toArray();
+                }
 				$res[$name] = $data;
 			}
 		}
