@@ -57,7 +57,7 @@ trait ResponseCollection
                 }
 				$res[$name] = $new;
 			}else{
-                if ($field->getMessageType()){ // message 类型的 递归传递
+                if ($field->getMessageType() && is_object($data)){ // message 类型的 递归传递 (有message类型 返回的不是对象的 要加上判断)
                     $data = (new self($data))->toArray();
                 }
 				$res[$name] = $data;
