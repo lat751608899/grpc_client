@@ -48,7 +48,7 @@ class ClientFactory
      * @var array
      */
 	private $methodOptions = [
-        'timeout' => 2000000   // 调用超时时间 微秒
+        'timeout' => 5000000   // 调用超时时间 微秒
     ];
 
 
