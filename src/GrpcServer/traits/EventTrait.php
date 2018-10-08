@@ -127,7 +127,9 @@ trait EventTrait
 				$res = [];
 				if($req instanceof  Message){
 					$res = $this->dealRequestToArray($req);
-				}else{
+				}elseif (empty($req)){ // 有message 但是值不是对象的
+                    $res = $req;
+                }else{
 					foreach ($req as $val){
 						$res[] = array_map(function ($item) use ($val){
 							$getter = $item->getGetter();
