@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Monitor;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -33,6 +31,10 @@ class ReportRunStatusResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 rabbitmq_attr_version = 5;</code>
      */
     private $rabbitmq_attr_version = 0;
+    /**
+     * Generated from protobuf field <code>int32 setting_version = 6;</code>
+     */
+    private $setting_version = 0;
 
     public function __construct() {
         \GPBMetadata\Monitor::initOnce();
@@ -145,6 +147,28 @@ class ReportRunStatusResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->rabbitmq_attr_version = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 setting_version = 6;</code>
+     * @return int
+     */
+    public function getSettingVersion()
+    {
+        return $this->setting_version;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 setting_version = 6;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setSettingVersion($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->setting_version = $var;
 
         return $this;
     }

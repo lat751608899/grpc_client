@@ -31,6 +31,20 @@ class MonitorClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 获取微服务配置信息
+     * @param \Cfwf\Micro_service\Monitor\GetMicroServiceSettingRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetMicroServiceSetting(\Cfwf\Micro_service\Monitor\GetMicroServiceSettingRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.monitor.Monitor/GetMicroServiceSetting',
+        $argument,
+        ['\Cfwf\Micro_service\Monitor\GetMicroServiceSettingResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * 获取数据库连接配置
      * @param \Cfwf\Micro_service\Monitor\GetDatabaseServerAddressRequest $argument input argument
      * @param array $metadata metadata

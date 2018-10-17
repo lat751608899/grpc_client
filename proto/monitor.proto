@@ -9,6 +9,10 @@ service Monitor {
   
   // 获取微服务地址
   rpc GetMicroServiceAddress(GetMicroServiceAddressRequest) returns (GetMicroServiceAddressResponse) {} 
+  
+  // 获取微服务配置信息
+  rpc GetMicroServiceSetting(GetMicroServiceSettingRequest) returns (GetMicroServiceSettingResponse) {} 
+  
   // 获取数据库连接配置
   rpc GetDatabaseServerAddress(GetDatabaseServerAddressRequest) returns (GetDatabaseServerAddressResponse) {}   
   // 获取rabbitmq连接配置
@@ -65,6 +69,23 @@ message GetMicroServiceAddressResponse {
     RPC_CALL_RESULT result = 1;
     int32 version = 2;
 	repeated MicroServiceAddress list = 3; //返回有更新的微服务地址列表，只返回比 request.version 大的条目，也就是有更新的条目
+}
+
+message GetMicroServiceSettingRequest {
+	int32 service_id = 1; //调用者的 serviceid
+    int32 instance_id = 2; //调用者实例编号或组编号
+    int32 version = 3;    //调用者本地已存在的版本
+}
+
+message SettingItem{
+	string name = 1;  
+	string value = 2;
+}
+
+message GetMicroServiceSettingResponse {
+    RPC_CALL_RESULT result = 1; 
+    int32 version = 2;          //最新版本号。
+	repeated SettingItem list = 3; 
 }
 
 message GetDatabaseServerAddressRequest {
@@ -137,6 +158,7 @@ message ReportRunStatusResponse {
     int32 database_attr_version = 3;
     int32 redis_attr_version = 4;
     int32 rabbitmq_attr_version = 5;
+    int32 setting_version = 6;
 }
 
 
@@ -175,6 +197,7 @@ message ClientVersionInfo {
     VersionStatus status = 10;    //状态。 发布或修改时不用填写
     int32  download_count = 11;   //已下载次数。 发布或修改时不用填写
     string create_time = 12; //版本创建时间，发布时间。发布或修改时不用填写
+    int32  version_type = 13; //0=原版 1=教师版 2=手机版
 }
 
 message PublishNewClientVersionRequest{
@@ -200,6 +223,7 @@ message CancelClientVersionRequest{
    string operatorid = 1;    //操作人
    int32 os = 2;             //1=pc 2=android 3=ios
    string version = 3;       //版本号
+   int32  version_type = 4; //0=原版 1=教师版 2=手机版
 }
 
 message CancelClientVersionResponse {
@@ -210,6 +234,7 @@ message DeleteClientVersionRequest{
    string operatorid = 1;    //操作人
    int32 os = 2;             //1=pc 2=android 3=ios
    string version = 3;       //版本号
+   int32  version_type = 4; //0=原版 1=教师版 2=手机版
 }
 
 message DeleteClientVersionResponse {
@@ -237,6 +262,7 @@ message AddClientVersionDownloadCountRequest{
    int32 os = 1;             //下载哪个端的  1=pc 2=android 3=ios  
    string version = 2;       //下载哪个版本。 可不填，默认为非限定范围的当前版本。如果是限定ip范围的坂本，需要填写版本号
    string ip = 3;            //下载者的ip
+   int32  version_type = 4;  //0=原版 1=教师版 2=手机版
 }
 
 message AddClientVersionDownloadCountResponse {
@@ -255,12 +281,14 @@ message GetCurrentClientVersionResponse{
     string setupfile_url = 4; //安装文件下载地址，全路径 
     int32 setupfile_size = 5; //安装文件大小，单位： Byte
     string description = 6;    //升级说明
+    int32  version_type = 7; //0=原版 1=教师版 2=手机版
 }
 
 message GetUpgradeFileListRequest{
    int32 os = 1;  //目前固定为1 (pc)
    string client_version = 2; //客户端版本号
    string client_ip = 3; //客户端ip
+   int32  version_type = 4; //0=原版 1=教师版 2=手机版
 }
 
 message VersionUpgradeFiles{
