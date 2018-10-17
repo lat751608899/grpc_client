@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Monitor;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -31,6 +29,12 @@ class GetClientVersionListRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 os = 3;</code>
      */
     private $os = 0;
+    /**
+     *0=原版 1=教师版 2=学生版
+     *
+     * Generated from protobuf field <code>int32 version_type = 4;</code>
+     */
+    private $version_type = 0;
 
     public function __construct() {
         \GPBMetadata\Monitor::initOnce();
@@ -111,6 +115,32 @@ class GetClientVersionListRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->os = $var;
+
+        return $this;
+    }
+
+    /**
+     *0=原版 1=教师版 2=学生版
+     *
+     * Generated from protobuf field <code>int32 version_type = 4;</code>
+     * @return int
+     */
+    public function getVersionType()
+    {
+        return $this->version_type;
+    }
+
+    /**
+     *0=原版 1=教师版 2=学生版
+     *
+     * Generated from protobuf field <code>int32 version_type = 4;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setVersionType($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->version_type = $var;
 
         return $this;
     }

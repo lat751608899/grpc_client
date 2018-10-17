@@ -197,7 +197,7 @@ message ClientVersionInfo {
     VersionStatus status = 10;    //状态。 发布或修改时不用填写
     int32  download_count = 11;   //已下载次数。 发布或修改时不用填写
     string create_time = 12; //版本创建时间，发布时间。发布或修改时不用填写
-    int32  version_type = 13; //0=原版 1=教师版 2=手机版
+    int32  version_type = 13; //0=原版 1=教师版 2=学生版
 }
 
 message PublishNewClientVersionRequest{
@@ -223,7 +223,7 @@ message CancelClientVersionRequest{
    string operatorid = 1;    //操作人
    int32 os = 2;             //1=pc 2=android 3=ios
    string version = 3;       //版本号
-   int32  version_type = 4; //0=原版 1=教师版 2=手机版
+   int32  version_type = 4; //0=原版 1=教师版 2=学生版
 }
 
 message CancelClientVersionResponse {
@@ -234,7 +234,7 @@ message DeleteClientVersionRequest{
    string operatorid = 1;    //操作人
    int32 os = 2;             //1=pc 2=android 3=ios
    string version = 3;       //版本号
-   int32  version_type = 4; //0=原版 1=教师版 2=手机版
+   int32  version_type = 4; //0=原版 1=教师版 2=学生版
 }
 
 message DeleteClientVersionResponse {
@@ -246,6 +246,7 @@ message GetClientVersionListRequest{
    int32 page_size = 1;       //每页条数
    int32 page = 2;            //当前页。如果>总页数，则返回最后一页的数据
    int32 os = 3;              //1=pc 2=android 3=ios
+   int32 version_type = 4; //0=原版 1=教师版 2=学生版
 }
 
 message GetClientVersionListResponse
@@ -262,7 +263,7 @@ message AddClientVersionDownloadCountRequest{
    int32 os = 1;             //下载哪个端的  1=pc 2=android 3=ios  
    string version = 2;       //下载哪个版本。 可不填，默认为非限定范围的当前版本。如果是限定ip范围的坂本，需要填写版本号
    string ip = 3;            //下载者的ip
-   int32  version_type = 4;  //0=原版 1=教师版 2=手机版
+   int32  version_type = 4;  //0=原版 1=教师版 2=学生版
 }
 
 message AddClientVersionDownloadCountResponse {
@@ -272,6 +273,7 @@ message AddClientVersionDownloadCountResponse {
 message GetCurrentClientVersionRequest{
    int32 os = 1; 
    string ip = 2; 
+   int32 version_type = 3; //0=原版 1=教师版 2=学生版
 }
 
 message GetCurrentClientVersionResponse{
@@ -281,14 +283,14 @@ message GetCurrentClientVersionResponse{
     string setupfile_url = 4; //安装文件下载地址，全路径 
     int32 setupfile_size = 5; //安装文件大小，单位： Byte
     string description = 6;    //升级说明
-    int32  version_type = 7; //0=原版 1=教师版 2=手机版
+    int32  version_type = 7; //0=原版 1=教师版 2=学生版
 }
 
 message GetUpgradeFileListRequest{
    int32 os = 1;  //目前固定为1 (pc)
    string client_version = 2; //客户端版本号
    string client_ip = 3; //客户端ip
-   int32  version_type = 4; //0=原版 1=教师版 2=手机版
+   int32  version_type = 4; //0=原版 1=教师版 2=学生版
 }
 
 message VersionUpgradeFiles{

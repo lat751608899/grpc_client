@@ -46,7 +46,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
      */
     private $description = '';
     /**
-     *0=原版 1=教师版 2=手机版
+     *0=原版 1=教师版 2=学生版
      *
      * Generated from protobuf field <code>int32 version_type = 7;</code>
      */
@@ -210,7 +210,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=原版 1=教师版 2=手机版
+     *0=原版 1=教师版 2=学生版
      *
      * Generated from protobuf field <code>int32 version_type = 7;</code>
      * @return int
@@ -221,7 +221,7 @@ class GetCurrentClientVersionResponse extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=原版 1=教师版 2=手机版
+     *0=原版 1=教师版 2=学生版
      *
      * Generated from protobuf field <code>int32 version_type = 7;</code>
      * @param int $var
