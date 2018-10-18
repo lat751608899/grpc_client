@@ -4,16 +4,14 @@
 
 namespace Cfwf\Micro_service\Yunpan;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *函数： GetUploadingFileList 的 传入参数
+ *SearchFileInfo
  *
- * Generated from protobuf message <code>cfwf.micro_service.yunpan.SearchFileWhenBeginUploadRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.yunpan.SearchFileInfoRequest</code>
  */
-class SearchFileWhenBeginUploadRequest extends \Google\Protobuf\Internal\Message
+class SearchFileInfoRequest extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>fixed64 filesize = 1;</code>
@@ -35,6 +33,14 @@ class SearchFileWhenBeginUploadRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 file_res_type = 5;</code>
      */
     private $file_res_type = 0;
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.FileStatus status = 6;</code>
+     */
+    private $status = 0;
+    /**
+     * Generated from protobuf field <code>fixed64 operatorid = 7;</code>
+     */
+    private $operatorid = 0;
 
     public function __construct() {
         \GPBMetadata\Yunpan::initOnce();
@@ -147,6 +153,50 @@ class SearchFileWhenBeginUploadRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->file_res_type = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.FileStatus status = 6;</code>
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.FileStatus status = 6;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setStatus($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Yunpan\FileStatus::class);
+        $this->status = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 operatorid = 7;</code>
+     * @return int|string
+     */
+    public function getOperatorid()
+    {
+        return $this->operatorid;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 operatorid = 7;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setOperatorid($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->operatorid = $var;
 
         return $this;
     }

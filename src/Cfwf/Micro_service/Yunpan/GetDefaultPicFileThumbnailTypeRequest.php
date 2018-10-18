@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Yunpan;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -14,9 +12,9 @@ use Google\Protobuf\Internal\GPBUtil;
 class GetDefaultPicFileThumbnailTypeRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>int32 filetype = 1;</code>
+     * Generated from protobuf field <code>int32 res_type = 1;</code>
      */
-    private $filetype = 0;
+    private $res_type = 0;
 
     public function __construct() {
         \GPBMetadata\Yunpan::initOnce();
@@ -24,23 +22,23 @@ class GetDefaultPicFileThumbnailTypeRequest extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>int32 filetype = 1;</code>
+     * Generated from protobuf field <code>int32 res_type = 1;</code>
      * @return int
      */
-    public function getFiletype()
+    public function getResType()
     {
-        return $this->filetype;
+        return $this->res_type;
     }
 
     /**
-     * Generated from protobuf field <code>int32 filetype = 1;</code>
+     * Generated from protobuf field <code>int32 res_type = 1;</code>
      * @param int $var
      * @return $this
      */
-    public function setFiletype($var)
+    public function setResType($var)
     {
         GPBUtil::checkInt32($var);
-        $this->filetype = $var;
+        $this->res_type = $var;
 
         return $this;
     }

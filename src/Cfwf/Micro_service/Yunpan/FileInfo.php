@@ -4,13 +4,9 @@
 
 namespace Cfwf\Micro_service\Yunpan;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *文件信息
- *
  * Generated from protobuf message <code>cfwf.micro_service.yunpan.FileInfo</code>
  */
 class FileInfo extends \Google\Protobuf\Internal\Message
@@ -64,23 +60,29 @@ class FileInfo extends \Google\Protobuf\Internal\Message
      */
     private $fastdfs_id = '';
     /**
-     *文件资源类型        
+     *文件资源类型     
      *
      * Generated from protobuf field <code>int32 file_res_type = 9;</code>
      */
     private $file_res_type = 0;
     /**
-     *文件上传缓存服务器id    
+     *文件上传缓存服务器id 
      *
      * Generated from protobuf field <code>int32 file_server_id = 10;</code>
      */
     private $file_server_id = 0;
     /**
-     *0=原始缓存位置  1=预处理结果缓存位置   
+     *当文件为等待预处理时，下面两个字段会被填充
      *
-     * Generated from protobuf field <code>int32 save_path = 11;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.FileStatus status = 11;</code>
      */
-    private $save_path = 0;
+    private $status = 0;
+    /**
+     *下载地址：预处理程序需要下载文件并进行处理
+     *
+     * Generated from protobuf field <code>string download_url = 12;</code>
+     */
+    private $download_url = '';
 
     public function __construct() {
         \GPBMetadata\Yunpan::initOnce();
@@ -296,7 +298,7 @@ class FileInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *文件资源类型        
+     *文件资源类型     
      *
      * Generated from protobuf field <code>int32 file_res_type = 9;</code>
      * @return int
@@ -307,7 +309,7 @@ class FileInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *文件资源类型        
+     *文件资源类型     
      *
      * Generated from protobuf field <code>int32 file_res_type = 9;</code>
      * @param int $var
@@ -322,7 +324,7 @@ class FileInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *文件上传缓存服务器id    
+     *文件上传缓存服务器id 
      *
      * Generated from protobuf field <code>int32 file_server_id = 10;</code>
      * @return int
@@ -333,7 +335,7 @@ class FileInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *文件上传缓存服务器id    
+     *文件上传缓存服务器id 
      *
      * Generated from protobuf field <code>int32 file_server_id = 10;</code>
      * @param int $var
@@ -348,27 +350,53 @@ class FileInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *0=原始缓存位置  1=预处理结果缓存位置   
+     *当文件为等待预处理时，下面两个字段会被填充
      *
-     * Generated from protobuf field <code>int32 save_path = 11;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.FileStatus status = 11;</code>
      * @return int
      */
-    public function getSavePath()
+    public function getStatus()
     {
-        return $this->save_path;
+        return $this->status;
     }
 
     /**
-     *0=原始缓存位置  1=预处理结果缓存位置   
+     *当文件为等待预处理时，下面两个字段会被填充
      *
-     * Generated from protobuf field <code>int32 save_path = 11;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.FileStatus status = 11;</code>
      * @param int $var
      * @return $this
      */
-    public function setSavePath($var)
+    public function setStatus($var)
     {
-        GPBUtil::checkInt32($var);
-        $this->save_path = $var;
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Yunpan\FileStatus::class);
+        $this->status = $var;
+
+        return $this;
+    }
+
+    /**
+     *下载地址：预处理程序需要下载文件并进行处理
+     *
+     * Generated from protobuf field <code>string download_url = 12;</code>
+     * @return string
+     */
+    public function getDownloadUrl()
+    {
+        return $this->download_url;
+    }
+
+    /**
+     *下载地址：预处理程序需要下载文件并进行处理
+     *
+     * Generated from protobuf field <code>string download_url = 12;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setDownloadUrl($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->download_url = $var;
 
         return $this;
     }

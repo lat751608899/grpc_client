@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Yunpan;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -18,27 +16,35 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
      */
     private $id = 0;
     /**
+     * Generated from protobuf field <code>int32 res_type = 2;</code>
+     */
+    private $res_type = 0;
+    /**
      *0=按fld_height和fld_width压缩  1=压缩时不变形，以fld_height为基准压缩  2=压缩时不变形，以fld_width为基准压缩
      *
-     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 2;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 3;</code>
      */
     private $thumbnail_type = 0;
     /**
-     * Generated from protobuf field <code>int32 middle_height = 3;</code>
+     * Generated from protobuf field <code>int32 middle_height = 4;</code>
      */
     private $middle_height = 0;
     /**
-     * Generated from protobuf field <code>int32 middle_width = 4;</code>
+     * Generated from protobuf field <code>int32 middle_width = 5;</code>
      */
     private $middle_width = 0;
     /**
-     * Generated from protobuf field <code>int32 small_height = 5;</code>
+     * Generated from protobuf field <code>int32 small_height = 6;</code>
      */
     private $small_height = 0;
     /**
-     * Generated from protobuf field <code>int32 small_width = 6;</code>
+     * Generated from protobuf field <code>int32 small_width = 7;</code>
      */
     private $small_width = 0;
+    /**
+     * Generated from protobuf field <code>bool is_default = 8;</code>
+     */
+    private $is_default = false;
 
     public function __construct() {
         \GPBMetadata\Yunpan::initOnce();
@@ -68,9 +74,31 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
+     * Generated from protobuf field <code>int32 res_type = 2;</code>
+     * @return int
+     */
+    public function getResType()
+    {
+        return $this->res_type;
+    }
+
+    /**
+     * Generated from protobuf field <code>int32 res_type = 2;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setResType($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->res_type = $var;
+
+        return $this;
+    }
+
+    /**
      *0=按fld_height和fld_width压缩  1=压缩时不变形，以fld_height为基准压缩  2=压缩时不变形，以fld_width为基准压缩
      *
-     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 2;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 3;</code>
      * @return int
      */
     public function getThumbnailType()
@@ -81,7 +109,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     /**
      *0=按fld_height和fld_width压缩  1=压缩时不变形，以fld_height为基准压缩  2=压缩时不变形，以fld_width为基准压缩
      *
-     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 2;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.yunpan.PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 3;</code>
      * @param int $var
      * @return $this
      */
@@ -94,7 +122,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 middle_height = 3;</code>
+     * Generated from protobuf field <code>int32 middle_height = 4;</code>
      * @return int
      */
     public function getMiddleHeight()
@@ -103,7 +131,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 middle_height = 3;</code>
+     * Generated from protobuf field <code>int32 middle_height = 4;</code>
      * @param int $var
      * @return $this
      */
@@ -116,7 +144,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 middle_width = 4;</code>
+     * Generated from protobuf field <code>int32 middle_width = 5;</code>
      * @return int
      */
     public function getMiddleWidth()
@@ -125,7 +153,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 middle_width = 4;</code>
+     * Generated from protobuf field <code>int32 middle_width = 5;</code>
      * @param int $var
      * @return $this
      */
@@ -138,7 +166,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 small_height = 5;</code>
+     * Generated from protobuf field <code>int32 small_height = 6;</code>
      * @return int
      */
     public function getSmallHeight()
@@ -147,7 +175,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 small_height = 5;</code>
+     * Generated from protobuf field <code>int32 small_height = 6;</code>
      * @param int $var
      * @return $this
      */
@@ -160,7 +188,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 small_width = 6;</code>
+     * Generated from protobuf field <code>int32 small_width = 7;</code>
      * @return int
      */
     public function getSmallWidth()
@@ -169,7 +197,7 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>int32 small_width = 6;</code>
+     * Generated from protobuf field <code>int32 small_width = 7;</code>
      * @param int $var
      * @return $this
      */
@@ -177,6 +205,28 @@ class PicFileThumbnailInfo extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->small_width = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_default = 8;</code>
+     * @return bool
+     */
+    public function getIsDefault()
+    {
+        return $this->is_default;
+    }
+
+    /**
+     * Generated from protobuf field <code>bool is_default = 8;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setIsDefault($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->is_default = $var;
 
         return $this;
     }

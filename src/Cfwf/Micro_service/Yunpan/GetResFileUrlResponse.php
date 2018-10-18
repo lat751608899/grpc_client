@@ -7,18 +7,18 @@ namespace Cfwf\Micro_service\Yunpan;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.yunpan.GetPicFileThumbnailTypeListResponse</code>
+ * Generated from protobuf message <code>cfwf.micro_service.yunpan.GetResFileUrlResponse</code>
  */
-class GetPicFileThumbnailTypeListResponse extends \Google\Protobuf\Internal\Message
+class GetResFileUrlResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>.cfwf.micro_service.yunpan.RPC_CALL_RESULT result = 1;</code>
      */
     private $result = 0;
     /**
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.PicFileThumbnailInfo list = 2;</code>
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.ResFileUrl res_urls = 2;</code>
      */
-    private $list;
+    private $res_urls;
 
     public function __construct() {
         \GPBMetadata\Yunpan::initOnce();
@@ -48,23 +48,23 @@ class GetPicFileThumbnailTypeListResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.PicFileThumbnailInfo list = 2;</code>
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.ResFileUrl res_urls = 2;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getList()
+    public function getResUrls()
     {
-        return $this->list;
+        return $this->res_urls;
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.PicFileThumbnailInfo list = 2;</code>
-     * @param \Cfwf\Micro_service\Yunpan\PicFileThumbnailInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.ResFileUrl res_urls = 2;</code>
+     * @param \Cfwf\Micro_service\Yunpan\ResFileUrl[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setList($var)
+    public function setResUrls($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\Yunpan\PicFileThumbnailInfo::class);
-        $this->list = $arr;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\Yunpan\ResFileUrl::class);
+        $this->res_urls = $arr;
 
         return $this;
     }

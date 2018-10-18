@@ -46,29 +46,29 @@ class YunPanClient extends \Grpc\BaseStub {
 
     /**
      * ************************
-     * 文件上传
+     * 文件上传过程： 上传、预处理、存库
      * ***********************
      *
-     * 由文件上传服务器调用，检查新上传的文件是否已存在和是否可以断点续传
-     * @param \Cfwf\Micro_service\Yunpan\SearchFileWhenBeginUploadRequest $argument input argument
+     * 根据文件特征查询文件，用于在开始上传时检查断点续传
+     * @param \Cfwf\Micro_service\Yunpan\SearchFileInfoRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function SearchFileWhenBeginUpload(\Cfwf\Micro_service\Yunpan\SearchFileWhenBeginUploadRequest $argument,
+    public function SearchFileInfo(\Cfwf\Micro_service\Yunpan\SearchFileInfoRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/SearchFileWhenBeginUpload',
+        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/SearchFileInfo',
         $argument,
-        ['\Cfwf\Micro_service\Yunpan\GetFileListResponse', 'decode'],
+        ['\Cfwf\Micro_service\Yunpan\SearchFileInfoResponse', 'decode'],
         $metadata, $options);
     }
 
     /**
-     * 设置正在上传的文件信息。由文件上传服务器调用，在文件上传中断和完成时时会调用
-     * @param \Cfwf\Micro_service\Yunpan\FileInfo $argument input argument
+     * 保存正在上传的文件信息。由文件上传服务器调用，在文件上传中断和完成时时会调用
+     * @param \Cfwf\Micro_service\Yunpan\SetUploadingFileInfoRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function SetUploadingFileInfo(\Cfwf\Micro_service\Yunpan\FileInfo $argument,
+    public function SetUploadingFileInfo(\Cfwf\Micro_service\Yunpan\SetUploadingFileInfoRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/SetUploadingFileInfo',
         $argument,
@@ -77,66 +77,16 @@ class YunPanClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 设置已上传完成的的文件信息。由文件上传服务器调用，每个用户的每次上传最多调用一次。此函数会扣除用户的剩余空间。
-     * @param \Cfwf\Micro_service\Yunpan\SetFileUploadedAndBeloneToRequest $argument input argument
+     * 获取待预处理的文件，并将其设为“正在进行预处理”的状态。 预处理完成后，进行预处理的程序将文件保存到fastdfs
+     * @param \Cfwf\Micro_service\Yunpan\GetWaitingPreprocessFileRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function SetFileUploadedAndBeloneTo(\Cfwf\Micro_service\Yunpan\SetFileUploadedAndBeloneToRequest $argument,
+    public function GetWaitingPreprocessFile(\Cfwf\Micro_service\Yunpan\GetWaitingPreprocessFileRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/SetFileUploadedAndBeloneTo',
+        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/GetWaitingPreprocessFile',
         $argument,
-        ['\Cfwf\Micro_service\Yunpan\CommonResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * ************************
-     * 对上传后的文件预处理
-     * ***********************
-     *
-     * 获取已经上传完成等待预处理的文件的列表，由 预处理服务器调用
-     * @param \Cfwf\Micro_service\Yunpan\CommonRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function GetWaittingPreprocessFileList(\Cfwf\Micro_service\Yunpan\CommonRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/GetWaittingPreprocessFileList',
-        $argument,
-        ['\Cfwf\Micro_service\Yunpan\GetFileListResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * 设置文件预处理完成
-     * @param \Cfwf\Micro_service\Yunpan\SetFilePreprocessFinishRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function SetFilePreprocessFinish(\Cfwf\Micro_service\Yunpan\SetFilePreprocessFinishRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/SetFilePreprocessFinish',
-        $argument,
-        ['\Cfwf\Micro_service\Yunpan\CommonResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
-     * ************************
-     * 对预处理完成的文件存入fastdfs
-     * ***********************
-     *
-     * 获取已经预处理完成，等待保存到fast_dfs的文件的列表，由 文件存储服务器调用
-     * @param \Cfwf\Micro_service\Yunpan\CommonRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function GetWaittingStorageFileList(\Cfwf\Micro_service\Yunpan\CommonRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/GetWaittingStorageFileList',
-        $argument,
-        ['\Cfwf\Micro_service\Yunpan\GetFileListResponse', 'decode'],
+        ['\Cfwf\Micro_service\Yunpan\GetWaitingPreprocessFileResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -174,11 +124,11 @@ class YunPanClient extends \Grpc\BaseStub {
      * ***********************
      *
      * 获取 缩略图 处理类型列表
-     * @param \Cfwf\Micro_service\Yunpan\CommonRequest $argument input argument
+     * @param \Cfwf\Micro_service\Yunpan\GetPicFileThumbnailTypeListRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function GetPicFileThumbnailTypeList(\Cfwf\Micro_service\Yunpan\CommonRequest $argument,
+    public function GetPicFileThumbnailTypeList(\Cfwf\Micro_service\Yunpan\GetPicFileThumbnailTypeListRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/GetPicFileThumbnailTypeList',
         $argument,
@@ -188,11 +138,11 @@ class YunPanClient extends \Grpc\BaseStub {
 
     /**
      * 增加 缩略图 处理方式。此时PicFileThumbnailInfo中的 id将被忽略。 为保存已处理过的文件的信息，只能增加，不能修改。 CommonResponse中的 msg 保存新生成的id（如果存在相同处理类型，将不新增，并返回对应的id）
-     * @param \Cfwf\Micro_service\Yunpan\PicFileThumbnailInfo $argument input argument
+     * @param \Cfwf\Micro_service\Yunpan\AddPicFileThumbnailTypeRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function AddPicFileThumbnailType(\Cfwf\Micro_service\Yunpan\PicFileThumbnailInfo $argument,
+    public function AddPicFileThumbnailType(\Cfwf\Micro_service\Yunpan\AddPicFileThumbnailTypeRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/AddPicFileThumbnailType',
         $argument,
@@ -241,6 +191,19 @@ class YunPanClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/GetResFileInfo',
         $argument,
         ['\Cfwf\Micro_service\Yunpan\GetResFileInfoResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * @param \Cfwf\Micro_service\Yunpan\GetResFileUrlRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetResFileUrl(\Cfwf\Micro_service\Yunpan\GetResFileUrlRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.yunpan.YunPan/GetResFileUrl',
+        $argument,
+        ['\Cfwf\Micro_service\Yunpan\GetResFileUrlResponse', 'decode'],
         $metadata, $options);
     }
 

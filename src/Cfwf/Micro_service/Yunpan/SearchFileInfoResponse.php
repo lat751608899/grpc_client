@@ -7,16 +7,16 @@ namespace Cfwf\Micro_service\Yunpan;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.yunpan.GetPicFileThumbnailTypeListResponse</code>
+ * Generated from protobuf message <code>cfwf.micro_service.yunpan.SearchFileInfoResponse</code>
  */
-class GetPicFileThumbnailTypeListResponse extends \Google\Protobuf\Internal\Message
+class SearchFileInfoResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>.cfwf.micro_service.yunpan.RPC_CALL_RESULT result = 1;</code>
      */
     private $result = 0;
     /**
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.PicFileThumbnailInfo list = 2;</code>
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.FileInfo list = 2;</code>
      */
     private $list;
 
@@ -48,7 +48,7 @@ class GetPicFileThumbnailTypeListResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.PicFileThumbnailInfo list = 2;</code>
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.FileInfo list = 2;</code>
      * @return \Google\Protobuf\Internal\RepeatedField
      */
     public function getList()
@@ -57,13 +57,13 @@ class GetPicFileThumbnailTypeListResponse extends \Google\Protobuf\Internal\Mess
     }
 
     /**
-     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.PicFileThumbnailInfo list = 2;</code>
-     * @param \Cfwf\Micro_service\Yunpan\PicFileThumbnailInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.yunpan.FileInfo list = 2;</code>
+     * @param \Cfwf\Micro_service\Yunpan\FileInfo[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
     public function setList($var)
     {
-        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\Yunpan\PicFileThumbnailInfo::class);
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\Yunpan\FileInfo::class);
         $this->list = $arr;
 
         return $this;

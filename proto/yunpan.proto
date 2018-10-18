@@ -5,7 +5,7 @@ syntax = "proto3";
 package cfwf.micro_service.yunpan;
 option java_package = "com.cfwf.micro_service.yunpan";
 
-service YunPan {
+service YunPan { 
   /*************************
   用户空间
   *************************/
@@ -16,32 +16,17 @@ service YunPan {
   rpc SetUserSpace (SetUserSpaceRequest) returns (CommonResponse) {}  
 
   /*************************
-  文件上传
+  文件上传过程： 上传、预处理、存库
   *************************/
-  //由文件上传服务器调用，检查新上传的文件是否已存在和是否可以断点续传
-  rpc SearchFileWhenBeginUpload (SearchFileWhenBeginUploadRequest) returns (GetFileListResponse) {}  
+  //根据文件特征查询文件，用于在开始上传时检查断点续传
+  rpc SearchFileInfo (SearchFileInfoRequest) returns (SearchFileInfoResponse) {}  
 
-  //设置正在上传的文件信息。由文件上传服务器调用，在文件上传中断和完成时时会调用
-  rpc SetUploadingFileInfo (FileInfo) returns (CommonResponse) {}
+  //保存正在上传的文件信息。由文件上传服务器调用，在文件上传中断和完成时时会调用
+  rpc SetUploadingFileInfo (SetUploadingFileInfoRequest) returns (CommonResponse) {}
 
-  //设置已上传完成的的文件信息。由文件上传服务器调用，每个用户的每次上传最多调用一次。此函数会扣除用户的剩余空间。
-  rpc SetFileUploadedAndBeloneTo (SetFileUploadedAndBeloneToRequest) returns (CommonResponse) {}
-  
-  /*************************
-  对上传后的文件预处理
-  *************************/
-  //获取已经上传完成等待预处理的文件的列表，由 预处理服务器调用
-  rpc GetWaittingPreprocessFileList (CommonRequest) returns (GetFileListResponse) {}
-  
-  //设置文件预处理完成
-  rpc SetFilePreprocessFinish (SetFilePreprocessFinishRequest) returns (CommonResponse) {}
-  
-  /*************************
-  对预处理完成的文件存入fastdfs
-  *************************/
-  //获取已经预处理完成，等待保存到fast_dfs的文件的列表，由 文件存储服务器调用
-  rpc GetWaittingStorageFileList (CommonRequest) returns (GetFileListResponse) {}
-
+  //获取待预处理的文件，并将其设为“正在进行预处理”的状态。 预处理完成后，进行预处理的程序将文件保存到fastdfs
+  rpc GetWaitingPreprocessFile(GetWaitingPreprocessFileRequest) returns (GetWaitingPreprocessFileResponse) {}
+   
   //设置文件的fastdfs_id， 由文件存储服务器在保存文件到fastdfs成功时调用
   rpc SetFileStorageFinish(SetFileStorageFinishRequest) returns (CommonResponse) {}
   
@@ -52,10 +37,10 @@ service YunPan {
   图片文件在存入fastdfs之前进行缩略图处理
   *************************/
   //获取 缩略图 处理类型列表
-  rpc GetPicFileThumbnailTypeList (CommonRequest) returns (GetPicFileThumbnailTypeListResponse) {}
+  rpc GetPicFileThumbnailTypeList (GetPicFileThumbnailTypeListRequest) returns (GetPicFileThumbnailTypeListResponse) {}
   
   //增加 缩略图 处理方式。此时PicFileThumbnailInfo中的 id将被忽略。 为保存已处理过的文件的信息，只能增加，不能修改。 CommonResponse中的 msg 保存新生成的id（如果存在相同处理类型，将不新增，并返回对应的id）
-  rpc AddPicFileThumbnailType (PicFileThumbnailInfo) returns (CommonResponse) {}
+  rpc AddPicFileThumbnailType (AddPicFileThumbnailTypeRequest) returns (CommonResponse) {}
   
   //获取某种类型的图片文件的默认处理方式
   rpc GetDefaultPicFileThumbnailType (GetDefaultPicFileThumbnailTypeRequest) returns (GetDefaultPicFileThumbnailTypeResponse) {}
@@ -67,7 +52,8 @@ service YunPan {
   获取文件信息(包括下载地址信息)
   *************************/ 
   rpc GetResFileInfo (GetResFileInfoRequest) returns (GetResFileInfoResponse) {}
-    
+   
+  rpc GetResFileUrl (GetResFileUrlRequest) returns (GetResFileUrlResponse) {}
 }
 
 //通用rpc调用返回结果
@@ -80,6 +66,14 @@ enum RPC_CALL_RESULT {
 }
 
 //文件信息
+enum  FileStatus{
+    kFileStatusNone = 0;          
+    kFileStatusUploading = 1;      //正在上传
+    kFileStatusWaitPreprocess = 2; //已上传完成，等待预处理
+    kFileStatusPreprocessing  = 3; //正在进行预处理
+    kFileStatusSavedToFastDfs = 9; //已经保存到了fastdfs
+}
+
 message FileInfo{
     fixed64 userid = 1;         //上传人
 	fixed64 fileid = 2;         //文件id，全局唯一
@@ -89,26 +83,18 @@ message FileInfo{
 	string md5 = 6;             //文件md5
 	string crc = 7;             //文件校验码
 	string fastdfs_id = 8;      //文件存储到fastdfs内的文件名
-    int32 file_res_type = 9;    //文件资源类型        
-    int32 file_server_id = 10;        //文件上传缓存服务器id    
-    int32 save_path = 11;       //0=原始缓存位置  1=预处理结果缓存位置   
+    int32 file_res_type = 9;    //文件资源类型     
+    int32 file_server_id = 10;  //文件上传缓存服务器id 
+    
+    FileStatus status = 11;     //当文件为等待预处理时，下面两个字段会被填充
+    string download_url = 12;   //下载地址：预处理程序需要下载文件并进行处理
 }
 
-//一般rpc调用传入参数
-message CommonRequest{
-	string msg = 1;
-}
 
 //一般rpc调用返回值
 message CommonResponse{
 	RPC_CALL_RESULT result = 1;
 	string msg = 2;
-}
-
-//函数： SetUserSpace 的 传入参数
-message SetUserSpaceRequest{
-    fixed64 userid = 1;
-    fixed64 all_space = 2;
 }
 
 //函数： GetUserSpace 的 传入参数
@@ -125,33 +111,47 @@ message GetUserSpaceResponse{
 	fixed64 used_space = 4;
 }
 
-//函数： GetUploadingFileList 的 传入参数
-message SearchFileWhenBeginUploadRequest{
+//函数： SetUserSpace 的 传入参数
+message SetUserSpaceRequest{
+    fixed64 operatorid = 1;
+    fixed64 userid = 2;
+    fixed64 all_space = 3;
+}
+
+//SearchFileInfo
+message SearchFileInfoRequest{    
 	fixed64 filesize = 1;
 	string md5 = 2;
 	string crc = 3;
     string file_ext = 4;
     int32 file_res_type = 5;
+    FileStatus status = 6; 
+    fixed64 operatorid = 7;
 }
 
-//函数： GetUploadingFileList/GetUploadedFileList/ 的 返回结果
-message GetFileListResponse{
+message SearchFileInfoResponse{
     RPC_CALL_RESULT result = 1;
 	repeated  FileInfo list = 2;
 }
 
-//函数： SetFileBeloneTo 的 传入参数
-message SetFileUploadedAndBeloneToRequest{
-	FileInfo fileinfo = 1;
-	int32 belong_type = 2;
-    fixed64 belong_to = 3;
+//函数： SetUploadingFileInfo 的 传入参数
+message SetUploadingFileInfoRequest{
+    fixed64 operatorid = 1;
+	FileInfo fileinfo = 2;
+    bool upload_finish = 3; //是否已上传完成。若上传完成，根据以下连个字段扣除所属人（单位）的空间
+	int32 belong_type = 4;
+    fixed64 belong_to = 5;
 }
 
-//函数： SetFilePreprocessFinish 的 传入参数
-message SetFilePreprocessFinishRequest{
-	fixed64 fileid = 1;     //文件id
-    int32  save_path = 2;   //0=原始缓存位置  1=预处理结果缓存位置
-    int32 file_status = 3;  //0=上传中 1=上传完，等待预处理 9=预处理完成，等待保存入仓库
+message GetWaitingPreprocessFileRequest{    
+	fixed64 operatorid = 1;
+    string file_ext = 2;
+    int32 get_count = 3; //获取多少条
+}
+
+message GetWaitingPreprocessFileResponse{
+    RPC_CALL_RESULT result = 1;
+	repeated  FileInfo list = 2;
 }
 
 //函数： SetFileStorageFinish 的 传入参数
@@ -185,33 +185,43 @@ enum PIC_FILE_THUMBNAIL_TYPE {
 }
 
 message PicFileThumbnailInfo{
-	int32 id = 1;         
-    PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 2;    //0=按fld_height和fld_width压缩  1=压缩时不变形，以fld_height为基准压缩  2=压缩时不变形，以fld_width为基准压缩
-	int32 middle_height = 3;    
-	int32 middle_width = 4;    
-    int32 small_height = 5;    
-	int32 small_width = 6;    
+	int32 id = 1;
+    int32 res_type = 2;    
+    PIC_FILE_THUMBNAIL_TYPE thumbnail_type = 3;    //0=按fld_height和fld_width压缩  1=压缩时不变形，以fld_height为基准压缩  2=压缩时不变形，以fld_width为基准压缩
+	int32 middle_height = 4;    
+	int32 middle_width = 5;    
+    int32 small_height = 6;    
+	int32 small_width = 7; 
+    bool is_default = 8;    
 } 
 
 //获取和设置thumbnail_type
+message GetPicFileThumbnailTypeListRequest{
+    fixed64 operatorid = 1;    
+}
+
 message GetPicFileThumbnailTypeListResponse{
     RPC_CALL_RESULT result = 1;
 	repeated  PicFileThumbnailInfo list = 2;
 }
 
+message AddPicFileThumbnailTypeRequest{
+    fixed64 operatorid = 1;    
+	PicFileThumbnailInfo info = 2;
+}
+
 message GetDefaultPicFileThumbnailTypeRequest{
-    int32 filetype = 1;
+    int32 res_type = 1;
 }
 
 message GetDefaultPicFileThumbnailTypeResponse{
     RPC_CALL_RESULT result = 1;
-    int32 filetype = 2;
+    int32 res_type = 2;
 	PicFileThumbnailInfo info = 3;
 }
 
 message SetDefaultPicFileThumbnailTypeRequest{
-    int32 filetype = 1;
-    int32 thumbnail_type = 2;
+    int32 id = 1; // PicFileThumbnailInfo.id
 }
 
 ///////////////////////
@@ -234,4 +244,19 @@ message GetResFileInfoResponse{
     RPC_CALL_RESULT result = 1;
     repeated ResFileInfo res_files = 2;
 }
-  
+
+message ResFileUrl
+{
+    int64    file_resid = 1;
+    string   download_url = 2;
+};
+
+message GetResFileUrlRequest{ 
+    repeated int64 res_fileid = 1;
+}
+
+message GetResFileUrlResponse{ 
+    RPC_CALL_RESULT result = 1;
+    repeated ResFileUrl res_urls = 2;
+}
+

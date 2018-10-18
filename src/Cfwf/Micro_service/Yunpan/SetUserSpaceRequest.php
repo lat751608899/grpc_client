@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Yunpan;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -16,11 +14,15 @@ use Google\Protobuf\Internal\GPBUtil;
 class SetUserSpaceRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>fixed64 userid = 1;</code>
+     * Generated from protobuf field <code>fixed64 operatorid = 1;</code>
+     */
+    private $operatorid = 0;
+    /**
+     * Generated from protobuf field <code>fixed64 userid = 2;</code>
      */
     private $userid = 0;
     /**
-     * Generated from protobuf field <code>fixed64 all_space = 2;</code>
+     * Generated from protobuf field <code>fixed64 all_space = 3;</code>
      */
     private $all_space = 0;
 
@@ -30,7 +32,29 @@ class SetUserSpaceRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>fixed64 userid = 1;</code>
+     * Generated from protobuf field <code>fixed64 operatorid = 1;</code>
+     * @return int|string
+     */
+    public function getOperatorid()
+    {
+        return $this->operatorid;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 operatorid = 1;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setOperatorid($var)
+    {
+        GPBUtil::checkUint64($var);
+        $this->operatorid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>fixed64 userid = 2;</code>
      * @return int|string
      */
     public function getUserid()
@@ -39,7 +63,7 @@ class SetUserSpaceRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>fixed64 userid = 1;</code>
+     * Generated from protobuf field <code>fixed64 userid = 2;</code>
      * @param int|string $var
      * @return $this
      */
@@ -52,7 +76,7 @@ class SetUserSpaceRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>fixed64 all_space = 2;</code>
+     * Generated from protobuf field <code>fixed64 all_space = 3;</code>
      * @return int|string
      */
     public function getAllSpace()
@@ -61,7 +85,7 @@ class SetUserSpaceRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>fixed64 all_space = 2;</code>
+     * Generated from protobuf field <code>fixed64 all_space = 3;</code>
      * @param int|string $var
      * @return $this
      */

@@ -4,16 +4,12 @@
 
 namespace Cfwf\Micro_service\Yunpan;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *函数： GetUploadingFileList/GetUploadedFileList/ 的 返回结果
- *
- * Generated from protobuf message <code>cfwf.micro_service.yunpan.GetFileListResponse</code>
+ * Generated from protobuf message <code>cfwf.micro_service.yunpan.GetWaitingPreprocessFileResponse</code>
  */
-class GetFileListResponse extends \Google\Protobuf\Internal\Message
+class GetWaitingPreprocessFileResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>.cfwf.micro_service.yunpan.RPC_CALL_RESULT result = 1;</code>

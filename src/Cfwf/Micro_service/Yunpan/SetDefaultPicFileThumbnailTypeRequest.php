@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Yunpan;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -14,13 +12,11 @@ use Google\Protobuf\Internal\GPBUtil;
 class SetDefaultPicFileThumbnailTypeRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>int32 filetype = 1;</code>
+     * PicFileThumbnailInfo.id
+     *
+     * Generated from protobuf field <code>int32 id = 1;</code>
      */
-    private $filetype = 0;
-    /**
-     * Generated from protobuf field <code>int32 thumbnail_type = 2;</code>
-     */
-    private $thumbnail_type = 0;
+    private $id = 0;
 
     public function __construct() {
         \GPBMetadata\Yunpan::initOnce();
@@ -28,45 +24,27 @@ class SetDefaultPicFileThumbnailTypeRequest extends \Google\Protobuf\Internal\Me
     }
 
     /**
-     * Generated from protobuf field <code>int32 filetype = 1;</code>
+     * PicFileThumbnailInfo.id
+     *
+     * Generated from protobuf field <code>int32 id = 1;</code>
      * @return int
      */
-    public function getFiletype()
+    public function getId()
     {
-        return $this->filetype;
+        return $this->id;
     }
 
     /**
-     * Generated from protobuf field <code>int32 filetype = 1;</code>
+     * PicFileThumbnailInfo.id
+     *
+     * Generated from protobuf field <code>int32 id = 1;</code>
      * @param int $var
      * @return $this
      */
-    public function setFiletype($var)
+    public function setId($var)
     {
         GPBUtil::checkInt32($var);
-        $this->filetype = $var;
-
-        return $this;
-    }
-
-    /**
-     * Generated from protobuf field <code>int32 thumbnail_type = 2;</code>
-     * @return int
-     */
-    public function getThumbnailType()
-    {
-        return $this->thumbnail_type;
-    }
-
-    /**
-     * Generated from protobuf field <code>int32 thumbnail_type = 2;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setThumbnailType($var)
-    {
-        GPBUtil::checkInt32($var);
-        $this->thumbnail_type = $var;
+        $this->id = $var;
 
         return $this;
     }
