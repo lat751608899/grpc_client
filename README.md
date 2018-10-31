@@ -39,9 +39,4 @@ $ make grpc_php_plugin
 $ vim plugin.conf
 $ ./create_client.sh
 ```
-### Add namespace 
-```shell
-#Cfwf your package's name in proto file
-"Cfwf\\": "vendor/lat/grpcClient/src/server/Cfwf/"
-```
 
