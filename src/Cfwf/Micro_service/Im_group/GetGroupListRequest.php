@@ -19,12 +19,6 @@ class GetGroupListRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 userid = 1;</code>
      */
     private $userid = 0;
-    /**
-     *班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
-     *
-     * Generated from protobuf field <code>bool need_all_group_name = 2;</code>
-     */
-    private $need_all_group_name = false;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -53,32 +47,6 @@ class GetGroupListRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->userid = $var;
-
-        return $this;
-    }
-
-    /**
-     *班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
-     *
-     * Generated from protobuf field <code>bool need_all_group_name = 2;</code>
-     * @return bool
-     */
-    public function getNeedAllGroupName()
-    {
-        return $this->need_all_group_name;
-    }
-
-    /**
-     *班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
-     *
-     * Generated from protobuf field <code>bool need_all_group_name = 2;</code>
-     * @param bool $var
-     * @return $this
-     */
-    public function setNeedAllGroupName($var)
-    {
-        GPBUtil::checkBool($var);
-        $this->need_all_group_name = $var;
 
         return $this;
     }
