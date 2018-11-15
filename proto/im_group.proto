@@ -156,7 +156,7 @@ message GroupInfoItem {
 //获取群列表
 message GetGroupListRequest {
 	int64 userid = 1;     //调用者id
-    bool get_group_name = 2;   //班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
+    bool need_all_group_name = 2;   //班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
 }
 
 message GetGroupListResponse {
@@ -388,6 +388,7 @@ message GetGroupSpeakListResponse {
 //获取群信息
 message GetGruopInfoRequest {
 	repeated int64 groupid = 1;
+    bool need_all_group_name = 2;   //班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
 }
 
 message GetGruopInfoResponse {

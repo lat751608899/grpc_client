@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Im_group;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**

@@ -13,4 +13,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 cd proto
-protoc   --php_out=./../src   --grpc_out=./../src   --plugin=protoc-gen-grpc=`cat ./../plugin.conf` `ls | grep .proto`
+protoc   --php_out=./../src   --grpc_out=./../src   --plugin=protoc-gen-grpc=`cat ./../plugin.conf` `ls | grep $1.proto`
