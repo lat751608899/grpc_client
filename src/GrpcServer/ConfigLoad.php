@@ -97,7 +97,7 @@ class ConfigLoad implements \ArrayAccess
 		$this->mapConfigFile = $this->configPath.'map.php';
 		$this->setHostname();
 		$this->setMapName();
-		$this->loadPackageAndMethods();
+		//$this->loadPackageAndMethods();
 	}
 
 	/**
