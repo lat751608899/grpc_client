@@ -26,6 +26,9 @@ service IM_Group {
 	
 	//离开群
 	rpc LeaveGroup (LeaveGroupRequest) returns (CommonResponse) {}
+    
+    //离开所属单位的所有群
+	rpc LeaveUnitGroup (LeaveUnitGroupRequest) returns (CommonResponse) {}
 	
 	//删除群成员
 	rpc RemoveGruopMember (RemoveGruopMemberRequest) returns (CommonResponse) {}
@@ -65,9 +68,7 @@ service IM_Group {
 	
 	//搜索自己所在群
 	rpc SearchGroup (SearchGroupRequest) returns (SearchGroupResponse) {}
-	
-	//搜索群聊
-	rpc SearchGroupInfo (SearchGroupInfoRequest) returns (SearchGroupInfoResponse) {}
+
 	
 	//设置超级管理员
 	rpc SetSuperAdmin(SetSuperAdminRequest) returns (SetSuperAdminRespnse) {}
@@ -77,6 +78,12 @@ service IM_Group {
 	
 	//修改群名称
 	rpc SetGroupName(SetGroupNameRequest) returns (SetGroupNameResponse) {}
+    
+    //修改用户在群内的昵称
+	rpc SetNickName(SetNickNameRequest) returns (SetNickNameResponse) {}
+    
+    //修改用户的名字（该名字在用户修改个人信息时设置，用于群用户搜索）
+	rpc SetUserName(SetUserNameRequest) returns (SetUserNameResponse) {}
 } 
 
 // 通用返回结果
@@ -131,22 +138,25 @@ message GroupInfoItem {
 	int64 groupid = 1;                //群id
 	string name = 2;                  //群名称
 	GROUP_TYPE type = 3;              //群类型
-	int64 target_unit = 4;            //分组所属的单位，如:学校、教育局 
-	int64 target = 5;                 //分组ID, 如 年级编号, 班级id, 协作组id等
+	int64 target_unit = 4;            //群所属的单位。 如果是学校内的群，如group_type==全校群，教师群，班级群，校内协作组 等， 则保存 学校id
+	int64 target = 5;                 //关联对象id。 
+                                      //年级教师群， 保存 (学段[第5位])+(学届[1-4位])，学段:1小学 2初中 3高中;  学届:入学年份;  如 12018，表示小学2018年9月份开学的学届, 22017，表示初中2017年9月份开学的学届 
+                                      //班级群， 保存classid; 
+                                      //协作组群，保存协作组id
 	int64 super_admin = 6;            //超级管理员
 	string admins = 7;                //管理员列表:userid,userid...
 	string createtime = 8;            //创建时间
 	GROUP_ENTER_TYPE enterway = 9;    //自建群进入方式
 	int32 member_limit = 10;          //自建群的人数限制 0=不限
 	int32 member_count = 11;          //当前成员数
-	string target_describe = 12;      //json格式，信息描述，根据fld_type有特定含义。
-	                                  //如: {"schoolid":xxx,"grade":xxx,"class":xxx,"classid":xxx}
+	string target_describe = 12;      //json格式，信息描述，根据fld_type有特定含义。 学校教师群:{"grade_year":2011}  班级群:{"grade_year":2011,"classno":2}
 }
 
 
 //获取群列表
 message GetGroupListRequest {
 	int64 userid = 1;     //调用者id
+    bool get_group_name = 2;   //班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
 }
 
 message GetGroupListResponse {
@@ -212,6 +222,14 @@ message LeaveGroupRequest {
 	GROUP_TYPE type = 3;              //群类型
 	int64 target_unit = 4;            //分组所属的单位，如:学校、教育局 
 	int64 target = 5;                 //分组ID, 如 年级编号, 班级id, 协作组id等
+    bool force_leave = 6; //强制离开，被移出
+}
+
+message LeaveUnitGroupRequest {
+	int64 userid = 1;     //用户ID
+	int64 target_unit = 2;            //所属的单位
+    repeated GROUP_TYPE group_type = 3;  //群类型，可多个。 如果设置，则离开所设置的类型的群；如果不设置，则离开此单位所有群
+    bool force_leave = 4; //强制离开，被移出
 }
 
 //处理群申请
@@ -323,14 +341,18 @@ enum IM_GROUP_SPEACK_TYPE {
 	IM_GROUP_SPEACK_AUDIO = 4;        //语音
 	IM_GROUP_SPEACK_LINK = 5;         //超链接
 	IM_GROUP_SPEACK_UNDO = 6;         //撤销某条消息
+    IM_GROUP_SPEACK_DETAIL = 7;       //详情消息
+    IM_GROUP_SPEACK_SYSTEM_INFORM = 8;         //系统通知。
+    
 }
-
+    
 message InsertGroupSpeakRequest {
 	int64 userid = 1;                       //发送着userid
 	int64 group_id = 2;                     //群id
 	IM_GROUP_SPEACK_TYPE speak_type = 3;    //发送的消息类型。如果类型为IM_FRIEND_SPEACK_UNDO，则将要撤销的消息的id放入content字段内
 	string content = 4;                     //聊天内容
 	bool need_confirm = 5;                  //是否需要接收方做已读确认
+    string extra_message = 6;               //附加信息,json格式。 当content ==IM_GROUP_SPEACK_SYSTEM_INFORM 时为:{groupid:xxxx, groupname:xxxx}
 }
 
 message InsertGruopSpeakResponse {
@@ -392,6 +414,7 @@ message DeleteGroupRequest {
 	GROUP_TYPE type = 3;              //群类型
 	int64 target_unit = 4;            //分组所属的单位，如:学校、教育局 
 	int64 target = 5;                 //分组ID, 如 年级编号, 班级id, 协作组id等
+    bool only_close_group = 6;        //true= 改为“关闭”状态，而不是删除
 }
 
 //搜索群内成员
@@ -416,23 +439,6 @@ message SearchGroupResponse {
 	repeated GroupInfoItem list = 2;
 }
 
-//搜索群聊
-message SearchGroupInfoRequest {
-	int64 userid = 1;               //用户id
-	string keyword = 2;    //搜索关键字 (群名称,或用户昵称)
-}
-
-message SearchGroupInfoResult
-{
-	int64 groupid = 1;                //群id
-	string group_name = 2;                  //群名称
-	repeated string hitMembers = 3;    //命中的成员昵称
-}
-
-message SearchGroupInfoResponse {
-	RPC_CALL_RESULT result = 1;
-	repeated SearchGroupInfoResult list = 2;
-}
 
 //设置超级管理员
 message SetSuperAdminRequest {
@@ -483,7 +489,28 @@ message SetGroupNameResponse {
 	int64 group_id = 2;            //返回群组id
 }
 
+//修改用户在群内的昵称
+message SetNickNameRequest {
+	int64 operatorid = 1;              //操作者id 
+    int64 userid = 2;                  //设置此人的群内昵称 
+    int64 group_id = 3;                //群id 
+	string nikename = 4;               //昵称
+}
 
+message SetNickNameResponse {
+	RPC_CALL_RESULT result = 1; 
+}
+ 
+//修改用户的名字（该名字在用户修改个人信息时设置，用于群用户搜索）
+message SetUserNameRequest {
+	int64 operatorid = 1;              //操作者id 
+    int64 userid = 2;                  //设置此人的群内昵称 
+    string username = 3;               //昵称
+}
+
+message SetUserNameResponse {
+	RPC_CALL_RESULT result = 1; 
+}
 
 
 

@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Im_group;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -32,19 +30,21 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
      */
     private $type = 0;
     /**
-     *分组所属的单位，如:学校、教育局 
+     *群所属的单位。 如果是学校内的群，如group_type==全校群，教师群，班级群，校内协作组 等， 则保存 学校id
      *
      * Generated from protobuf field <code>int64 target_unit = 4;</code>
      */
     private $target_unit = 0;
     /**
-     *分组ID, 如 年级编号, 班级id, 协作组id等
+     *关联对象id。 
      *
      * Generated from protobuf field <code>int64 target = 5;</code>
      */
     private $target = 0;
     /**
-     *超级管理员
+     *年级教师群， 保存 (学段[第5位])+(学届[1-4位])，学段:1小学 2初中 3高中;  学届:入学年份;  如 12018，表示小学2018年9月份开学的学届, 22017，表示初中2017年9月份开学的学届 
+     *班级群， 保存classid; 
+     *协作组群，保存协作组id
      *
      * Generated from protobuf field <code>int64 super_admin = 6;</code>
      */
@@ -80,7 +80,7 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
      */
     private $member_count = 0;
     /**
-     *json格式，信息描述，根据fld_type有特定含义。
+     *json格式，信息描述，根据fld_type有特定含义。 学校教师群:{"grade_year":2011}  班级群:{"grade_year":2011,"classno":2}
      *
      * Generated from protobuf field <code>string target_describe = 12;</code>
      */
@@ -170,7 +170,7 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *分组所属的单位，如:学校、教育局 
+     *群所属的单位。 如果是学校内的群，如group_type==全校群，教师群，班级群，校内协作组 等， 则保存 学校id
      *
      * Generated from protobuf field <code>int64 target_unit = 4;</code>
      * @return int|string
@@ -181,7 +181,7 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *分组所属的单位，如:学校、教育局 
+     *群所属的单位。 如果是学校内的群，如group_type==全校群，教师群，班级群，校内协作组 等， 则保存 学校id
      *
      * Generated from protobuf field <code>int64 target_unit = 4;</code>
      * @param int|string $var
@@ -196,7 +196,7 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *分组ID, 如 年级编号, 班级id, 协作组id等
+     *关联对象id。 
      *
      * Generated from protobuf field <code>int64 target = 5;</code>
      * @return int|string
@@ -207,7 +207,7 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *分组ID, 如 年级编号, 班级id, 协作组id等
+     *关联对象id。 
      *
      * Generated from protobuf field <code>int64 target = 5;</code>
      * @param int|string $var
@@ -222,7 +222,9 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *超级管理员
+     *年级教师群， 保存 (学段[第5位])+(学届[1-4位])，学段:1小学 2初中 3高中;  学届:入学年份;  如 12018，表示小学2018年9月份开学的学届, 22017，表示初中2017年9月份开学的学届 
+     *班级群， 保存classid; 
+     *协作组群，保存协作组id
      *
      * Generated from protobuf field <code>int64 super_admin = 6;</code>
      * @return int|string
@@ -233,7 +235,9 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *超级管理员
+     *年级教师群， 保存 (学段[第5位])+(学届[1-4位])，学段:1小学 2初中 3高中;  学届:入学年份;  如 12018，表示小学2018年9月份开学的学届, 22017，表示初中2017年9月份开学的学届 
+     *班级群， 保存classid; 
+     *协作组群，保存协作组id
      *
      * Generated from protobuf field <code>int64 super_admin = 6;</code>
      * @param int|string $var
@@ -378,7 +382,7 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *json格式，信息描述，根据fld_type有特定含义。
+     *json格式，信息描述，根据fld_type有特定含义。 学校教师群:{"grade_year":2011}  班级群:{"grade_year":2011,"classno":2}
      *
      * Generated from protobuf field <code>string target_describe = 12;</code>
      * @return string
@@ -389,7 +393,7 @@ class GroupInfoItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *json格式，信息描述，根据fld_type有特定含义。
+     *json格式，信息描述，根据fld_type有特定含义。 学校教师群:{"grade_year":2011}  班级群:{"grade_year":2011,"classno":2}
      *
      * Generated from protobuf field <code>string target_describe = 12;</code>
      * @param string $var

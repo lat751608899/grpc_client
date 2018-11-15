@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Im_group;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -21,6 +19,12 @@ class GetGroupListRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 userid = 1;</code>
      */
     private $userid = 0;
+    /**
+     *班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
+     *
+     * Generated from protobuf field <code>bool get_group_name = 2;</code>
+     */
+    private $get_group_name = false;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -49,6 +53,32 @@ class GetGroupListRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->userid = $var;
+
+        return $this;
+    }
+
+    /**
+     *班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
+     *
+     * Generated from protobuf field <code>bool get_group_name = 2;</code>
+     * @return bool
+     */
+    public function getGetGroupName()
+    {
+        return $this->get_group_name;
+    }
+
+    /**
+     *班级群，学校教师群 不会主动填充 name字段。 此参数设为true时，imgroup通过调用school_class微服务主动填充 name字段
+     *
+     * Generated from protobuf field <code>bool get_group_name = 2;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setGetGroupName($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->get_group_name = $var;
 
         return $this;
     }

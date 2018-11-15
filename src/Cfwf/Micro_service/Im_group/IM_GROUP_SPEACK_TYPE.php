@@ -51,5 +51,17 @@ class IM_GROUP_SPEACK_TYPE
      * Generated from protobuf enum <code>IM_GROUP_SPEACK_UNDO = 6;</code>
      */
     const IM_GROUP_SPEACK_UNDO = 6;
+    /**
+     *详情消息
+     *
+     * Generated from protobuf enum <code>IM_GROUP_SPEACK_DETAIL = 7;</code>
+     */
+    const IM_GROUP_SPEACK_DETAIL = 7;
+    /**
+     *系统通知。
+     *
+     * Generated from protobuf enum <code>IM_GROUP_SPEACK_SYSTEM_INFORM = 8;</code>
+     */
+    const IM_GROUP_SPEACK_SYSTEM_INFORM = 8;
 }
 

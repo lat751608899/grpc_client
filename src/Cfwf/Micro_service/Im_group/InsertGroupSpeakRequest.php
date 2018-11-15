@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Im_group;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -43,6 +41,12 @@ class InsertGroupSpeakRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>bool need_confirm = 5;</code>
      */
     private $need_confirm = false;
+    /**
+     *附加信息,json格式。 当content ==IM_GROUP_SPEACK_SYSTEM_INFORM 时为:{groupid:xxxx, groupname:xxxx}
+     *
+     * Generated from protobuf field <code>string extra_message = 6;</code>
+     */
+    private $extra_message = '';
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -175,6 +179,32 @@ class InsertGroupSpeakRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkBool($var);
         $this->need_confirm = $var;
+
+        return $this;
+    }
+
+    /**
+     *附加信息,json格式。 当content ==IM_GROUP_SPEACK_SYSTEM_INFORM 时为:{groupid:xxxx, groupname:xxxx}
+     *
+     * Generated from protobuf field <code>string extra_message = 6;</code>
+     * @return string
+     */
+    public function getExtraMessage()
+    {
+        return $this->extra_message;
+    }
+
+    /**
+     *附加信息,json格式。 当content ==IM_GROUP_SPEACK_SYSTEM_INFORM 时为:{groupid:xxxx, groupname:xxxx}
+     *
+     * Generated from protobuf field <code>string extra_message = 6;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setExtraMessage($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->extra_message = $var;
 
         return $this;
     }

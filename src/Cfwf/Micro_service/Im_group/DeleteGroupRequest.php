@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Im_group;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -45,6 +43,12 @@ class DeleteGroupRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 target = 5;</code>
      */
     private $target = 0;
+    /**
+     *true= 改为“关闭”状态，而不是删除
+     *
+     * Generated from protobuf field <code>bool only_close_group = 6;</code>
+     */
+    private $only_close_group = false;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -177,6 +181,32 @@ class DeleteGroupRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->target = $var;
+
+        return $this;
+    }
+
+    /**
+     *true= 改为“关闭”状态，而不是删除
+     *
+     * Generated from protobuf field <code>bool only_close_group = 6;</code>
+     * @return bool
+     */
+    public function getOnlyCloseGroup()
+    {
+        return $this->only_close_group;
+    }
+
+    /**
+     *true= 改为“关闭”状态，而不是删除
+     *
+     * Generated from protobuf field <code>bool only_close_group = 6;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setOnlyCloseGroup($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->only_close_group = $var;
 
         return $this;
     }

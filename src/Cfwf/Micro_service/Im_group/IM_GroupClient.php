@@ -116,6 +116,20 @@ class IM_GroupClient extends \Grpc\BaseStub {
     }
 
     /**
+     * 离开所属单位的所有群
+     * @param \Cfwf\Micro_service\Im_group\LeaveUnitGroupRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function LeaveUnitGroup(\Cfwf\Micro_service\Im_group\LeaveUnitGroupRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/LeaveUnitGroup',
+        $argument,
+        ['\Cfwf\Micro_service\Im_group\CommonResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
      * 删除群成员
      * @param \Cfwf\Micro_service\Im_group\RemoveGruopMemberRequest $argument input argument
      * @param array $metadata metadata
@@ -298,20 +312,6 @@ class IM_GroupClient extends \Grpc\BaseStub {
     }
 
     /**
-     * 搜索群聊
-     * @param \Cfwf\Micro_service\Im_group\SearchGroupInfoRequest $argument input argument
-     * @param array $metadata metadata
-     * @param array $options call options
-     */
-    public function SearchGroupInfo(\Cfwf\Micro_service\Im_group\SearchGroupInfoRequest $argument,
-      $metadata = [], $options = []) {
-        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SearchGroupInfo',
-        $argument,
-        ['\Cfwf\Micro_service\Im_group\SearchGroupInfoResponse', 'decode'],
-        $metadata, $options);
-    }
-
-    /**
      * 设置超级管理员
      * @param \Cfwf\Micro_service\Im_group\SetSuperAdminRequest $argument input argument
      * @param array $metadata metadata
@@ -350,6 +350,34 @@ class IM_GroupClient extends \Grpc\BaseStub {
         return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SetGroupName',
         $argument,
         ['\Cfwf\Micro_service\Im_group\SetGroupNameResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 修改用户在群内的昵称
+     * @param \Cfwf\Micro_service\Im_group\SetNickNameRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetNickName(\Cfwf\Micro_service\Im_group\SetNickNameRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SetNickName',
+        $argument,
+        ['\Cfwf\Micro_service\Im_group\SetNickNameResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 修改用户的名字（该名字在用户修改个人信息时设置，用于群用户搜索）
+     * @param \Cfwf\Micro_service\Im_group\SetUserNameRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function SetUserName(\Cfwf\Micro_service\Im_group\SetUserNameRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.im_group.IM_Group/SetUserName',
+        $argument,
+        ['\Cfwf\Micro_service\Im_group\SetUserNameResponse', 'decode'],
         $metadata, $options);
     }
 

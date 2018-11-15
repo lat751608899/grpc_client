@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\Im_group;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -45,6 +43,12 @@ class LeaveGroupRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 target = 5;</code>
      */
     private $target = 0;
+    /**
+     *强制离开，被移出
+     *
+     * Generated from protobuf field <code>bool force_leave = 6;</code>
+     */
+    private $force_leave = false;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -177,6 +181,32 @@ class LeaveGroupRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->target = $var;
+
+        return $this;
+    }
+
+    /**
+     *强制离开，被移出
+     *
+     * Generated from protobuf field <code>bool force_leave = 6;</code>
+     * @return bool
+     */
+    public function getForceLeave()
+    {
+        return $this->force_leave;
+    }
+
+    /**
+     *强制离开，被移出
+     *
+     * Generated from protobuf field <code>bool force_leave = 6;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setForceLeave($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->force_leave = $var;
 
         return $this;
     }
