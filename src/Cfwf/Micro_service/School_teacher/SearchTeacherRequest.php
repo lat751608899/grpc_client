@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\School_teacher;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -46,7 +44,7 @@ class SearchTeacherRequest extends \Google\Protobuf\Internal\Message
      */
     private $grade_year = '';
     /**
-     *年级列表: 1,2,3..   空字符串表示不限年级。
+     *年级列表: 1,2,3..   空字符串表示不限年级。 
      *
      * Generated from protobuf field <code>string grade = 6;</code>
      */
@@ -64,7 +62,7 @@ class SearchTeacherRequest extends \Google\Protobuf\Internal\Message
      */
     private $classid = 0;
     /**
-     *姓名/帐号 关键字
+     *姓名/帐号 关键字   
      *
      * Generated from protobuf field <code>string keyword = 9;</code>
      */
@@ -206,7 +204,7 @@ class SearchTeacherRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *年级列表: 1,2,3..   空字符串表示不限年级。
+     *年级列表: 1,2,3..   空字符串表示不限年级。 
      *
      * Generated from protobuf field <code>string grade = 6;</code>
      * @return string
@@ -217,7 +215,7 @@ class SearchTeacherRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *年级列表: 1,2,3..   空字符串表示不限年级。
+     *年级列表: 1,2,3..   空字符串表示不限年级。 
      *
      * Generated from protobuf field <code>string grade = 6;</code>
      * @param string $var
@@ -284,7 +282,7 @@ class SearchTeacherRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *姓名/帐号 关键字
+     *姓名/帐号 关键字   
      *
      * Generated from protobuf field <code>string keyword = 9;</code>
      * @return string
@@ -295,7 +293,7 @@ class SearchTeacherRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *姓名/帐号 关键字
+     *姓名/帐号 关键字   
      *
      * Generated from protobuf field <code>string keyword = 9;</code>
      * @param string $var

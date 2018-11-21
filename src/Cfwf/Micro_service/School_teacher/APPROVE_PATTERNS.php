@@ -16,7 +16,7 @@ class APPROVE_PATTERNS
      */
     const APPROVE_PATTERNS_AUTO = 0;
     /**
-     *人工审核
+     *人工审核 
      *
      * Generated from protobuf enum <code>APPROVE_PATTERNS_MANUAL = 1;</code>
      */

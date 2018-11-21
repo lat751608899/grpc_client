@@ -7,26 +7,26 @@ namespace Cfwf\Micro_service\School_teacher;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.school_teacher.ApproveTeacherApplyRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.school_teacher.RemoveClassTeachersRequest</code>
  */
-class ApproveTeacherApplyRequest extends \Google\Protobuf\Internal\Message
+class RemoveClassTeachersRequest extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>fixed64 operatorid = 1;</code>
      */
     private $operatorid = 0;
     /**
-     *学校id
+     *学校id，必填
      *
      * Generated from protobuf field <code>fixed64 schoolid = 2;</code>
      */
     private $schoolid = 0;
     /**
-     *教师id    
+     *班级id
      *
-     * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
+     * Generated from protobuf field <code>repeated fixed64 classid = 3;</code>
      */
-    private $teacherid = 0;
+    private $classid;
 
     public function __construct() {
         \GPBMetadata\SchoolTeacher::initOnce();
@@ -56,7 +56,7 @@ class ApproveTeacherApplyRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *学校id
+     *学校id，必填
      *
      * Generated from protobuf field <code>fixed64 schoolid = 2;</code>
      * @return int|string
@@ -67,7 +67,7 @@ class ApproveTeacherApplyRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *学校id
+     *学校id，必填
      *
      * Generated from protobuf field <code>fixed64 schoolid = 2;</code>
      * @param int|string $var
@@ -82,27 +82,27 @@ class ApproveTeacherApplyRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *教师id    
+     *班级id
      *
-     * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
-     * @return int|string
+     * Generated from protobuf field <code>repeated fixed64 classid = 3;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
      */
-    public function getTeacherid()
+    public function getClassid()
     {
-        return $this->teacherid;
+        return $this->classid;
     }
 
     /**
-     *教师id    
+     *班级id
      *
-     * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
-     * @param int|string $var
+     * Generated from protobuf field <code>repeated fixed64 classid = 3;</code>
+     * @param int[]|string[]|\Google\Protobuf\Internal\RepeatedField $var
      * @return $this
      */
-    public function setTeacherid($var)
+    public function setClassid($var)
     {
-        GPBUtil::checkUint64($var);
-        $this->teacherid = $var;
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::FIXED64);
+        $this->classid = $arr;
 
         return $this;
     }

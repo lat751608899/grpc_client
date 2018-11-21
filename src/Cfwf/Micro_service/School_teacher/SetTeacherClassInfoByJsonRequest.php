@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\School_teacher;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -38,7 +36,7 @@ class SetTeacherClassInfoByJsonRequest extends \Google\Protobuf\Internal\Message
      */
     private $is_addnew = false;
     /**
-     * json格式，见TeacherInfo.teach_info。
+     * json格式，见TeacherInfo.teach_info。 
      *
      * Generated from protobuf field <code>string teach_info = 5;</code>
      */
@@ -158,7 +156,7 @@ class SetTeacherClassInfoByJsonRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * json格式，见TeacherInfo.teach_info。
+     * json格式，见TeacherInfo.teach_info。 
      *
      * Generated from protobuf field <code>string teach_info = 5;</code>
      * @return string
@@ -169,7 +167,7 @@ class SetTeacherClassInfoByJsonRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * json格式，见TeacherInfo.teach_info。
+     * json格式，见TeacherInfo.teach_info。 
      *
      * Generated from protobuf field <code>string teach_info = 5;</code>
      * @param string $var

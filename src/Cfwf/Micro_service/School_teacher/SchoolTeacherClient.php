@@ -180,7 +180,7 @@ class SchoolTeacherClient extends \Grpc\BaseStub {
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.school_teacher.SchoolTeacher/SetTeacherClassInfo',
         $argument,
-        ['\Cfwf\Micro_service\School_teacher\CommonResponse', 'decode'],
+        ['\Cfwf\Micro_service\School_teacher\SetTeacherClassInfoResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -194,7 +194,7 @@ class SchoolTeacherClient extends \Grpc\BaseStub {
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.school_teacher.SchoolTeacher/SetTeacherClassInfoByJson',
         $argument,
-        ['\Cfwf\Micro_service\School_teacher\CommonResponse', 'decode'],
+        ['\Cfwf\Micro_service\School_teacher\SetTeacherClassInfoByJsonResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -235,6 +235,20 @@ class SchoolTeacherClient extends \Grpc\BaseStub {
     public function RemoveTeacherFromClass(\Cfwf\Micro_service\School_teacher\RemoveTeacherFromClassRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.school_teacher.SchoolTeacher/RemoveTeacherFromClass',
+        $argument,
+        ['\Cfwf\Micro_service\School_teacher\CommonResponse', 'decode'],
+        $metadata, $options);
+    }
+
+    /**
+     * 移除班级内所有老师
+     * @param \Cfwf\Micro_service\School_teacher\RemoveClassTeachersRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function RemoveClassTeachers(\Cfwf\Micro_service\School_teacher\RemoveClassTeachersRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.school_teacher.SchoolTeacher/RemoveClassTeachers',
         $argument,
         ['\Cfwf\Micro_service\School_teacher\CommonResponse', 'decode'],
         $metadata, $options);

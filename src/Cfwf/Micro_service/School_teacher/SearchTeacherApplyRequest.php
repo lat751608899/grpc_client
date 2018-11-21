@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\School_teacher;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -52,7 +50,7 @@ class SearchTeacherApplyRequest extends \Google\Protobuf\Internal\Message
      */
     private $subject = 0;
     /**
-     *姓名/帐号 关键字
+     *姓名/帐号 关键字   
      *
      * Generated from protobuf field <code>string keyword = 7;</code>
      */
@@ -226,7 +224,7 @@ class SearchTeacherApplyRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *姓名/帐号 关键字
+     *姓名/帐号 关键字   
      *
      * Generated from protobuf field <code>string keyword = 7;</code>
      * @return string
@@ -237,7 +235,7 @@ class SearchTeacherApplyRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *姓名/帐号 关键字
+     *姓名/帐号 关键字   
      *
      * Generated from protobuf field <code>string keyword = 7;</code>
      * @param string $var

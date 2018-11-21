@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\School_teacher;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -50,7 +48,7 @@ class TeacherInfo extends \Google\Protobuf\Internal\Message
      */
     private $is_course_teacher = false;
     /**
-     *任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"}]
+     *任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"}]
      *
      * Generated from protobuf field <code>string teach_info = 7;</code>
      */
@@ -214,7 +212,7 @@ class TeacherInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"}]
+     *任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"}]
      *
      * Generated from protobuf field <code>string teach_info = 7;</code>
      * @return string
@@ -225,7 +223,7 @@ class TeacherInfo extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"}]
+     *任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"}]
      *
      * Generated from protobuf field <code>string teach_info = 7;</code>
      * @param string $var

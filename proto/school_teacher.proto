@@ -14,47 +14,50 @@ service SchoolTeacher {
   
   
   //批准老师申请
-  rpc ApproveTeacherApply (ApproveTeacherApplyRequest) returns (CommonResponse) {}
-
+  rpc ApproveTeacherApply (ApproveTeacherApplyRequest) returns (CommonResponse) {}  
+  
   //拒绝老师申请
-  rpc RejectTeacherApply (RejectTeacherApplyRequest) returns (CommonResponse) {}
+  rpc RejectTeacherApply (RejectTeacherApplyRequest) returns (CommonResponse) {}  
 
   //批量批准老师申请
-  rpc BatchApproveTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}
-
+  rpc BatchApproveTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}  
+  
   //批量拒绝老师申请
-  rpc BatchRejectTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}
-
+  rpc BatchRejectTeacherApply (BatchSchoolTeacherApply) returns (CommonResponse) {}  
+  
   //老师提交入校申请：如果之前老师已经提交过对该学校的申请，则新申请信息会覆盖原申请信息
-  rpc TeacherSubmitApply (TeacherApplyInfo) returns (CommonResponse) {}
-
+  rpc TeacherSubmitApply (TeacherApplyInfo) returns (CommonResponse) {} 
+  
   //获取老师列表(分页返回)
-  rpc SearchTeacher (SearchTeacherRequest) returns (SearchTeacherResponse) {}
-
+  rpc SearchTeacher (SearchTeacherRequest) returns (SearchTeacherResponse) {} 
+  
   //获取某老师信息
-  rpc GetTeacherInfo (GetTeacherInfoRequest) returns (GetTeacherInfoResponse) {}
-
+  rpc GetTeacherInfo (GetTeacherInfoRequest) returns (GetTeacherInfoResponse) {} 
+ 
   //设置学校审批老师申请的方式：自动同意还是人工审核。未设置的学校默认人工审核
   rpc SetApprovePatternsForTeacherApply (SetApprovePatternsForTeacherApplyRequest) returns (CommonResponse) {}
 
   //获取学校审批老师申请的方式
   rpc GetApprovePatternsForTeacherApply (GetApprovePatternsForTeacherApplyRequest) returns (GetApprovePatternsForTeacherApplyResponse) {}
-
+  
   //设置老师任课信息
-  rpc SetTeacherClassInfo (SetTeacherClassInfoRequest) returns (CommonResponse) {}
-
+  rpc SetTeacherClassInfo (SetTeacherClassInfoRequest) returns (SetTeacherClassInfoResponse) {}
+  
   //设置老师任课信息
-  rpc SetTeacherClassInfoByJson (SetTeacherClassInfoByJsonRequest) returns (CommonResponse) {}
-
+  rpc SetTeacherClassInfoByJson (SetTeacherClassInfoByJsonRequest) returns (SetTeacherClassInfoByJsonResponse) {}
+  
   //设置老师所属学校信息。如果老师已属于其他学校，且全局设置中老师只能属于一个学校时，退出原学校
   rpc AddTeacherToSchool (AddTeacherToSchoolRequest) returns (CommonResponse) {}
-
+  
 
   //从学校内移除老师
   rpc RemoveTeacherFromSchool(RemoveTeacherFromSchoolRequest) returns (CommonResponse) {}
-
+  
   //将老师从某个班移出
   rpc RemoveTeacherFromClass (RemoveTeacherFromClassRequest) returns (CommonResponse) {}
+  
+  //移除班级内所有老师
+  rpc RemoveClassTeachers (RemoveClassTeachersRequest) returns (CommonResponse) {}
 }
 
 //通用rpc调用返回结果
@@ -77,11 +80,11 @@ message CommonResponse{
 enum USER_SEX{
 	USER_SEX_INIT = 0;
     USER_SEX_GIRL = 1;
-    USER_SEX_BOY  = 2;
+    USER_SEX_BOY  = 2;   
 }
 
 message TeacherApplyInfo{
-    fixed64 userid = 1;
+    fixed64 userid = 1;         
 	fixed64 schoolid = 2;         //学校id
 	string username = 3;          //姓名
 	USER_SEX sex = 4 ;            //性别
@@ -99,32 +102,32 @@ message TeacherApplyInfo{
 }
 
 //函数： SearchTeacherApply 的 传入参数(分页返回)
-message SearchTeacherApplyRequest{
+message SearchTeacherApplyRequest{    
     int32 pagesize = 1;        //每页条数
     int32 page = 2;            //当前页。如果>总页数，则返回最后一页的数据
-
+    
     fixed64 schoolid = 3;      //学校id
     string grade_year = 4;    //所教的届: 可多个: 2016,2017 ...
     string grade = 5;          //年级: 可多个年级: 1,2,3 ...
     int32 subject = 6;         //科目
-    string keyword = 7;        //姓名/帐号 关键字
+    string keyword = 7;        //姓名/帐号 关键字   
     bool  get_all_status = 8;  //false: 只获取等待审批的条目； true:获取所有条目
 }
 
 //函数： SearchTeacherApply 的 返回结果
 message SearchTeacherApplyResponse{
     RPC_CALL_RESULT result = 1;
-
+	
 	int32 pagesize = 2;        //每页条数
     int32 page = 3;            //当前页
     int32 pagecount = 4;       //总页数
     int32 recordcount = 5;     //总条数
-
+    
     repeated TeacherApplyInfo list = 6; //当前页结果列表
 }
 
-message GetTeacherApplyRequest{
-    int64 teacherid = 1;
+message GetTeacherApplyRequest{    
+    int64 teacherid = 1;    
     bool get_last_item = 2;
 }
 
@@ -138,14 +141,14 @@ message ApproveTeacherApplyRequest
 {
     fixed64 operatorid = 1;
     fixed64 schoolid = 2;    //学校id
-    fixed64 teacherid = 3;      //教师id
+    fixed64 teacherid = 3;      //教师id    
 }
-
+  
 message RejectTeacherApplyRequest
 {
     fixed64 operatorid = 1;
     fixed64 schoolid = 2;    //学校id
-    fixed64 teacherid = 3;    //教师id
+    fixed64 teacherid = 3;    //教师id    
 }
 
 //教师申请条目：用于 ApproveTeacherApply 和 RejectTeacherApply
@@ -162,37 +165,37 @@ message BatchSchoolTeacherApply{
 
 //TeacherInfo：老师信息。
 message TeacherInfo{
-    fixed64 userid = 1;
+    fixed64 userid = 1;         
 	fixed64 schoolid = 2;         //学校id
 	string username = 3;          //姓名
 	USER_SEX sex = 4 ;            //性别： 男/女
 	string tel = 5;               //联系方式
     bool is_course_teacher = 6;   //是否任课教师
-	string teach_info = 7;        //任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"grade":5,"classid":10002,"classno":1,"subject":"1,2"}]
+	string teach_info = 7;        //任教信息，和TeacherApplyInfo格式相同 [{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"},{"grade_year":2012,"period":1,"classid":10002,"classno":1,"subject":"1,2"}]
 }
 
 //获取老师列表(分页返回)
 message SearchTeacherRequest{
     int32 pagesize = 1;        //每页条数
     int32 page = 2;            //当前页。如果>总页数，则返回最后一页的数据
-
+    
     fixed64 schoolid = 3;      //学校id，必填
     int32 teacher_type = 4;    //老师类型：0=不限 1=任课教师 2=非任课教师。当查询非任课教师时，grade,subject,classid将被忽略
     string grade_year = 5;     //所教的届: 可多个: 2016,2017 ...
-    string grade = 6;          //年级列表: 1,2,3..   空字符串表示不限年级。
+    string grade = 6;          //年级列表: 1,2,3..   空字符串表示不限年级。 
     int32 subject = 7;         //科目，可为0，表示不限科目
     fixed64 classid = 8;       //班级id，可为0，表示不限班级
-    string keyword = 9;        //姓名/帐号 关键字
+    string keyword = 9;        //姓名/帐号 关键字   
 }
 
 message SearchTeacherResponse{
     RPC_CALL_RESULT result = 1;
-
+	
 	int32 pagesize = 2;        //每页条数
     int32 page = 3;            //当前页
     int32 pagecount = 4;       //总页数
     int32 recordcount = 5;     //总条数
-
+    
     repeated TeacherInfo list = 6; //当前页结果列表
 }
 
@@ -204,13 +207,13 @@ message GetTeacherInfoRequest{
 
 message GetTeacherInfoResponse{
     RPC_CALL_RESULT result = 1;
-
+    
     repeated TeacherInfo list = 2; //如果该老师未在任何学校，则 list 的长度是0
 }
 
 enum APPROVE_PATTERNS{
     APPROVE_PATTERNS_AUTO = 0; //自动通过
-    APPROVE_PATTERNS_MANUAL = 1; //人工审核
+    APPROVE_PATTERNS_MANUAL = 1; //人工审核 
 }
 
 //设置学校审批老师申请的方式：自动同意还是人工审核。未设置的学校默认人工审核
@@ -228,8 +231,8 @@ message GetApprovePatternsForTeacherApplyRequest{
 message GetApprovePatternsForTeacherApplyResponse{
     RPC_CALL_RESULT result = 1;
 
-    fixed64 schoolid = 2;
-    APPROVE_PATTERNS approve_patterns = 3;
+    fixed64 schoolid = 2;     
+    APPROVE_PATTERNS approve_patterns = 3;  
 }
 
 //设置老师任课信息
@@ -245,8 +248,15 @@ message SetTeacherClassInfoRequest{
     fixed64 teacherid = 2;        //老师id，必填
     bool is_course_teacher = 3;   //是否任课: 若原先为任课，改为不认课，则原先所有任课信息将被清除
     bool is_addnew  = 4;          // =true: 增加所教班级科目，原设置不变，忽略相同项。 =fasle:  将原设置覆盖为新设置
-    repeated TeacherClassInfo teach_info = 5;
+    repeated TeacherClassInfo teach_info = 5; 
     fixed64 operatorid = 6;
+}
+
+message SetTeacherClassInfoResponse{
+    RPC_CALL_RESULT result = 1;
+    fixed64 schoolid = 2;        
+    fixed64 teacherid = 3;      
+    repeated TeacherClassInfo teach_info = 4; 
 }
 
 message SetTeacherClassInfoByJsonRequest{
@@ -254,25 +264,40 @@ message SetTeacherClassInfoByJsonRequest{
     fixed64 teacherid = 2;        //老师id，必填
     bool is_course_teacher = 3;   //是否任课: 若原先为任课，改为不认课，则原先所有任课信息将被清除
     bool is_addnew  = 4;          // =true: 增加所教班级科目，原设置不变，忽略相同项。 =fasle:  将原设置覆盖为新设置
-    string teach_info = 5;        // json格式，见TeacherInfo.teach_info。
+    string teach_info = 5;        // json格式，见TeacherInfo.teach_info。 
     fixed64 operatorid = 6;
+}
+
+message SetTeacherClassInfoByJsonResponse{
+    RPC_CALL_RESULT result = 1;
+    fixed64 schoolid = 2;       
+    fixed64 teacherid = 3;       
+    repeated TeacherClassInfo teach_info = 4; 
 }
 
  //设置老师所属学校信息
 message AddTeacherToSchoolRequest{
     fixed64 operatorid = 1;         //操作者id，必填
-    repeated TeacherInfo teacher_list = 2;
+    repeated TeacherInfo teacher_list = 2; 
 }
 
 message RemoveTeacherFromSchoolRequest{
     fixed64 operatorid = 1;
     fixed64 schoolid = 2;         //学校id，必填
-    repeated fixed64 teacherids = 3;
+    repeated fixed64 teacherids = 3; 
 }
-
+        
 message RemoveTeacherFromClassRequest {
 	fixed64 operatorid = 1;
     fixed64 schoolid = 2;      //学校id，必填
 	fixed64 classid = 3;       //班级id
-	repeated fixed64 teacherids = 4;
+	repeated fixed64 teacherids = 4; 
 }
+
+        
+message RemoveClassTeachersRequest {
+	fixed64 operatorid = 1;
+    fixed64 schoolid = 2;      //学校id，必填
+	repeated fixed64 classid = 3;       //班级id
+}
+

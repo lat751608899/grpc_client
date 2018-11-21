@@ -4,8 +4,6 @@
 
 namespace Cfwf\Micro_service\School_teacher;
 
-use Google\Protobuf\Internal\GPBType;
-use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
@@ -24,7 +22,7 @@ class RejectTeacherApplyRequest extends \Google\Protobuf\Internal\Message
      */
     private $schoolid = 0;
     /**
-     *教师id
+     *教师id    
      *
      * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
      */
@@ -84,7 +82,7 @@ class RejectTeacherApplyRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *教师id
+     *教师id    
      *
      * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
      * @return int|string
@@ -95,7 +93,7 @@ class RejectTeacherApplyRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *教师id
+     *教师id    
      *
      * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
      * @param int|string $var

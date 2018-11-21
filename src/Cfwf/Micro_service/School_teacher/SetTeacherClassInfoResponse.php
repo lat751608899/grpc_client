@@ -7,9 +7,9 @@ namespace Cfwf\Micro_service\School_teacher;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * Generated from protobuf message <code>cfwf.micro_service.school_teacher.GetApprovePatternsForTeacherApplyResponse</code>
+ * Generated from protobuf message <code>cfwf.micro_service.school_teacher.SetTeacherClassInfoResponse</code>
  */
-class GetApprovePatternsForTeacherApplyResponse extends \Google\Protobuf\Internal\Message
+class SetTeacherClassInfoResponse extends \Google\Protobuf\Internal\Message
 {
     /**
      * Generated from protobuf field <code>.cfwf.micro_service.school_teacher.RPC_CALL_RESULT result = 1;</code>
@@ -20,9 +20,13 @@ class GetApprovePatternsForTeacherApplyResponse extends \Google\Protobuf\Interna
      */
     private $schoolid = 0;
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_teacher.APPROVE_PATTERNS approve_patterns = 3;</code>
+     * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
      */
-    private $approve_patterns = 0;
+    private $teacherid = 0;
+    /**
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.school_teacher.TeacherClassInfo teach_info = 4;</code>
+     */
+    private $teach_info;
 
     public function __construct() {
         \GPBMetadata\SchoolTeacher::initOnce();
@@ -74,23 +78,45 @@ class GetApprovePatternsForTeacherApplyResponse extends \Google\Protobuf\Interna
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_teacher.APPROVE_PATTERNS approve_patterns = 3;</code>
-     * @return int
+     * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
+     * @return int|string
      */
-    public function getApprovePatterns()
+    public function getTeacherid()
     {
-        return $this->approve_patterns;
+        return $this->teacherid;
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.school_teacher.APPROVE_PATTERNS approve_patterns = 3;</code>
-     * @param int $var
+     * Generated from protobuf field <code>fixed64 teacherid = 3;</code>
+     * @param int|string $var
      * @return $this
      */
-    public function setApprovePatterns($var)
+    public function setTeacherid($var)
     {
-        GPBUtil::checkEnum($var, \Cfwf\Micro_service\School_teacher\APPROVE_PATTERNS::class);
-        $this->approve_patterns = $var;
+        GPBUtil::checkUint64($var);
+        $this->teacherid = $var;
+
+        return $this;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.school_teacher.TeacherClassInfo teach_info = 4;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getTeachInfo()
+    {
+        return $this->teach_info;
+    }
+
+    /**
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.school_teacher.TeacherClassInfo teach_info = 4;</code>
+     * @param \Cfwf\Micro_service\School_teacher\TeacherClassInfo[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setTeachInfo($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\School_teacher\TeacherClassInfo::class);
+        $this->teach_info = $arr;
 
         return $this;
     }
