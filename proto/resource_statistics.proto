@@ -146,7 +146,9 @@ service ResourceStatistics {
   //传入学校id，获取统计数据 "视频"， 返回 教师列表
   rpc GetWebStatTeachersVideo(GetWebStatTeachersVideoRequest) returns (GetWebStatTeachersVideoResponse) {}  
   //传入学校id，获取统计数据 "教研行动"， 返回 教师列表
-  rpc GetWebStatTeachersResearchAction(GetWebStatTeachersResearchActionRequest) returns (GetWebStatTeachersResearchActionResponse) {}  
+  rpc GetWebStatTeachersResearchAction(GetWebStatTeachersResearchActionRequest) returns (GetWebStatTeachersResearchActionResponse) {}    
+  //传入学校id，获取"学校统计数据"
+  rpc GetWebStatSchoolData(GetWebStatSchoolDataRequest) returns (GetWebStatSchoolDataResponse) {}    
 }
 
 //通用rpc调用返回结果
@@ -1137,4 +1139,31 @@ message GetWebStatTeachersResearchActionResponse{
     int32 record_count = 5;     //总条数
     repeated WebStatTeacherResearchActionItem list = 6; //第一条表示“本市”的统计总数
 }
+
+//传入学校id，获取"学校统计数据"
+message GetWebStatSchoolDataRequest{
+    int32 schoolid = 1;     //学校id，不能为0
+    int32 school_year = 2;  //学年  2018= 2018-2019学年    2017=2018-2018学年
+    int32 term = 3;         //学期  0(不填)=全学年  1=上学期 2=下学期    
+    string begin_date = 4;  //精确查找，开始日期。不为空时忽略 school_year 和 term
+    string end_date = 5;    //精确查找，结束日期。不为空时忽略 school_year 和 term
+}
+
+message GetWebStatSchoolDataResponse{
+    RPC_CALL_RESULT result = 1;
+    int32 schoolid = 2;
+
+    int32 theory_count = 3;   //理论研究
+    int32 resource_count = 4; //教学资源
+    int32 video_count = 5; //视频
+    int32 broadcast_count = 6; //直播
+    int32 pingke_count = 7; //课堂评课
+    int32 xiezuozu_count = 8; //协作组
+    int32 teacher_count = 9; //教师空间
+    int32 student_count = 10; //学生空间
+    
+    int32 class_count = 11; //班级空间
+    int32 research_action_count = 12; //教研行动
+}
+
 

@@ -7,18 +7,18 @@ namespace Cfwf\Micro_service\Resource_statistics;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *传入区县id，获取统计数据 "理论研究"， 返回 学校列表
+ *传入学校id，获取"学校统计数据"
  *
- * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.GetWebStatSchoolsTheoryRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.GetWebStatSchoolDataRequest</code>
  */
-class GetWebStatSchoolsTheoryRequest extends \Google\Protobuf\Internal\Message
+class GetWebStatSchoolDataRequest extends \Google\Protobuf\Internal\Message
 {
     /**
-     *所属区县教育局编号，必填
+     *学校id，不能为0
      *
-     * Generated from protobuf field <code>string edu_id = 1;</code>
+     * Generated from protobuf field <code>int32 schoolid = 1;</code>
      */
-    private $edu_id = '';
+    private $schoolid = 0;
     /**
      *学年  2018= 2018-2019学年    2017=2018-2018学年
      *
@@ -43,24 +43,6 @@ class GetWebStatSchoolsTheoryRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string end_date = 5;</code>
      */
     private $end_date = '';
-    /**
-     *学段， 0=不限 1=小学 2=初中 3=高中
-     *
-     * Generated from protobuf field <code>int32 period = 6;</code>
-     */
-    private $period = 0;
-    /**
-     *学科， 0=不限 
-     *
-     * Generated from protobuf field <code>int32 subject = 7;</code>
-     */
-    private $subject = 0;
-    /**
-     *排名规则 
-     *
-     * Generated from protobuf field <code>int32 orderby = 8;</code>
-     */
-    private $orderby = 0;
 
     public function __construct() {
         \GPBMetadata\ResourceStatistics::initOnce();
@@ -68,27 +50,27 @@ class GetWebStatSchoolsTheoryRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *所属区县教育局编号，必填
+     *学校id，不能为0
      *
-     * Generated from protobuf field <code>string edu_id = 1;</code>
-     * @return string
+     * Generated from protobuf field <code>int32 schoolid = 1;</code>
+     * @return int
      */
-    public function getEduId()
+    public function getSchoolid()
     {
-        return $this->edu_id;
+        return $this->schoolid;
     }
 
     /**
-     *所属区县教育局编号，必填
+     *学校id，不能为0
      *
-     * Generated from protobuf field <code>string edu_id = 1;</code>
-     * @param string $var
+     * Generated from protobuf field <code>int32 schoolid = 1;</code>
+     * @param int $var
      * @return $this
      */
-    public function setEduId($var)
+    public function setSchoolid($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->edu_id = $var;
+        GPBUtil::checkInt32($var);
+        $this->schoolid = $var;
 
         return $this;
     }
@@ -193,84 +175,6 @@ class GetWebStatSchoolsTheoryRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->end_date = $var;
-
-        return $this;
-    }
-
-    /**
-     *学段， 0=不限 1=小学 2=初中 3=高中
-     *
-     * Generated from protobuf field <code>int32 period = 6;</code>
-     * @return int
-     */
-    public function getPeriod()
-    {
-        return $this->period;
-    }
-
-    /**
-     *学段， 0=不限 1=小学 2=初中 3=高中
-     *
-     * Generated from protobuf field <code>int32 period = 6;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setPeriod($var)
-    {
-        GPBUtil::checkInt32($var);
-        $this->period = $var;
-
-        return $this;
-    }
-
-    /**
-     *学科， 0=不限 
-     *
-     * Generated from protobuf field <code>int32 subject = 7;</code>
-     * @return int
-     */
-    public function getSubject()
-    {
-        return $this->subject;
-    }
-
-    /**
-     *学科， 0=不限 
-     *
-     * Generated from protobuf field <code>int32 subject = 7;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setSubject($var)
-    {
-        GPBUtil::checkInt32($var);
-        $this->subject = $var;
-
-        return $this;
-    }
-
-    /**
-     *排名规则 
-     *
-     * Generated from protobuf field <code>int32 orderby = 8;</code>
-     * @return int
-     */
-    public function getOrderby()
-    {
-        return $this->orderby;
-    }
-
-    /**
-     *排名规则 
-     *
-     * Generated from protobuf field <code>int32 orderby = 8;</code>
-     * @param int $var
-     * @return $this
-     */
-    public function setOrderby($var)
-    {
-        GPBUtil::checkInt32($var);
-        $this->orderby = $var;
 
         return $this;
     }

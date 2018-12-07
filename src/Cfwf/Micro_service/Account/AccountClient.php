@@ -18,12 +18,12 @@ class AccountClient extends \Grpc\BaseStub {
 
     /**
      * --------------------------------------- 注册新用户
-     * 检查手机号是否可用(在调用RegistNewAccountByMobilePhone 之前应先调用此接口检查) CommonRequest.msg==手机号 
-     * @param \Cfwf\Micro_service\Account\CommonRequest $argument input argument
+     * 检查手机号是否可用(在调用RegistNewAccountByMobilePhone 之前应先调用此接口检查) 
+     * @param \Cfwf\Micro_service\Account\CheckMobilePhoneAvailableRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      */
-    public function CheckMobilePhoneAvailable(\Cfwf\Micro_service\Account\CommonRequest $argument,
+    public function CheckMobilePhoneAvailable(\Cfwf\Micro_service\Account\CheckMobilePhoneAvailableRequest $argument,
       $metadata = [], $options = []) {
         return $this->_simpleRequest('/cfwf.micro_service.account.Account/CheckMobilePhoneAvailable',
         $argument,

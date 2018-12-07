@@ -7,24 +7,18 @@ namespace Cfwf\Micro_service\Resource_statistics;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * 区县/学校-"所有" 条目信息 
- *
- * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.WebStatAllItem</code>
+ * Generated from protobuf message <code>cfwf.micro_service.resource_statistics.GetWebStatSchoolDataResponse</code>
  */
-class WebStatAllItem extends \Google\Protobuf\Internal\Message
+class GetWebStatSchoolDataResponse extends \Google\Protobuf\Internal\Message
 {
     /**
-     * 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
-     *
-     * Generated from protobuf field <code>int64 id = 1;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.resource_statistics.RPC_CALL_RESULT result = 1;</code>
      */
-    private $id = 0;
+    private $result = 0;
     /**
-     * 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
-     *
-     * Generated from protobuf field <code>string name = 2;</code>
+     * Generated from protobuf field <code>int32 schoolid = 2;</code>
      */
-    private $name = '';
+    private $schoolid = 0;
     /**
      *理论研究
      *
@@ -73,6 +67,18 @@ class WebStatAllItem extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int32 student_count = 10;</code>
      */
     private $student_count = 0;
+    /**
+     *班级空间
+     *
+     * Generated from protobuf field <code>int32 class_count = 11;</code>
+     */
+    private $class_count = 0;
+    /**
+     *教研行动
+     *
+     * Generated from protobuf field <code>int32 research_action_count = 12;</code>
+     */
+    private $research_action_count = 0;
 
     public function __construct() {
         \GPBMetadata\ResourceStatistics::initOnce();
@@ -80,53 +86,45 @@ class WebStatAllItem extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
-     *
-     * Generated from protobuf field <code>int64 id = 1;</code>
-     * @return int|string
+     * Generated from protobuf field <code>.cfwf.micro_service.resource_statistics.RPC_CALL_RESULT result = 1;</code>
+     * @return int
      */
-    public function getId()
+    public function getResult()
     {
-        return $this->id;
+        return $this->result;
     }
 
     /**
-     * 返回区县列表时，表示区县id； 返回学校列表时，表示学校id；返回教师列表时，表示教师id
-     *
-     * Generated from protobuf field <code>int64 id = 1;</code>
-     * @param int|string $var
+     * Generated from protobuf field <code>.cfwf.micro_service.resource_statistics.RPC_CALL_RESULT result = 1;</code>
+     * @param int $var
      * @return $this
      */
-    public function setId($var)
+    public function setResult($var)
     {
-        GPBUtil::checkInt64($var);
-        $this->id = $var;
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Resource_statistics\RPC_CALL_RESULT::class);
+        $this->result = $var;
 
         return $this;
     }
 
     /**
-     * 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
-     *
-     * Generated from protobuf field <code>string name = 2;</code>
-     * @return string
+     * Generated from protobuf field <code>int32 schoolid = 2;</code>
+     * @return int
      */
-    public function getName()
+    public function getSchoolid()
     {
-        return $this->name;
+        return $this->schoolid;
     }
 
     /**
-     * 返回区县列表时，表示区县名称； 返回学校列表时，表示学校名称；返回教师列表时，表示教师名称
-     *
-     * Generated from protobuf field <code>string name = 2;</code>
-     * @param string $var
+     * Generated from protobuf field <code>int32 schoolid = 2;</code>
+     * @param int $var
      * @return $this
      */
-    public function setName($var)
+    public function setSchoolid($var)
     {
-        GPBUtil::checkString($var, True);
-        $this->name = $var;
+        GPBUtil::checkInt32($var);
+        $this->schoolid = $var;
 
         return $this;
     }
@@ -335,6 +333,58 @@ class WebStatAllItem extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt32($var);
         $this->student_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *班级空间
+     *
+     * Generated from protobuf field <code>int32 class_count = 11;</code>
+     * @return int
+     */
+    public function getClassCount()
+    {
+        return $this->class_count;
+    }
+
+    /**
+     *班级空间
+     *
+     * Generated from protobuf field <code>int32 class_count = 11;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setClassCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->class_count = $var;
+
+        return $this;
+    }
+
+    /**
+     *教研行动
+     *
+     * Generated from protobuf field <code>int32 research_action_count = 12;</code>
+     * @return int
+     */
+    public function getResearchActionCount()
+    {
+        return $this->research_action_count;
+    }
+
+    /**
+     *教研行动
+     *
+     * Generated from protobuf field <code>int32 research_action_count = 12;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setResearchActionCount($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->research_action_count = $var;
 
         return $this;
     }

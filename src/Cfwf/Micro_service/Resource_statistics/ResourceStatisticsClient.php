@@ -603,4 +603,18 @@ class ResourceStatisticsClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * 传入学校id，获取"学校统计数据"
+     * @param \Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolDataRequest $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function GetWebStatSchoolData(\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolDataRequest $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/cfwf.micro_service.resource_statistics.ResourceStatistics/GetWebStatSchoolData',
+        $argument,
+        ['\Cfwf\Micro_service\Resource_statistics\GetWebStatSchoolDataResponse', 'decode'],
+        $metadata, $options);
+    }
+
 }

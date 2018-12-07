@@ -7,20 +7,18 @@ namespace Cfwf\Micro_service\Account;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * SetUserAllIdentity 设置用户所拥有的全部身份
- *
- * Generated from protobuf message <code>cfwf.micro_service.account.SetUserAllIdentityRequest</code>
+ * Generated from protobuf message <code>cfwf.micro_service.account.UserAndIdentity</code>
  */
-class SetUserAllIdentityRequest extends \Google\Protobuf\Internal\Message
+class UserAndIdentity extends \Google\Protobuf\Internal\Message
 {
     /**
-     * Generated from protobuf field <code>fixed64 userid = 1;</code>
+     * Generated from protobuf field <code>uint64 userid = 2;</code>
      */
     private $userid = 0;
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identitys = 2;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identity = 3;</code>
      */
-    private $identitys = null;
+    private $identity = null;
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -28,7 +26,7 @@ class SetUserAllIdentityRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>fixed64 userid = 1;</code>
+     * Generated from protobuf field <code>uint64 userid = 2;</code>
      * @return int|string
      */
     public function getUserid()
@@ -37,7 +35,7 @@ class SetUserAllIdentityRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>fixed64 userid = 1;</code>
+     * Generated from protobuf field <code>uint64 userid = 2;</code>
      * @param int|string $var
      * @return $this
      */
@@ -50,23 +48,23 @@ class SetUserAllIdentityRequest extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identitys = 2;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identity = 3;</code>
      * @return \Cfwf\Micro_service\Account\UserIdentity
      */
-    public function getIdentitys()
+    public function getIdentity()
     {
-        return $this->identitys;
+        return $this->identity;
     }
 
     /**
-     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identitys = 2;</code>
+     * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identity = 3;</code>
      * @param \Cfwf\Micro_service\Account\UserIdentity $var
      * @return $this
      */
-    public function setIdentitys($var)
+    public function setIdentity($var)
     {
         GPBUtil::checkMessage($var, \Cfwf\Micro_service\Account\UserIdentity::class);
-        $this->identitys = $var;
+        $this->identity = $var;
 
         return $this;
     }

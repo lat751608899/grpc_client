@@ -23,6 +23,12 @@ class GetUserIdResponse extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.cfwf.micro_service.account.UserIdentity identity = 3;</code>
      */
     private $identity = null;
+    /**
+     *如果GetUserIdRequest.loginid传入的是手机号，一个手机号有可能绑定多个userid。此处返回所有绑定该手机号的帐号，其第一条等于GetUserIdResponse.userid。保留userid是要兼容之前版本
+     *
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.account.UserAndIdentity users = 4;</code>
+     */
+    private $users;
 
     public function __construct() {
         \GPBMetadata\Account::initOnce();
@@ -91,6 +97,32 @@ class GetUserIdResponse extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Cfwf\Micro_service\Account\UserIdentity::class);
         $this->identity = $var;
+
+        return $this;
+    }
+
+    /**
+     *如果GetUserIdRequest.loginid传入的是手机号，一个手机号有可能绑定多个userid。此处返回所有绑定该手机号的帐号，其第一条等于GetUserIdResponse.userid。保留userid是要兼容之前版本
+     *
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.account.UserAndIdentity users = 4;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     *如果GetUserIdRequest.loginid传入的是手机号，一个手机号有可能绑定多个userid。此处返回所有绑定该手机号的帐号，其第一条等于GetUserIdResponse.userid。保留userid是要兼容之前版本
+     *
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.account.UserAndIdentity users = 4;</code>
+     * @param \Cfwf\Micro_service\Account\UserAndIdentity[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setUsers($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::MESSAGE, \Cfwf\Micro_service\Account\UserAndIdentity::class);
+        $this->users = $arr;
 
         return $this;
     }
