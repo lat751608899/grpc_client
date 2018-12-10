@@ -154,11 +154,17 @@ trait EventTrait
      * grpc出问题时返回一个空的 response
      * @return mixed
      */
-	protected function getNullResponse()
+	protected function getNullResponse($res)
     {
-        $responseName = $this->config->getRpcMethodResponse($this->clientName,$this->methodName);
+        /*$responseName = $this->config->getRpcMethodResponse($this->clientName,$this->methodName);*/
+        try{
+            $responseName = $res['deserialize'][0];
+        }catch (\Exception $exception){
+            $responseName = '';
+        }
         if(class_exists($responseName)){
             return new $responseName();
         }
+        return false;
     }
 }
