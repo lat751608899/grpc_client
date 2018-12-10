@@ -148,7 +148,8 @@ class ClientFactory
 		$response = $res->wait();
 		Event::listen($this->clientName.'_response',$response);
 		if($response[1]->code != 0){ // grpc出问题时返回一个空的 response
-            $response[0] = $this->getNullResponse($res);
+            throw new \Exception('grpc error:'.$response[1]->details);
+            //$response[0] = $this->getNullResponse($res);
         }
 		$this->setCode($response[1]);
 		$this->where = [];
