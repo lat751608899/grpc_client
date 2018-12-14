@@ -49,6 +49,42 @@ class EnterGroupRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>uint32 idnetity_tag = 6;</code>
      */
     private $idnetity_tag = 0;
+    /**
+     *当groupid==0时，若其他条件完备，但找不到群组时，若本参数为true，则会创建群组
+     *
+     * Generated from protobuf field <code>bool create_group_if_not_exist = 7;</code>
+     */
+    private $create_group_if_not_exist = false;
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>string create_group_name = 8;</code>
+     */
+    private $create_group_name = '';
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>uint32 create_group_orderby = 9;</code>
+     */
+    private $create_group_orderby = 0;
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>int64 create_super_admin = 10;</code>
+     */
+    private $create_super_admin = 0;
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.im_group.GROUP_ENTER_TYPE create_enterway = 11;</code>
+     */
+    private $create_enterway = 0;
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>string create_describe = 12;</code>
+     */
+    private $create_describe = '';
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -207,6 +243,162 @@ class EnterGroupRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkUint32($var);
         $this->idnetity_tag = $var;
+
+        return $this;
+    }
+
+    /**
+     *当groupid==0时，若其他条件完备，但找不到群组时，若本参数为true，则会创建群组
+     *
+     * Generated from protobuf field <code>bool create_group_if_not_exist = 7;</code>
+     * @return bool
+     */
+    public function getCreateGroupIfNotExist()
+    {
+        return $this->create_group_if_not_exist;
+    }
+
+    /**
+     *当groupid==0时，若其他条件完备，但找不到群组时，若本参数为true，则会创建群组
+     *
+     * Generated from protobuf field <code>bool create_group_if_not_exist = 7;</code>
+     * @param bool $var
+     * @return $this
+     */
+    public function setCreateGroupIfNotExist($var)
+    {
+        GPBUtil::checkBool($var);
+        $this->create_group_if_not_exist = $var;
+
+        return $this;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>string create_group_name = 8;</code>
+     * @return string
+     */
+    public function getCreateGroupName()
+    {
+        return $this->create_group_name;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>string create_group_name = 8;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCreateGroupName($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->create_group_name = $var;
+
+        return $this;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>uint32 create_group_orderby = 9;</code>
+     * @return int
+     */
+    public function getCreateGroupOrderby()
+    {
+        return $this->create_group_orderby;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>uint32 create_group_orderby = 9;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setCreateGroupOrderby($var)
+    {
+        GPBUtil::checkUint32($var);
+        $this->create_group_orderby = $var;
+
+        return $this;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>int64 create_super_admin = 10;</code>
+     * @return int|string
+     */
+    public function getCreateSuperAdmin()
+    {
+        return $this->create_super_admin;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>int64 create_super_admin = 10;</code>
+     * @param int|string $var
+     * @return $this
+     */
+    public function setCreateSuperAdmin($var)
+    {
+        GPBUtil::checkInt64($var);
+        $this->create_super_admin = $var;
+
+        return $this;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.im_group.GROUP_ENTER_TYPE create_enterway = 11;</code>
+     * @return int
+     */
+    public function getCreateEnterway()
+    {
+        return $this->create_enterway;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>.cfwf.micro_service.im_group.GROUP_ENTER_TYPE create_enterway = 11;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setCreateEnterway($var)
+    {
+        GPBUtil::checkEnum($var, \Cfwf\Micro_service\Im_group\GROUP_ENTER_TYPE::class);
+        $this->create_enterway = $var;
+
+        return $this;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>string create_describe = 12;</code>
+     * @return string
+     */
+    public function getCreateDescribe()
+    {
+        return $this->create_describe;
+    }
+
+    /**
+     *若创建群有效
+     *
+     * Generated from protobuf field <code>string create_describe = 12;</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCreateDescribe($var)
+    {
+        GPBUtil::checkString($var, True);
+        $this->create_describe = $var;
 
         return $this;
     }

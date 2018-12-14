@@ -19,6 +19,12 @@ class GetGroupListRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>int64 userid = 1;</code>
      */
     private $userid = 0;
+    /**
+     *可以限定获取的群的类型。不设置表示不限制
+     *
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.im_group.GROUP_TYPE limit_group_type = 2;</code>
+     */
+    private $limit_group_type;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -47,6 +53,32 @@ class GetGroupListRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkInt64($var);
         $this->userid = $var;
+
+        return $this;
+    }
+
+    /**
+     *可以限定获取的群的类型。不设置表示不限制
+     *
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.im_group.GROUP_TYPE limit_group_type = 2;</code>
+     * @return \Google\Protobuf\Internal\RepeatedField
+     */
+    public function getLimitGroupType()
+    {
+        return $this->limit_group_type;
+    }
+
+    /**
+     *可以限定获取的群的类型。不设置表示不限制
+     *
+     * Generated from protobuf field <code>repeated .cfwf.micro_service.im_group.GROUP_TYPE limit_group_type = 2;</code>
+     * @param int[]|\Google\Protobuf\Internal\RepeatedField $var
+     * @return $this
+     */
+    public function setLimitGroupType($var)
+    {
+        $arr = GPBUtil::checkRepeatedField($var, \Google\Protobuf\Internal\GPBType::ENUM, \Cfwf\Micro_service\Im_group\GROUP_TYPE::class);
+        $this->limit_group_type = $arr;
 
         return $this;
     }

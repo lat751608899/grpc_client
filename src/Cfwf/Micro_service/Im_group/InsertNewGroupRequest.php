@@ -23,6 +23,12 @@ class InsertNewGroupRequest extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>.cfwf.micro_service.im_group.GroupInfoItem item = 2;</code>
      */
     private $item = null;
+    /**
+     *相同类型的群的获取群列表时的排序号。 学校班级群的该值为: (period * 10000 + grade_year) * 10000 + class_no。 220120001=初中2012届1班
+     *
+     * Generated from protobuf field <code>int32 orderby = 3;</code>
+     */
+    private $orderby = 0;
 
     public function __construct() {
         \GPBMetadata\ImGroup::initOnce();
@@ -73,6 +79,32 @@ class InsertNewGroupRequest extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkMessage($var, \Cfwf\Micro_service\Im_group\GroupInfoItem::class);
         $this->item = $var;
+
+        return $this;
+    }
+
+    /**
+     *相同类型的群的获取群列表时的排序号。 学校班级群的该值为: (period * 10000 + grade_year) * 10000 + class_no。 220120001=初中2012届1班
+     *
+     * Generated from protobuf field <code>int32 orderby = 3;</code>
+     * @return int
+     */
+    public function getOrderby()
+    {
+        return $this->orderby;
+    }
+
+    /**
+     *相同类型的群的获取群列表时的排序号。 学校班级群的该值为: (period * 10000 + grade_year) * 10000 + class_no。 220120001=初中2012届1班
+     *
+     * Generated from protobuf field <code>int32 orderby = 3;</code>
+     * @param int $var
+     * @return $this
+     */
+    public function setOrderby($var)
+    {
+        GPBUtil::checkInt32($var);
+        $this->orderby = $var;
 
         return $this;
     }
