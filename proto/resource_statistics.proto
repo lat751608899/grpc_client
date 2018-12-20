@@ -292,7 +292,9 @@ message GetActiveUserStatisticsRequest{
 message ActiveUserItem
 {
     int32 date = 1;  //格式：按天统计：20170102； 按周统计  201700-201752；  按月统计： 201701-201712
-    int64 user_count = 2;
+    int64 user_count = 2;      //总人数
+	int64 teacher_count = 3;   //教师总数
+	int64 student_count = 4;   //学生总数
 }
 
 message GetActiveUserStatisticsResponse{
