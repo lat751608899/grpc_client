@@ -39,4 +39,8 @@ $ make grpc_php_plugin
 $ vim plugin.conf
 $ ./create_client.sh
 ```
-
+### Usage
+```
+$clinet = GrpcServer\ClientFactory::createClient('sms.SMS', 'develop');
+$clinet->SendVerificationCode();
+```
